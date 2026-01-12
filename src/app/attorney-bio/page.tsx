@@ -1,80 +1,203 @@
 "use client";
 
+import Link from 'next/link';
+import { images } from '@/data/images';
+import { useState } from 'react';
+
 export default function AttorneyBio() {
+    const [imgError, setImgError] = useState(false);
+    const [honoraryImgError, setHonoraryImgError] = useState(false);
+
     return (
-        <section className="section-padding">
-            <div className="container">
-                <div className="bio-grid">
-                    <div className="bio-image">
-                        {/* Placeholder for attorney image */}
-                        <div style={{
-                            width: '100%',
-                            height: '500px',
-                            backgroundColor: '#ddd',
-                            borderRadius: '8px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: '#666',
-                            backgroundImage: 'url(https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80)',
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center'
-                        }}>
+        <>
+            <section className="page-header section-padding text-center" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
+                <div className="container">
+                    <h1 style={{ color: '#fff' }}>Attorney Bio</h1>
+                    <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginTop: '1rem' }}>
+                        Meet Norma Henning, J.D.
+                    </p>
+                </div>
+            </section>
+
+            <section className="section-padding">
+                <div className="container">
+                    <div className="bio-grid">
+                        <div className="bio-image">
+                            <div className="image-wrapper">
+                                <img
+                                    src={imgError ? 'https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=800' : images.attorneyPortrait2}
+                                    alt="Norma Henning, J.D."
+                                    style={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        borderRadius: '8px',
+                                        objectFit: 'cover',
+                                        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+                                        display: 'block',
+                                        minHeight: '500px',
+                                        backgroundColor: '#f0f0f0'
+                                    }}
+                                    onError={(e) => {
+                                        if (!imgError) {
+                                            setImgError(true);
+                                            (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=800';
+                                        }
+                                    }}
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="bio-content">
-                        <h1>Norma Henning, J.D.</h1>
-                        <h3 style={{ color: 'var(--color-secondary)', marginBottom: '1.5rem', fontSize: '1.5rem' }}>Founding Attorney</h3>
+                        <div className="bio-content">
+                            <h1>Norma Henning, J.D.</h1>
+                            <h3 style={{ color: 'var(--color-secondary)', marginBottom: '2rem', fontSize: '1.5rem', fontWeight: '400' }}>
+                                Founding Attorney
+                            </h3>
 
-                        <p><strong>Meet Your Attorney</strong></p>
-                        <p>
-                            Norma Henning is the founder and principal attorney of Henning Law Firm, PLLC.
-                            As an immigrant herself, she brings a unique personal perspective to her practice,
-                            understanding the complexities and emotional aspects of the immigration journey.
-                        </p>
-                        <p>
-                            With extensive experience in U.S. immigration law, specifically business and family immigration,
-                            Ms. Henning has helped countless individuals, families, and businesses navigate the complex
-                            U.S. legal system. Her approach combines legal expertise with practical, strategic advice
-                            tailored to each client's specific long-term goals.
-                        </p>
-                        <p>
-                            In addition to immigration law, Ms. Henning provides counsel in related areas such as
-                            real estate, corporate structure, and estate planning for international clients, acting
-                            as a trusted advisor for their transition to life in the United States.
-                        </p>
+                            <div style={{ marginBottom: '2rem' }}>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
+                                    Welcome to <strong>Henning Law Firm PLLC</strong>, where nothing gives us greater satisfaction than assisting our clients in realizing their very own personal, professional or commercial goals in the United States.
+                                </p>
+                            </div>
 
-                        <div style={{ marginTop: '2rem' }}>
-                            <h4>Education & Admissions</h4>
-                            <ul style={{ paddingLeft: '1.2rem', marginBottom: '2rem', color: 'var(--color-text-light)' }}>
-                                <li>Juris Doctor (J.D.)</li>
-                                <li>Member of the Florida Bar</li>
-                                <li>Admitted to practice in U.S. Federal Courts</li>
-                            </ul>
+                            <div style={{ marginBottom: '2rem' }}>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
+                                    Henning Law Firm is guided by Ms. Henning's own background as an immigrant, her service as former Honorary Consul of Germany in Florida, and her experience as a practicing attorney. Her background provides a unique perspective when it comes to the legal and cultural aspects of navigating market entry, establishing lasting business and personal relationships, and raising a family in the United States.
+                                </p>
+                            </div>
+
+                            <div style={{ marginBottom: '2rem' }}>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
+                                    Her approach to the practice is based on her appreciation for the opportunities the United States offers to newcomers as well as a deep respect for the contributions that immigrants have made and continue to make to this country. Based on this philosophy, the firm focuses on designing tailored visa and immigration strategies and counseling clients in areas of property ownership and U.S. market entry for business ventures in the United States.
+                                </p>
+                            </div>
+
+                            <div style={{ marginBottom: '2rem' }}>
+                                <h3 style={{ marginBottom: '1rem', marginTop: '2rem' }}>What Sets Us Apart</h3>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
+                                    When it comes to moving your life to the United States, we have answers to the questions you may not even know to ask. Particularly for investors and immigrants from Civil Law countries, the U.S. common law legal system presents challenges that should not be underestimated. Our holistic approach takes into account our clients' individual goals and addresses complexities such as tax and estate planning considerations as well as corporate, contractual, intellectual property, and other aspects of the law.
+                                </p>
+                            </div>
+
+                            <div style={{ marginBottom: '2rem' }}>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
+                                    We work with a network of like-minded specialists who ensure you receive personalized guidance every step of the way.
+                                </p>
+                            </div>
+
+                            <div style={{ marginTop: '3rem', padding: '2rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '8px' }}>
+                                <h4 style={{ marginBottom: '1rem' }}>Education & Professional Background</h4>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                    <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
+                                        <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
+                                        Juris Doctor (J.D.)
+                                    </li>
+                                    <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
+                                        <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
+                                        Former Honorary Consul of Germany in Florida
+                                    </li>
+                                    <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
+                                        <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
+                                        Member of the Florida Bar
+                                    </li>
+                                    <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
+                                        <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
+                                        Extensive experience in U.S. immigration law
+                                    </li>
+                                    <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
+                                        <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
+                                        Personal experience as an immigrant
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div style={{ marginTop: '3rem' }}>
+                                <Link href="/contact" className="btn btn-primary" style={{ marginRight: '1rem' }}>
+                                    Schedule a Consultation
+                                </Link>
+                                <Link href="/practice-areas" className="btn btn-outline">
+                                    Learn About Our Practice Areas
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <style jsx>{`
-        .bio-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        
-        @media (min-width: 768px) {
-            .bio-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        .bio-content h1 {
-            margin-bottom: 0.5rem;
-        }
-      `}</style>
-        </section>
+                {/* Honorary Consul Section */}
+                <div className="container" style={{ marginTop: '4rem' }}>
+                    <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Honorary Consul of Germany in Florida</h2>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', alignItems: 'center' }}>
+                            <div className="honorary-consul-image" style={{ borderRadius: '8px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
+                                <img
+                                    src={honoraryImgError ? 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800' : images.attorneyHonoraryConsul}
+                                    alt="Norma Henning as Honorary Consul of Germany in Florida"
+                                    style={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        display: 'block',
+                                        minHeight: '400px',
+                                        backgroundColor: '#f0f0f0'
+                                    }}
+                                    onError={(e) => {
+                                        if (!honoraryImgError) {
+                                            setHonoraryImgError(true);
+                                            (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800';
+                                        }
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8', textAlign: 'center' }}>
+                                    Ms. Henning served as the Honorary Consul of Germany in Florida, bringing a unique international perspective and deep understanding of cross-cultural legal matters to her practice. This experience, combined with her personal background as an immigrant, enables her to provide exceptional guidance to clients navigating the complexities of immigration and business law.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <style jsx>{`
+                    .bio-grid {
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        gap: 4rem;
+                        align-items: start;
+                    }
+                    
+                    @media (min-width: 968px) {
+                        .bio-grid {
+                            grid-template-columns: 1fr 1.5fr;
+                        }
+                    }
+                    
+                    .bio-image .image-wrapper {
+                        width: 100%;
+                        border-radius: 8px;
+                        overflow: hidden;
+                    }
+                    
+                    .bio-content h1 {
+                        margin-bottom: 0.5rem;
+                        font-size: 3rem;
+                    }
+                    
+                    .bio-content h3 {
+                        font-size: 1.5rem;
+                        margin-bottom: 2rem;
+                    }
+                    
+                    .bio-content h4 {
+                        font-size: 1.3rem;
+                        margin-bottom: 1rem;
+                    }
+                    
+                    @media (min-width: 768px) {
+                        .honorary-consul-image {
+                            max-width: 700px;
+                            margin: 0 auto;
+                        }
+                    }
+                `}</style>
+            </section>
+        </>
     );
 }

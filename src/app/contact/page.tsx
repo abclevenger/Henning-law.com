@@ -1,12 +1,40 @@
 "use client";
 
+import Link from 'next/link';
+import { useEffect } from 'react';
+import BookingWidget from '@/components/BookingWidget';
+
 export default function Contact() {
+    useEffect(() => {
+        // Check if script is already loaded
+        const existingScript = document.querySelector('script[src="https://link.ymbs.pro/js/form_embed.js"]');
+        if (existingScript) {
+            return;
+        }
+
+        // Load the form embed script
+        const script = document.createElement('script');
+        script.src = 'https://link.ymbs.pro/js/form_embed.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            // Cleanup: remove script on unmount if it exists
+            const scriptToRemove = document.querySelector('script[src="https://link.ymbs.pro/js/form_embed.js"]');
+            if (scriptToRemove && scriptToRemove.parentNode) {
+                scriptToRemove.parentNode.removeChild(scriptToRemove);
+            }
+        };
+    }, []);
+
     return (
         <>
             <section className="page-header section-padding text-center" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
                 <div className="container">
-                    <h1>Contact Us</h1>
-                    <p>Start Your Journey Today</p>
+                    <h1 style={{ color: '#fff' }}>Contact</h1>
+                    <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginTop: '1rem' }}>
+                        Get in touch with us to start your immigration journey
+                    </p>
                 </div>
             </section>
 
@@ -14,119 +42,156 @@ export default function Contact() {
                 <div className="container">
                     <div className="contact-layout">
                         <div className="contact-info">
-                            <h2>Get in Touch</h2>
-                            <p>
-                                We look forward to hearing from you. Please contact us via phone or email,
-                                or fill out the contact form to schedule a consultation.
+                            <h2>Contact</h2>
+                            <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
+                                We look forward to hearing from you. Please contact us via phone or email to schedule a consultation.
                             </p>
 
                             <div className="info-item">
-                                <h4>Address</h4>
-                                <p>
-                                    Henning Law Firm, PLLC<br />
-                                    1089 N. Collier Blvd., #411<br />
-                                    Marco Island, FL 34145
+                                <h4>Tampa</h4>
+                                <p style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--color-primary)' }}>
+                                    <a href="tel:2398216504" style={{ color: 'inherit', textDecoration: 'none' }}>(239) 821-6504</a>
                                 </p>
                             </div>
 
                             <div className="info-item">
-                                <h4>Phone</h4>
-                                <p>(239) 821-6504</p>
+                                <h4>Minneapolis</h4>
+                                <p style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--color-primary)' }}>
+                                    <a href="tel:6124225700" style={{ color: 'inherit', textDecoration: 'none' }}>(612) 422-5700</a>
+                                </p>
                             </div>
 
                             <div className="info-item">
                                 <h4>Email</h4>
-                                <p>office@henning-law.com</p>
+                                <p style={{ fontSize: '1.1rem' }}>
+                                    <a href="mailto:nhenning@henning-law.com" style={{ color: 'var(--color-secondary)', textDecoration: 'none' }}>
+                                        nhenning@henning-law.com
+                                    </a>
+                                </p>
                             </div>
 
                             <div className="info-item">
                                 <h4>Hours</h4>
-                                <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
-                                <p>Saturday - Sunday: Closed</p>
+                                <p style={{ fontSize: '1.1rem' }}>By Appointment Only</p>
+                            </div>
+
+                            <div className="info-item" style={{ marginTop: '3rem' }}>
+                                <Link href="/practice-areas" className="btn btn-primary">
+                                    Learn More About Our Practice Areas
+                                </Link>
                             </div>
                         </div>
 
                         <div className="contact-form-wrapper">
-                            <form className="contact-form">
-                                <div className="form-group">
-                                    <label htmlFor="name">Full Name</label>
-                                    <input type="text" id="name" name="name" required />
-                                </div>
-
-                                <div className="form-group">
-                                    <label htmlFor="email">Email Address</label>
-                                    <input type="email" id="email" name="email" required />
-                                </div>
-
-                                <div className="form-group">
-                                    <label htmlFor="phone">Phone Number</label>
-                                    <input type="tel" id="phone" name="phone" />
-                                </div>
-
-                                <div className="form-group">
-                                    <label htmlFor="message">How can we help you?</label>
-                                    <textarea id="message" name="message" rows={5} required></textarea>
-                                </div>
-
-                                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                                    Send Message
-                                </button>
-                            </form>
+                            <h3 style={{ marginBottom: '2rem' }}>Send Us a Message</h3>
+                            <div className="embedded-form-container" style={{ width: '100%', height: '1084px', borderRadius: '8px', overflow: 'hidden' }}>
+                                <iframe
+                                    src="https://link.ymbs.pro/widget/form/vkKECO8y8SRTuPh4vNeM"
+                                    style={{ width: '100%', height: '100%', border: 'none', borderRadius: '0px' }}
+                                    id="inline-vkKECO8y8SRTuPh4vNeM"
+                                    data-layout="{'id':'INLINE'}"
+                                    data-trigger-type="alwaysShow"
+                                    data-trigger-value=""
+                                    data-activation-type="alwaysActivated"
+                                    data-activation-value=""
+                                    data-deactivation-type="neverDeactivate"
+                                    data-deactivation-value=""
+                                    data-form-name="Immigration Lawyer Contact "
+                                    data-height="1084"
+                                    data-layout-iframe-id="inline-vkKECO8y8SRTuPh4vNeM"
+                                    data-form-id="vkKECO8y8SRTuPh4vNeM"
+                                    title="Immigration Lawyer Contact "
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <style jsx>{`
-            .contact-layout {
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 4rem;
-            }
-            
-            @media (min-width: 900px) {
-                .contact-layout {
-                    grid-template-columns: 1fr 1fr;
-                }
-            }
-            
-            .info-item {
-                margin-bottom: 2rem;
-            }
-            
-            .contact-form-wrapper {
-                background: #f9f9f9;
-                padding: 2.5rem;
-                border-radius: 8px;
-            }
-            
-            .form-group {
-                margin-bottom: 1.5rem;
-            }
-            
-            .form-group label {
-                display: block;
-                margin-bottom: 0.5rem;
-                font-weight: 700;
-                font-size: 0.9rem;
-            }
-            
-            .form-group input,
-            .form-group textarea {
-                width: 100%;
-                padding: 12px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                font-family: inherit;
-                font-size: 1rem;
-            }
-            
-            .form-group input:focus,
-            .form-group textarea:focus {
-                border-color: var(--color-secondary);
-                outline: none;
-                box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2);
-            }
-        `}</style>
+                    .contact-layout {
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        gap: 4rem;
+                    }
+                    
+                    @media (min-width: 968px) {
+                        .contact-layout {
+                            grid-template-columns: 1fr 1.2fr;
+                        }
+                    }
+                    
+                    .info-item {
+                        margin-bottom: 2.5rem;
+                    }
+                    
+                    .info-item h4 {
+                        font-size: 1.2rem;
+                        margin-bottom: 0.75rem;
+                        color: var(--color-primary);
+                    }
+                    
+                    .info-item a:hover {
+                        color: var(--color-secondary);
+                        text-decoration: underline;
+                    }
+                    
+                    .contact-form-wrapper {
+                        background: #f9f9f9;
+                        padding: 3rem;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+                    }
+                    
+                    .contact-form-wrapper h3 {
+                        color: var(--color-primary);
+                    }
+                    
+                    .form-group {
+                        margin-bottom: 1.5rem;
+                    }
+                    
+                    .form-group label {
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: 600;
+                        font-size: 0.95rem;
+                        color: var(--color-primary);
+                    }
+                    
+                    .form-group input,
+                    .form-group select,
+                    .form-group textarea {
+                        width: 100%;
+                        padding: 12px 16px;
+                        border: 1px solid #ddd;
+                        border-radius: 4px;
+                        font-family: inherit;
+                        font-size: 1rem;
+                        transition: border-color 0.3s ease;
+                    }
+                    
+                    .form-group input:focus,
+                    .form-group select:focus,
+                    .form-group textarea:focus {
+                        border-color: var(--color-secondary);
+                        outline: none;
+                        box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+                    }
+                    
+                    .form-group textarea {
+                        resize: vertical;
+                        min-height: 150px;
+                    }
+                `}</style>
+            </section>
+
+            {/* Booking Section */}
+            <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
+                <div className="container">
+                    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                        <BookingWidget />
+                    </div>
+                </div>
             </section>
         </>
     );
