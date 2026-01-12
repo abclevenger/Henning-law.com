@@ -12,11 +12,6 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="container navbar-content">
                 <Link href="/" className="logo">
-                    <img 
-                        src={images.logoPathElements || '/favicon.png'} 
-                        alt="Henning Law Firm" 
-                        className="logo-image"
-                    />
                     <span className="logo-text">HENNING <span>LAW</span></span>
                 </Link>
                 
