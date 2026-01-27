@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import Hero from '@/components/Hero';
+import { IconStrategy, IconGlobe, IconKey } from '@/components/Icons';
+import { images } from '@/data/images';
 
 export default function Home() {
   return (
@@ -11,7 +13,7 @@ export default function Home() {
       {/* Let us Help You Design Your Path Section */}
       <section className="section-padding">
         <div className="container">
-          <div className="text-center" style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div className="text-center reveal" style={{ maxWidth: '900px', margin: '0 auto' }}>
             <h2>Let us Help You Design Your Path to Success in the United States</h2>
             <p style={{ marginTop: '1.5rem', fontSize: '1.1rem' }}>
               The rules and regulations that govern living, working, or purchasing property in the United States can be time consuming and overwhelming. Spend your time doing what you do best and let us do what we do best.
@@ -46,7 +48,7 @@ export default function Home() {
 
       {/* Building Bridges Section */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
-        <div className="container text-center">
+        <div className="container text-center reveal">
           <h2 style={{ fontSize: '3rem', marginBottom: '2rem' }}>Building Bridges To The Land of Opportunity</h2>
         </div>
       </section>
@@ -55,7 +57,7 @@ export default function Home() {
       <section className="section-padding">
         <div className="container">
           <div className="content-image-grid">
-            <div className="content-text">
+            <div className="content-text reveal">
               <h2>From Temporary and Permanent Residence to Citizenship - We've Got the Answers to Your Questions</h2>
               <p style={{ fontSize: '1.1rem', marginTop: '1.5rem' }}>
                 If your personal or business plans include living, working or investing in the United States, we assist with strategies that open doors for you and avoid costly pitfalls.
@@ -94,7 +96,7 @@ export default function Home() {
                 </ul>
               </div>
             </div>
-            <div className="content-image">
+            <div className="content-image reveal">
               <div style={{
                 width: '100%',
                 height: '100%',
@@ -133,29 +135,35 @@ export default function Home() {
       {/* Why Choose Us Section */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container">
-          <div className="text-center" style={{ marginBottom: '4rem' }}>
+          <div className="text-center reveal" style={{ marginBottom: '4rem' }}>
             <h2>Why Choose Us</h2>
           </div>
 
           <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon" style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>♟️</div>
+            <div className="feature-card reveal">
+              <div className="feature-icon">
+                <IconStrategy />
+              </div>
               <h3>Personalized Immigration Strategies for individuals, families, startups and employers</h3>
               <p>
                 We recognize that each immigration journey is distinct, and shaped by individual backgrounds and aspirations. By choosing us, you benefit from expert advice and creativity based on years of experience in the U.S. market. We pride ourselves on fashioning customized strategies that are created with your best long-term interest in mind.
               </p>
             </div>
 
-            <div className="feature-card">
-              <div className="feature-icon" style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>🌍</div>
+            <div className="feature-card reveal">
+              <div className="feature-icon">
+                <IconGlobe />
+              </div>
               <h3>Global Perspective and Expert Guidance to protect your interests in the long term</h3>
               <p>
                 Ms. Henning brings to the table a wealth of personal experience as an immigrant and in advising individuals, businesses and families from various corners of the globe in their transition to the United States. Whether you're looking to live, work or play in the United States, the firm's expertise can help ensure a soft landing stateside.
               </p>
             </div>
 
-            <div className="feature-card">
-              <div className="feature-icon" style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>🔑</div>
+            <div className="feature-card reveal">
+              <div className="feature-icon">
+                <IconKey />
+              </div>
               <h3>Comprehensive representation to guide your property purchase or market entry into the U.S.A.</h3>
               <p>
                 Not all questions are immigration questions. We offer comprehensive representation to protect our clients' interests in the areas of real estate, corporate, taxation, estate planning and other areas of the law. In that respect, Ms. Henning often acts as "general counsel" to help build relationships and calls in experts in other speciality areas as needed.
@@ -163,7 +171,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-center" style={{ marginTop: '4rem' }}>
+          <div className="text-center reveal" style={{ marginTop: '4rem' }}>
             <Link href="/practice-areas" className="btn btn-primary">
               Learn More About Our Practice Areas
             </Link>
@@ -186,15 +194,28 @@ export default function Home() {
           .feature-card {
             background: #fff;
             padding: 2.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(15, 23, 42, 0.08);
             text-align: center;
+          }
+
+          .feature-icon {
+            color: var(--color-secondary);
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+          }
+
+          .feature-icon :global(svg) {
+            width: 60px;
+            height: 60px;
           }
           
           .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
           }
           
           .feature-card h3 {
@@ -215,7 +236,7 @@ export default function Home() {
       <section className="section-padding">
         <div className="container">
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <h2 className="text-center" style={{ marginBottom: '2rem' }}>Supporting Immigrants to Thrive in The U.S.</h2>
+            <h2 className="text-center reveal" style={{ marginBottom: '2rem' }}>Supporting Immigrants to Thrive in The U.S.</h2>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
               Welcome to <strong>Henning Law Firm PLLC</strong>, where nothing gives us greater satisfaction than assisting our clients in realizing their very own personal, professional or commercial goals in the United States.
             </p>
@@ -246,12 +267,12 @@ export default function Home() {
       {/* Testimonials Section */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container">
-          <div className="text-center" style={{ marginBottom: '4rem' }}>
+          <div className="text-center reveal" style={{ marginBottom: '4rem' }}>
             <h2>Hear It Straight from Our Happy Clients</h2>
           </div>
 
           <div className="testimonials-grid">
-            <div className="testimonial-card">
+            <div className="testimonial-card reveal">
               <blockquote style={{ margin: 0, fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-text-light)' }}>
                 <p style={{ marginBottom: '1.5rem' }}>
                   I was referred to Norma Henning by my CPA, who spoke <strong>highly</strong> about her <strong>knowledge</strong> when it comes to visa and immigration matters. I wanted to move from Germany to the US and was looking for the best way to get my visa or even permanent resident card (green card). She <strong>analyzed</strong> my professional background and found that I qualified for classification as an Alien of Extraordinary Ability in my field.
@@ -268,7 +289,7 @@ export default function Home() {
               </footer>
             </div>
 
-            <div className="testimonial-card">
+            <div className="testimonial-card reveal">
               <blockquote style={{ margin: 0, fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-text-light)' }}>
                 <p style={{ marginBottom: '1.5rem' }}>
                   The immigration process can be a stressful and challenging journey. This is exactly how I felt before I met Norma Henning. I was going through a rough divorce, had an arrest record and did not have any family around. I was not sure if I would be able to have my case approved. Norma was able to prepare everything. She assured and supported me throughout the entire process. After going through another similar process without an attorney, this was a completely <strong>unique</strong> experience to have Norma by my side attending my interviews in the USCIS. She was like Immigration <strong>Fairy Godmother</strong> who made things magically happen.
@@ -282,7 +303,7 @@ export default function Home() {
               </footer>
             </div>
 
-            <div className="testimonial-card">
+            <div className="testimonial-card reveal">
               <blockquote style={{ margin: 0, fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-text-light)' }}>
                 <p style={{ marginBottom: '1.5rem' }}>
                   It was a <strong>pleasure</strong> to work with Mrs. Henning from the initial consultation until the day our case was <strong>approved</strong> and green card was in our hand.
@@ -320,8 +341,15 @@ export default function Home() {
           .testimonial-card {
             background: #fff;
             padding: 2.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+          }
+
+          .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
           }
           
           .testimonial-card blockquote p {
@@ -331,11 +359,16 @@ export default function Home() {
       </section>
 
       {/* Unlock Your American Dream CTA Section */}
-      <section className="section-padding" style={{ 
-        background: 'linear-gradient(135deg, var(--color-primary) 0%, #1a3a5f 100%)',
-        color: 'var(--color-white)'
-      }}>
-        <div className="container text-center">
+      <section
+        className="section-padding"
+        style={{
+          backgroundImage: `linear-gradient(rgba(10, 25, 47, 0.5), rgba(10, 25, 47, 0.75)), url(${images.consultation})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          color: 'var(--color-white)',
+        }}
+      >
+        <div className="container text-center reveal">
           <h2 style={{ color: 'var(--color-white)', marginBottom: '1.5rem' }}>
             Unlock Your American Dream Today
           </h2>

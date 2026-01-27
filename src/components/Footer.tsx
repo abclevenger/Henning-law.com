@@ -46,6 +46,27 @@ const Footer = () => {
                         }}>
                             Get in Touch
                         </Link>
+                        <div style={{ marginTop: '1.5rem' }}>
+                            <a
+                                href="https://www.linkedin.com/in/norma-henning-jd/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Norma Henning on LinkedIn"
+                                style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '0.6rem',
+                                    color: 'rgba(255,255,255,0.9)',
+                                    textDecoration: 'none',
+                                    fontWeight: 600,
+                                }}
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true" style={{ width: '20px', height: '20px', fill: 'currentColor' }}>
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.025-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.047c.476-.9 1.637-1.85 3.368-1.85 3.6 0 4.268 2.369 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM6.856 20.452H3.818V9h3.038v11.452zM22.225 0H1.771C.792 0 0 .771 0 1.723v20.555C0 23.23.792 24 1.771 24h20.451C23.2 24 24 23.23 24 22.278V1.723C24 .771 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
                     </div>
                     
                     <div className="footer-col">
@@ -55,6 +76,8 @@ const Footer = () => {
                             <li><Link href="/attorney-bio">Attorney Bio</Link></li>
                             <li><Link href="/practice-areas">Practice Areas</Link></li>
                             <li><Link href="/contact">Contact</Link></li>
+                            <li><Link href="/privacy">Privacy Policy</Link></li>
+                            <li><Link href="/terms">Terms &amp; Conditions</Link></li>
                         </ul>
                     </div>
                 </div>

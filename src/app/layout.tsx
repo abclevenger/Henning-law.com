@@ -4,6 +4,7 @@ import './globals.css';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ScrollReveal from '@/components/ScrollReveal';
 
 export const metadata: Metadata = {
   title: {
@@ -49,6 +50,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <LanguageProvider>
+          <ScrollReveal />
           <Navbar />
           <main>{children}</main>
           <Footer />

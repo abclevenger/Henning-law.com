@@ -4,15 +4,19 @@
   /* Colors - Premium Palette */
   --color-primary: #0A192F;
   /* Navy Blue */
-  --color-secondary: #C5A059;
-  /* Gold */
-  --color-secondary-light: #E0C07F;
-  /* Light Gold */
+  --color-secondary: #7ac0e1;
+  /* Light Blue */
+  --color-secondary-light: #7ac0e1;
+  /* Light Blue */
   --color-text: #333333;
   --color-text-light: #666666;
   --color-white: #FFFFFF;
   --color-bg-light: #F9F9F9;
   --color-border: #E5E5E5;
+  --shadow-sm: 0 6px 16px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.12);
+  --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.18);
+  --transition-base: 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
 
   /* Typography */
   --font-heading: 'Playfair Display', serif;
@@ -54,7 +58,7 @@ img {
 a {
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
 }
 
 a:hover {
@@ -156,15 +160,18 @@ ul {
   letter-spacing: 1px;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
   border: 2px solid transparent;
   text-align: center;
   font-family: var(--font-body);
+  box-shadow: 0 12px 24px rgba(10, 25, 47, 0.18);
+  transform: translateY(0);
+  will-change: transform;
 }
 
 .btn-primary {
   background-color: var(--color-secondary);
-  color: var(--color-white);
+  color: var(--color-primary);
   border: 2px solid var(--color-secondary);
 }
 
@@ -172,8 +179,13 @@ ul {
   background-color: var(--color-secondary-light);
   border-color: var(--color-secondary-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(197, 160, 89, 0.3);
-  color: var(--color-white);
+  box-shadow: 0 16px 32px rgba(122, 192, 225, 0.3);
+  color: var(--color-primary);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 8px 16px rgba(10, 25, 47, 0.2);
 }
 
 .btn-outline {
@@ -187,6 +199,26 @@ ul {
   color: var(--color-white);
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(10, 25, 47, 0.2);
+}
+
+.reveal {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+  transition: opacity 600ms ease, transform 600ms ease, filter 600ms ease;
+  will-change: opacity, transform;
+}
+
+.reveal-ready .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
 /* Navbar */

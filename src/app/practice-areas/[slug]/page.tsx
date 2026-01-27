@@ -1,15 +1,31 @@
 "use client";
 
 import Link from 'next/link';
-import { getPracticeAreaBySlug, practiceAreas, getPracticeAreasByIds, PracticeArea } from '@/data/practiceAreas';
+import { getPracticeAreaBySlug, practiceAreas, getPracticeAreasByIds, PracticeArea, PracticeAreaIconKey } from '@/data/practiceAreas';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import {
+  IconBriefcase,
+  IconCorporate,
+  IconCitizenship,
+  IconFamily,
+  IconHome,
+  IconResidency,
+} from '@/components/Icons';
 
 export default function PracticeAreaPage() {
   const params = useParams();
   const router = useRouter();
   const [practiceArea, setPracticeArea] = useState<PracticeArea | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const iconMap: Record<PracticeAreaIconKey, React.ReactNode> = {
+    briefcase: <IconBriefcase />,
+    residency: <IconResidency />,
+    family: <IconFamily />,
+    citizenship: <IconCitizenship />,
+    corporate: <IconCorporate />,
+    home: <IconHome />,
+  };
 
   useEffect(() => {
     const slug = params?.slug as string | undefined;
@@ -49,9 +65,9 @@ export default function PracticeAreaPage() {
 
   return (
     <>
-      <section className="page-header section-padding text-center" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
+      <section className="page-header section-padding text-center reveal" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
         <div className="container">
-          <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{practiceArea.icon}</div>
+          <div className="page-icon">{iconMap[practiceArea.icon]}</div>
           <h1 style={{ color: '#fff' }}>{practiceArea.title}</h1>
           <p style={{ maxWidth: '700px', margin: '1.5rem auto 0', color: 'rgba(255,255,255,0.9)', fontSize: '1.2rem' }}>
             {practiceArea.shortDescription}
@@ -63,7 +79,7 @@ export default function PracticeAreaPage() {
         <div className="container">
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
             {/* Full Description */}
-            <div style={{ marginBottom: '3rem' }}>
+            <div className="reveal" style={{ marginBottom: '3rem' }}>
               <h2 style={{ marginBottom: '1.5rem' }}>Overview</h2>
               <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-text-light)' }}>
                 {practiceArea.fullDescription}
@@ -71,7 +87,7 @@ export default function PracticeAreaPage() {
             </div>
 
             {/* Services */}
-            <div style={{ marginBottom: '3rem' }}>
+            <div className="reveal" style={{ marginBottom: '3rem' }}>
               <h2 style={{ marginBottom: '1.5rem' }}>Services We Offer</h2>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 {practiceArea.services.map((service, index) => (
@@ -94,7 +110,7 @@ export default function PracticeAreaPage() {
             </div>
 
             {/* Benefits */}
-            <div style={{ marginBottom: '3rem', padding: '2.5rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '8px' }}>
+            <div className="reveal" style={{ marginBottom: '3rem', padding: '2.5rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
               <h2 style={{ marginBottom: '1.5rem' }}>Why Choose Us</h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>
                 {practiceArea.benefits.map((benefit, index) => (
@@ -117,35 +133,37 @@ export default function PracticeAreaPage() {
 
             {/* Related Practice Areas */}
             {relatedAreas.length > 0 && (
-              <div style={{ marginBottom: '3rem' }}>
+              <div className="reveal" style={{ marginBottom: '3rem' }}>
                 <h2 style={{ marginBottom: '1.5rem' }}>Related Practice Areas</h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
                   {relatedAreas.map((area) => (
                     <Link
                       key={area.id}
                       href={`/practice-areas/${area.slug}`}
+                      className="reveal"
                       style={{
                         display: 'block',
                         padding: '1.5rem',
                         backgroundColor: '#fff',
                         border: '1px solid var(--color-border)',
-                        borderRadius: '8px',
+                        borderRadius: '12px',
                         textDecoration: 'none',
-                        transition: 'all 0.3s ease',
+                        transition: 'transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base)',
                         borderLeft: '4px solid var(--color-secondary)',
+                        boxShadow: 'var(--shadow-sm)',
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.boxShadow = '0 8px 16px rgba(0,0,0,0.1)';
-                        e.currentTarget.style.transform = 'translateY(-3px)';
+                        e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                        e.currentTarget.style.transform = 'translateY(-6px)';
                         e.currentTarget.style.borderLeftColor = 'var(--color-primary)';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.boxShadow = 'none';
+                        e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
                         e.currentTarget.style.transform = 'translateY(0)';
                         e.currentTarget.style.borderLeftColor = 'var(--color-secondary)';
                       }}
                     >
-                      <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{area.icon}</div>
+                      <div className="related-icon">{iconMap[area.icon]}</div>
                       <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
                         {area.title}
                       </h3>
@@ -159,12 +177,13 @@ export default function PracticeAreaPage() {
             )}
 
             {/* CTA Section */}
-            <div style={{ 
+            <div className="reveal" style={{ 
               textAlign: 'center', 
               padding: '3rem', 
               backgroundColor: 'var(--color-bg-light)', 
-              borderRadius: '8px',
-              marginTop: '4rem'
+              borderRadius: '12px',
+              marginTop: '4rem',
+              boxShadow: 'var(--shadow-sm)'
             }}>
               <h3 style={{ marginBottom: '1.5rem' }}>Ready to Get Started?</h3>
               <p style={{ fontSize: '1.1rem', marginBottom: '2rem', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto', color: 'var(--color-text-light)' }}>
@@ -179,6 +198,31 @@ export default function PracticeAreaPage() {
             </div>
           </div>
         </div>
+        <style jsx>{`
+          .page-icon {
+            color: var(--color-secondary);
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+          }
+
+          .page-icon :global(svg) {
+            width: 64px;
+            height: 64px;
+          }
+
+          .related-icon {
+            color: var(--color-secondary);
+            width: 36px;
+            height: 36px;
+            margin-bottom: 0.75rem;
+          }
+
+          .related-icon :global(svg) {
+            width: 36px;
+            height: 36px;
+          }
+        `}</style>
       </section>
     </>
   );

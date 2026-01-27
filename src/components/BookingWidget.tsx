@@ -8,10 +8,10 @@ const BookingWidget = () => {
   const [duration, setDuration] = useState<AppointmentDuration>('30min');
 
   useEffect(() => {
-    // Load the embed script
+    // Reload the embed script so the calendar re-initializes on toggle
     const existingScript = document.querySelector('script[src="https://link.ymbs.pro/js/embed.js"]');
-    if (existingScript) {
-      return;
+    if (existingScript && existingScript.parentNode) {
+      existingScript.parentNode.removeChild(existingScript);
     }
 
     const script = document.createElement('script');
@@ -26,11 +26,11 @@ const BookingWidget = () => {
         scriptToRemove.parentNode.removeChild(scriptToRemove);
       }
     };
-  }, []);
+  }, [duration]);
 
   const bookingIds = {
-    '30min': 'NMHxnh5PGXkfPxBSkci5',
-    '60min': 'amF0sUNL3IWh0nu9UtJj',
+    '30min': 'amF0sUNL3IWh0nu9UtJj',
+    '60min': 'NMHxnh5PGXkfPxBSkci5',
   };
 
   return (
@@ -60,7 +60,7 @@ const BookingWidget = () => {
           src={`https://link.ymbs.pro/widget/booking/${bookingIds[duration]}`}
           style={{ width: '100%', border: 'none', overflow: 'hidden' }}
           scrolling="no"
-          id={`msgsndr-calendar-${duration}`}
+          id="msgsndr-calendar"
           title={`${duration} Appointment Booking`}
           key={duration} // Force re-render when duration changes
         />
@@ -109,7 +109,7 @@ const BookingWidget = () => {
           background-color: var(--color-secondary);
           color: var(--color-white);
           border-color: var(--color-secondary);
-          box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+          box-shadow: 0 4px 12px rgba(122, 192, 225, 0.3);
         }
 
         .booking-iframe-container {

@@ -146,7 +146,7 @@ const LanguageToggle = () => {
         }
 
         .language-option.active {
-          background-color: rgba(197, 160, 89, 0.1);
+          background-color: rgba(122, 192, 225, 0.1);
           font-weight: 600;
         }
 

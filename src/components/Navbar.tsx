@@ -12,7 +12,11 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="container navbar-content">
                 <Link href="/" className="logo">
-                    <span className="logo-text">HENNING <span>LAW</span></span>
+                    <img
+                        src={images.logo || '/favicon.png'}
+                        alt="Henning Law Firm"
+                        className="logo-image"
+                    />
                 </Link>
                 
                 <ul className={`nav-links ${isMenuOpen ? 'nav-links-open' : ''}`}>
@@ -66,7 +70,7 @@ const Navbar = () => {
                 }
 
                 .logo-image {
-                    height: 40px;
+                    height: 50px;
                     width: auto;
                     object-fit: contain;
                 }

@@ -7,6 +7,40 @@ import { useState } from 'react';
 export default function AttorneyBio() {
     const [imgError, setImgError] = useState(false);
     const [honoraryImgError, setHonoraryImgError] = useState(false);
+    const galleryImages = [
+        {
+            src: '/images/2krCRQV6hI3DnsbJCcHzoQOt4LDpH7Mw5nYkkfyf-_x600-resize-trim(0,0,1500,2250).jpg',
+            alt: 'Norma Henning speaking at event',
+        },
+        {
+            src: '/images/BsDwgkl51eIjLKieDxHYz2c9Rvp8JzD8ec2FcfYl-_x600-resize-trim(0,0,3264,2448).jpg',
+            alt: 'Honorary consul ceremony',
+        },
+        {
+            src: '/images/nLXDt74qHlkBZ2fm03j72SLkdwgW8UFTzVwSJJV4-_x600-resize-trim(0,0,3024,4032).jpg',
+            alt: 'Aboard naval vessel',
+        },
+        {
+            src: '/images/C4ASTuDUUtisY4BU8ZXwWQIhE6yhO08tHuJlBQzs-_x600-resize-trim(0,0,1550,913).jpg',
+            alt: 'German embassy group photo',
+        },
+        {
+            src: '/images/7PWgsf7ekyxExcbqsPx56M9JvVBoxh9qBQjfF9te-_x600-resize-trim(0,0,1280,960).png',
+            alt: 'Public policy lecture',
+        },
+        {
+            src: '/images/anS41g8Ar2pXAEjsz8HxxF8uXZ1rcQPdd5F6DG0O-_x600-resize-trim(0,0,800,800).jpg',
+            alt: 'Uli Stein cartoon',
+        },
+        {
+            src: '/images/UN7YODP2OLJi16bTeXhjlHnPFtgPFi4Q06v7Qd7M-1920x_-resize-trim(0,0,3840,2563).jpg',
+            alt: 'US Market Entry Bootcamp group',
+        },
+        {
+            src: '/images/UxiuLeh5Z56lqdD2JNYqDvsg5tVtHqjDEnGJrT8w-638x_-resize-trim(0,0,3024,4032).jpg',
+            alt: 'Event photo with German emblem',
+        },
+    ];
 
     return (
         <>
@@ -110,8 +144,8 @@ export default function AttorneyBio() {
                                 </ul>
                             </div>
 
-                            <div style={{ marginTop: '3rem' }}>
-                                <Link href="/contact" className="btn btn-primary" style={{ marginRight: '1rem' }}>
+                            <div className="bio-cta" style={{ marginTop: '3rem' }}>
+                                <Link href="/contact" className="btn btn-primary">
                                     Schedule a Consultation
                                 </Link>
                                 <Link href="/practice-areas" className="btn btn-outline">
@@ -155,6 +189,19 @@ export default function AttorneyBio() {
                     </div>
                 </div>
 
+                <div className="container" style={{ marginTop: '4rem' }}>
+                    <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Gallery</h2>
+                        <div className="bio-gallery">
+                            {galleryImages.map((image) => (
+                                <div key={image.src} className="bio-gallery-item">
+                                    <img src={image.src} alt={image.alt} loading="lazy" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
                 <style jsx>{`
                     .bio-grid {
                         display: grid;
@@ -189,11 +236,44 @@ export default function AttorneyBio() {
                         font-size: 1.3rem;
                         margin-bottom: 1rem;
                     }
+
+                    .bio-cta {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1rem;
+                        align-items: center;
+                    }
                     
                     @media (min-width: 768px) {
                         .honorary-consul-image {
                             max-width: 700px;
                             margin: 0 auto;
+                        }
+                    }
+
+                    .bio-gallery {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1.5rem;
+                    }
+
+                    .bio-gallery-item {
+                        border-radius: 12px;
+                        overflow: hidden;
+                        box-shadow: var(--shadow-sm);
+                        background: #fff;
+                    }
+
+                    .bio-gallery-item img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        display: block;
+                    }
+
+                    @media (min-width: 968px) {
+                        .bio-gallery {
+                            grid-template-columns: repeat(4, 1fr);
                         }
                     }
                 `}</style>

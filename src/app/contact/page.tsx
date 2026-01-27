@@ -84,7 +84,7 @@ export default function Contact() {
 
                         <div className="contact-form-wrapper">
                             <h3 style={{ marginBottom: '2rem' }}>Send Us a Message</h3>
-                            <div className="embedded-form-container" style={{ width: '100%', height: '1084px', borderRadius: '8px', overflow: 'hidden' }}>
+                            <div className="embedded-form-container">
                                 <iframe
                                     src="https://link.ymbs.pro/widget/form/vkKECO8y8SRTuPh4vNeM"
                                     style={{ width: '100%', height: '100%', border: 'none', borderRadius: '0px' }}
@@ -97,7 +97,7 @@ export default function Contact() {
                                     data-deactivation-type="neverDeactivate"
                                     data-deactivation-value=""
                                     data-form-name="Immigration Lawyer Contact "
-                                    data-height="1084"
+                                    data-height="1200"
                                     data-layout-iframe-id="inline-vkKECO8y8SRTuPh4vNeM"
                                     data-form-id="vkKECO8y8SRTuPh4vNeM"
                                     title="Immigration Lawyer Contact "
@@ -117,6 +117,12 @@ export default function Contact() {
                     @media (min-width: 968px) {
                         .contact-layout {
                             grid-template-columns: 1fr 1.2fr;
+                        }
+                    }
+
+                    @media (max-width: 768px) {
+                        .embedded-form-container {
+                            height: 1400px;
                         }
                     }
                     
@@ -140,6 +146,18 @@ export default function Contact() {
                         padding: 3rem;
                         border-radius: 8px;
                         box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+                    }
+
+                    .embedded-form-container {
+                        width: 100%;
+                        height: 1200px;
+                        border-radius: 8px;
+                        overflow: hidden;
+                    }
+
+                    .embedded-form-container iframe {
+                        width: 100%;
+                        height: 100%;
                     }
                     
                     .contact-form-wrapper h3 {
@@ -175,7 +193,7 @@ export default function Contact() {
                     .form-group textarea:focus {
                         border-color: var(--color-secondary);
                         outline: none;
-                        box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+                        box-shadow: 0 0 0 3px rgba(122, 192, 225, 0.1);
                     }
                     
                     .form-group textarea {

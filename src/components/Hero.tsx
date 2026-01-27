@@ -52,6 +52,7 @@ const Hero = () => {
 
   return (
     <section className="hero">
+      <div className="hero-underlay"></div>
       <div className="hero-overlay"></div>
       <div className="hero-slides">
         {heroSlides.map((slide, index) => (
@@ -96,9 +97,19 @@ const Hero = () => {
           align-items: center;
           justify-content: center;
           text-align: center;
-          background-color: var(--color-primary);
+          background-color: transparent;
           color: var(--color-white);
           overflow: hidden;
+        }
+
+        .hero-underlay {
+          position: absolute;
+          inset: 0;
+          background-image: url('/images/hero-underlay.png');
+          background-size: cover;
+          background-position: center;
+          z-index: 0;
+          opacity: 0.9;
         }
         
         .hero-overlay {
@@ -107,7 +118,7 @@ const Hero = () => {
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.85));
+          background: linear-gradient(rgba(10, 25, 47, 0.4), rgba(10, 25, 47, 0.6));
           z-index: 1;
         }
         
@@ -130,11 +141,13 @@ const Hero = () => {
           align-items: center;
           justify-content: center;
           opacity: 0;
-          transition: opacity 1s ease-in-out;
+          transform: scale(1.04);
+          transition: opacity 1s ease-in-out, transform 1.6s ease;
         }
         
         .hero-slide.active {
           opacity: 1;
+          transform: scale(1.01);
         }
         
         .hero-content {
