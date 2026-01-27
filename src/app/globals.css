@@ -375,6 +375,16 @@ ul {
   .container {
     padding: 0 var(--spacing-md);
   }
+
+  .btn {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  .btn + .btn {
+    margin-top: 0.75rem;
+  }
 }
 
 /* Form Styles */

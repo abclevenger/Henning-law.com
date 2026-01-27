@@ -124,6 +124,10 @@ export default function Contact() {
                         .embedded-form-container {
                             height: 1400px;
                         }
+
+                        .contact-form-wrapper {
+                            padding: 2rem;
+                        }
                     }
                     
                     .info-item {
