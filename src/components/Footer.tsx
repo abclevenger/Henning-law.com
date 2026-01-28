@@ -1,13 +1,18 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
+    const { t } = useLanguage();
+    
     return (
         <footer className="footer">
             <div className="container">
                 <div className="footer-grid">
                     <div className="footer-col">
-                        <h4>Contact</h4>
+                        <h4>{t('footer.contact')}</h4>
                         <div style={{ marginBottom: '1rem' }}>
                             <p style={{ marginBottom: '0.5rem', fontWeight: '600' }}>Tampa</p>
                             <p style={{ marginBottom: '1rem' }}>
@@ -33,18 +38,18 @@ const Footer = () => {
                     </div>
                     
                     <div className="footer-col">
-                        <h4>Hours</h4>
-                        <p>By Appointment Only</p>
+                        <h4>{t('footer.hours')}</h4>
+                        <p>{t('footer.byAppointment')}</p>
                         
-                        <h4 style={{ marginTop: '2rem' }}>Connect</h4>
-                        <p>Let us help you design your path to success in the United States.</p>
+                        <h4 style={{ marginTop: '2rem' }}>{t('footer.connect')}</h4>
+                        <p>{t('footer.helpDesign')}</p>
                         <Link href="/contact" className="btn btn-outline" style={{ 
                             marginTop: '1rem', 
                             borderColor: 'rgba(255,255,255,0.5)', 
                             color: '#fff',
                             display: 'inline-block'
                         }}>
-                            Get in Touch
+                            {t('cta.getInTouch')}
                         </Link>
                         <div style={{ marginTop: '1.5rem' }}>
                             <a
@@ -70,14 +75,26 @@ const Footer = () => {
                     </div>
                     
                     <div className="footer-col">
-                        <h4>Quick Links</h4>
+                        <h4>{t('footer.quickLinks')}</h4>
                         <ul className="footer-links">
-                            <li><Link href="/">Home</Link></li>
-                            <li><Link href="/attorney-bio">Attorney Bio</Link></li>
-                            <li><Link href="/practice-areas">Practice Areas</Link></li>
-                            <li><Link href="/contact">Contact</Link></li>
-                            <li><Link href="/privacy">Privacy Policy</Link></li>
-                            <li><Link href="/terms">Terms &amp; Conditions</Link></li>
+                            <li><Link href="/">{t('nav.home')}</Link></li>
+                            <li><Link href="/attorney-bio">{t('nav.attorney')}</Link></li>
+                            <li><Link href="/practice-areas">{t('nav.practice')}</Link></li>
+                            <li><Link href="/contact">{t('nav.contact')}</Link></li>
+                            <li><Link href="/blog">{t('nav.blog')}</Link></li>
+                            <li>
+                                <a 
+                                    href="https://d5cijhwdqw0sfite0ihy.app.clientclub.net/login" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+                                >
+                                    {t('nav.clientPortal')} <span style={{ fontSize: '0.75em', opacity: 0.7 }}>↗</span>
+                                </a>
+                            </li>
+                            <li><Link href="/privacy">{t('footer.privacyPolicy')}</Link></li>
+                            <li><Link href="/terms">{t('footer.terms')}</Link></li>
+                            <li><Link href="/accessibility">{t('footer.accessibility')}</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -90,18 +107,21 @@ const Footer = () => {
                     color: 'rgba(255,255,255,0.7)'
                 }}>
                     <h4 style={{ fontSize: '0.9rem', marginBottom: '1rem', color: 'rgba(255,255,255,0.9)' }}>
-                        Attorney Advertising | Bar Complaint Information
+                        {t('legal.attorneyAdvertising')}
                     </h4>
+                    <p style={{ marginBottom: '1rem', lineHeight: '1.6', fontStyle: 'italic' }}>
+                        {t('legal.jurisdictionDisclosure')}
+                    </p>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem', marginBottom: '1.5rem' }} className="bar-complaint-grid">
                         <div>
                             <p style={{ fontWeight: '600', marginBottom: '0.5rem', color: 'rgba(255,255,255,0.9)' }}>
-                                Florida Bar Complaints
+                                {t('legal.floridaBarComplaints')}
                             </p>
                             <p style={{ marginBottom: '0.5rem', lineHeight: '1.6' }}>
-                                The hiring of a lawyer is an important decision that should not be based solely upon advertisements. Before you decide, ask us to send you free written information about our qualifications and experience.
+                                {t('legal.hiringDecision')}
                             </p>
                             <p style={{ marginBottom: '0.5rem', lineHeight: '1.6' }}>
-                                Complaints may be filed with the Florida Bar by calling toll-free 1-866-352-0707 or visiting{' '}
+                                {t('legal.floridaBarContact')}{' '}
                                 <a href="https://www.floridabar.org" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.9)', textDecoration: 'underline' }}>
                                     www.floridabar.org
                                 </a>
@@ -109,13 +129,13 @@ const Footer = () => {
                         </div>
                         <div>
                             <p style={{ fontWeight: '600', marginBottom: '0.5rem', color: 'rgba(255,255,255,0.9)' }}>
-                                Minnesota Bar Complaints
+                                {t('legal.minnesotaBarComplaints')}
                             </p>
                             <p style={{ marginBottom: '0.5rem', lineHeight: '1.6' }}>
-                                The hiring of a lawyer is an important decision that should not be based solely upon advertisements. Before you decide, ask us to send you free written information about our qualifications and experience.
+                                {t('legal.hiringDecision')}
                             </p>
                             <p style={{ marginBottom: '0.5rem', lineHeight: '1.6' }}>
-                                Complaints may be filed with the Minnesota Board of Professional Responsibility by calling 1-800-657-3600 or visiting{' '}
+                                {t('legal.minnesotaBarContact')}{' '}
                                 <a href="https://www.mncourts.gov/lprb" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.9)', textDecoration: 'underline' }}>
                                     www.mncourts.gov/lprb
                                 </a>
