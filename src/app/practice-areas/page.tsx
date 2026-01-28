@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import React from 'react';
+import type { ReactNode } from 'react';
 import { practiceAreas, PracticeAreaIconKey } from '@/data/practiceAreas';
 import {
     IconBriefcase,
@@ -11,9 +11,69 @@ import {
     IconHome,
     IconResidency,
 } from '@/components/Icons';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function PracticeAreas() {
     const services = practiceAreas;
+    const { language, t: translate } = useLanguage();
+    const t = (en: ReactNode, de?: ReactNode) => (language === 'de' ? de ?? en : en);
+    const faqItems = language === 'de'
+        ? [
+            {
+                question: 'Arbeiten Sie mit Mandanten außerhalb der USA?',
+                answer:
+                    'Ja. Wir beraten Mandanten weltweit per Videokonferenz und strategischer Planung.',
+            },
+            {
+                question: 'Welche Visakategorien sind für Fachkräfte und Unternehmen häufig relevant?',
+                answer:
+                    'Häufige Optionen sind E‑1/E‑2, L‑1, O‑1 sowie EB‑Kategorien für die dauerhafte Aufenthaltsgenehmigung.',
+            },
+            {
+                question: 'Können Sie bei Markteintritt und Immobilienthemen in den USA helfen?',
+                answer:
+                    'Ja. Wir beraten zu Markteintritt, Unternehmensstruktur und rechtlichen Fragen beim Immobilieneigentum als Nicht‑Resident.',
+            },
+            {
+                question: 'Wie starte ich eine Beratung?',
+                answer:
+                    'Kontaktieren Sie uns mit einer kurzen Zusammenfassung Ihrer Ziele. Wir skizzieren die nächsten Schritte.',
+            },
+        ]
+        : [
+            {
+                question: 'Do you work with clients outside the U.S.?',
+                answer:
+                    'Yes. We regularly assist clients abroad through virtual consultations and strategic planning.',
+            },
+            {
+                question: 'Which visa categories are common for professionals and companies?',
+                answer:
+                    'Common options include E-1/E-2 treaty visas, L-1 intra-company transfers, O-1 extraordinary ability, and EB categories for permanent residency.',
+            },
+            {
+                question: 'Can you help with U.S. market entry and property ownership?',
+                answer:
+                    'Yes. We advise on market entry strategy, corporate structure, and legal considerations for property ownership as a non-resident.',
+            },
+            {
+                question: 'How do we start a consultation?',
+                answer:
+                    'Start by contacting us with a short summary of your goals. We will outline the next steps and required documents.',
+            },
+        ];
+    const faqSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer,
+            },
+        })),
+    };
     const iconMap: Record<PracticeAreaIconKey, React.ReactNode> = {
         briefcase: <IconBriefcase />,
         residency: <IconResidency />,
@@ -25,11 +85,20 @@ export default function PracticeAreas() {
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
             <section className="page-header section-padding text-center reveal" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
                 <div className="container">
-                    <h1 style={{ color: '#fff' }}>Practice Areas</h1>
+                    <h1 style={{ color: '#fff' }}>
+                        {t('U.S. Immigration Practice Areas', 'US‑Einwanderung: Rechtsgebiete')}
+                    </h1>
                     <p style={{ maxWidth: '900px', margin: '1.5rem auto 0', color: 'rgba(255,255,255,0.9)', fontSize: '1.2rem' }}>
-                        Comprehensive Representation of Families, Companies and Entrepreneurs Seeking to Live and/or Work in the U.S.A.
+                        {t(
+                            'Comprehensive representation for families, companies, and entrepreneurs seeking to live or work in the U.S.A.',
+                            'Umfassende Vertretung für Familien, Unternehmen und Unternehmer mit Zielen in den USA.'
+                        )}
                     </p>
                 </div>
             </section>
@@ -37,18 +106,89 @@ export default function PracticeAreas() {
             <section className="section-padding">
                 <div className="container">
                     <div className="intro-text reveal" style={{ maxWidth: '900px', margin: '0 auto 4rem', textAlign: 'center' }}>
-                        <h2>How We Can Help You</h2>
+                        <h2>{t('How We Help Clients', 'So helfen wir Mandanten')}</h2>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginTop: '1.5rem' }}>
-                            Navigating your path to the United States can be challenging. Let Henning Law Firm PLLC help simplify the process by designing a plan that is right for your company or family.
+                            {t(
+                                'Navigating your path to the United States can be challenging. We simplify the process by designing a plan that fits your company or family.',
+                                'Der Weg in die USA kann komplex sein. Wir vereinfachen den Prozess und entwickeln einen Plan, der zu Ihrer Familie oder Ihrem Unternehmen passt.'
+                            )}
                         </p>
+                        <div
+                            style={{
+                                marginTop: '1.5rem',
+                                padding: '1.5rem',
+                                borderRadius: '12px',
+                                backgroundColor: 'var(--color-bg-light)',
+                                textAlign: 'left',
+                            }}
+                        >
+                            <h3 style={{ marginBottom: '0.75rem' }}>
+                                {t('Guidance available in German', 'Beratung auf Deutsch')}
+                            </h3>
+                            <p style={{ marginBottom: '0.75rem', fontSize: '1.05rem' }}>
+                                {t(
+                                    'We support clients with U.S. visas, green cards, and market entry. Our guidance is structured and individualized.',
+                                    'Wir begleiten Mandanten bei US‑Visa, Green Cards und Unternehmensaufbau. Unsere Beratung ist klar strukturiert und individuell.'
+                                )}
+                            </p>
+                            <p style={{ marginBottom: 0, fontSize: '1.05rem' }}>
+                                {t(
+                                    <>Schedule a conversation through our <Link href="/contact">contact page</Link>.</>,
+                                    <>Vereinbaren Sie ein Gespräch über unsere <Link href="/contact">Kontaktseite</Link>.</>
+                                )}
+                            </p>
+                        </div>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                            Click on the tiles below to open general descriptions of some of the most popular visa categories available.
+                            {t(
+                                'Click the tiles below to explore general descriptions of popular visa categories.',
+                                'Klicken Sie auf die Kacheln, um allgemeine Beschreibungen beliebter Visakategorien zu sehen.'
+                            )}
                         </p>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: 0 }}>
-                            <strong>Startups - don’t let visa eligibility for key personnel be an afterthought!</strong> We work with your corporate counsel to help create the right structures to allow you or your employees to enter the United States to pursue your goals.
+                            <strong>
+                                {t(
+                                    'Startups - don’t let visa eligibility for key personnel be an afterthought!',
+                                    'Start-ups – Visa-Fragen für Schlüsselpersonen sollten kein Nachgedanke sein!'
+                                )}
+                            </strong>{' '}
+                            {t(
+                                'We work with your corporate counsel to help create the right structures to allow you or your employees to enter the United States to pursue your goals.',
+                                'Wir arbeiten mit Ihrer Unternehmensberatung zusammen, um die passenden Strukturen für Ihren Eintritt in die USA zu schaffen.'
+                            )}
                         </p>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginTop: '1.5rem' }}>
-                            Contact us to discuss your individual situation and learn how we can assist you with everything from work and residency visas to U.S. property ownership.
+                            {t(
+                                'Contact us to discuss your situation and learn how we can assist with work visas, residency options, and U.S. property ownership.',
+                                'Kontaktieren Sie uns, um Ihre Situation zu besprechen – von Arbeits‑ und Aufenthaltsvisa bis zu Immobilieneigentum in den USA.'
+                            )}
+                        </p>
+                        <p style={{ fontSize: '1.05rem', lineHeight: '1.7', marginTop: '1.25rem' }}>
+                            {t(
+                                <>Meet <Link href="/attorney-bio">Norma Henning, J.D.</Link>, or <Link href="/contact">schedule a consultation</Link> to review your goals.</>,
+                                <>Lernen Sie <Link href="/attorney-bio">Norma Henning, J.D.</Link> kennen oder <Link href="/contact">vereinbaren Sie eine Beratung</Link>.</>
+                            )}
+                        </p>
+                        <p style={{ fontSize: '1rem', lineHeight: '1.7', marginTop: '1rem' }}>
+                            {t(
+                                <>Helpful resources:{' '}
+                                    <a href="https://www.uscis.gov/" target="_blank" rel="noopener noreferrer">
+                                        USCIS
+                                    </a>{' '}
+                                    and{' '}
+                                    <a href="https://travel.state.gov/" target="_blank" rel="noopener noreferrer">
+                                        U.S. Department of State
+                                    </a>
+                                    .</>,
+                                <>Hilfreiche Quellen:{' '}
+                                    <a href="https://www.uscis.gov/" target="_blank" rel="noopener noreferrer">
+                                        USCIS
+                                    </a>{' '}
+                                    und das{' '}
+                                    <a href="https://travel.state.gov/" target="_blank" rel="noopener noreferrer">
+                                        U.S. Department of State
+                                    </a>
+                                    .</>
+                            )}
                         </p>
                     </div>
 
@@ -58,8 +198,28 @@ export default function PracticeAreas() {
                                 <div className="service-icon">
                                     {iconMap[service.icon]}
                                 </div>
-                                <h3>{service.title}</h3>
-                                <p style={{ lineHeight: '1.7', color: 'var(--color-text-light)' }}>{service.shortDescription}</p>
+                                <h3
+                                    style={{
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: 2,
+                                        WebkitBoxOrient: 'vertical',
+                                        overflow: 'hidden',
+                                    }}
+                                >
+                                    {service.title}
+                                </h3>
+                                <p
+                                    style={{
+                                        lineHeight: '1.6',
+                                        color: 'var(--color-text-light)',
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: 2,
+                                        WebkitBoxOrient: 'vertical',
+                                        overflow: 'hidden',
+                                    }}
+                                >
+                                    {service.shortDescription}
+                                </p>
                                 <div style={{ display: 'flex', gap: '1rem', marginTop: 'auto', paddingTop: '1rem' }}>
                                     <Link href={`/practice-areas/${service.slug}`} className="read-more-link">
                                         Learn More →
@@ -72,45 +232,51 @@ export default function PracticeAreas() {
                         ))}
                     </div>
 
-                    <div className="longform-section reveal" style={{ marginTop: '5rem' }}>
-                        <h2 className="text-center" style={{ marginBottom: '2.5rem' }}>Navigating Success for Immigrants</h2>
-                        <div className="longform-grid">
-                            {services.map((service) => (
-                                <div key={`${service.id}-detail`} className="longform-card">
-                                    <div className="longform-header">
-                                        <span className="longform-icon">{iconMap[service.icon]}</span>
-                                        <h3>{service.title}</h3>
-                                    </div>
-                                    <p style={{ marginBottom: '1.5rem' }}>{service.fullDescription}</p>
-                                    <p style={{ fontWeight: 600, color: 'var(--color-primary)', marginBottom: '0.75rem' }}>
-                                        Popular Visas we can help you obtain include:
+                    <div className="reveal" style={{ marginTop: '4rem' }}>
+                        <h2 className="text-center" style={{ marginBottom: '2rem' }}>
+                            {t('Frequently Asked Questions', 'Häufige Fragen')}
+                        </h2>
+                        <div style={{ display: 'grid', gap: '1.5rem', maxWidth: '900px', margin: '0 auto' }}>
+                            {faqItems.map((item) => (
+                                <div
+                                    key={item.question}
+                                    style={{
+                                        padding: '1.5rem',
+                                        borderRadius: '12px',
+                                        border: '1px solid var(--color-border)',
+                                        backgroundColor: '#fff',
+                                        boxShadow: 'var(--shadow-sm)',
+                                    }}
+                                >
+                                    <h3 style={{ marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
+                                        {item.question}
+                                    </h3>
+                                    <p style={{ margin: 0, color: 'var(--color-text-light)', lineHeight: '1.7' }}>
+                                        {item.answer}
                                     </p>
-                                    <ul className="longform-list">
-                                        {service.services.map((item, index) => (
-                                            <li key={`${service.id}-service-${index}`}>{item}</li>
-                                        ))}
-                                    </ul>
-                                    <div style={{ marginTop: '1.5rem' }}>
-                                        <Link href={`/practice-areas/${service.slug}`} className="read-more-link">
-                                            Learn More →
-                                        </Link>
-                                    </div>
                                 </div>
                             ))}
                         </div>
                     </div>
 
                     <div className="cta-section reveal" style={{ marginTop: '4rem', textAlign: 'center', padding: '3rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
-                        <h3 style={{ marginBottom: '1.5rem' }}>Ready to Get Started?</h3>
+                        <h3 style={{ marginBottom: '1.5rem' }}>
+                            {t('Ready to Start Your U.S. Immigration Plan?', 'Bereit für Ihren US‑Einwanderungsplan?')}
+                        </h3>
                         <p style={{ fontSize: '1.1rem', marginBottom: '2rem', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
-                            Let us help you navigate your path to success in the United States. Contact us today for a consultation.
+                            {t(
+                                'Let us help you navigate your path to success in the United States. Contact us today for a consultation.',
+                                'Wir begleiten Sie Schritt für Schritt. Kontaktieren Sie uns für eine erste Beratung.'
+                            )}
                         </p>
-                        <Link href="/contact" className="btn btn-primary" style={{ marginRight: '1rem' }}>
-                            Contact Us
-                        </Link>
-                        <Link href="/attorney-bio" className="btn btn-outline">
-                            Learn About Our Attorney
-                        </Link>
+                        <div className="cta-buttons">
+                            <Link href="/contact" className="btn btn-primary">
+                                {translate('cta.contactForm')}
+                            </Link>
+                            <a href="tel:2398216504" className="btn btn-outline">
+                                {translate('cta.callUs')}
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -118,7 +284,7 @@ export default function PracticeAreas() {
                     .services-grid {
                         display: grid;
                         grid-template-columns: 1fr;
-                        gap: 2.5rem;
+                        gap: 3.25rem;
                     }
                     
                     @media (min-width: 768px) {
@@ -136,7 +302,7 @@ export default function PracticeAreas() {
                     .service-card {
                         background: #fff;
                         border: 1px solid rgba(15, 23, 42, 0.08);
-                        padding: 2.5rem;
+                        padding: 3rem;
                         display: flex;
                         flex-direction: column;
                         transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
@@ -152,10 +318,11 @@ export default function PracticeAreas() {
                     }
                     
                     .service-card h3 {
-                        font-size: 1.5rem;
-                        margin-bottom: 1.25rem;
+                        font-size: 1.25rem;
+                        margin-bottom: 0.75rem;
                         color: var(--color-primary);
                         line-height: 1.3;
+                        font-weight: 600;
                     }
 
                     .service-icon {
@@ -172,7 +339,8 @@ export default function PracticeAreas() {
                     
                     .service-card p {
                         flex-grow: 1;
-                        margin-bottom: 1.5rem;
+                        margin-bottom: 1.25rem;
+                        font-size: 0.98rem;
                     }
                     
                     .read-more-link {
@@ -190,75 +358,6 @@ export default function PracticeAreas() {
                     
                     .read-more-link:hover {
                         color: var(--color-primary);
-                    }
-
-                    .longform-grid {
-                        display: grid;
-                        grid-template-columns: 1fr;
-                        gap: 2.5rem;
-                        margin-top: 2.5rem;
-                    }
-
-                    @media (min-width: 968px) {
-                        .longform-grid {
-                            grid-template-columns: repeat(2, 1fr);
-                        }
-                    }
-
-                    .longform-card {
-                        background: #fff;
-                        border: 1px solid rgba(15, 23, 42, 0.08);
-                        border-radius: 12px;
-                        padding: 2.5rem;
-                        box-shadow: var(--shadow-sm);
-                        display: flex;
-                        flex-direction: column;
-                    }
-
-                    .longform-header {
-                        display: flex;
-                        align-items: center;
-                        gap: 1rem;
-                        margin-bottom: 1.5rem;
-                    }
-
-                    .longform-icon {
-                        color: var(--color-secondary);
-                        width: 40px;
-                        height: 40px;
-                    }
-
-                    .longform-icon :global(svg) {
-                        width: 40px;
-                        height: 40px;
-                    }
-
-                    .longform-card h3 {
-                        margin: 0;
-                        font-size: 1.35rem;
-                        color: var(--color-primary);
-                    }
-
-                    .longform-list {
-                        list-style: none;
-                        padding: 0;
-                        margin: 0;
-                        display: grid;
-                        gap: 0.75rem;
-                    }
-
-                    .longform-list li {
-                        padding-left: 1.5rem;
-                        position: relative;
-                        color: var(--color-text-light);
-                        line-height: 1.7;
-                    }
-
-                    .longform-list li::before {
-                        content: '•';
-                        position: absolute;
-                        left: 0;
-                        color: var(--color-secondary);
                     }
                 `}</style>
             </section>

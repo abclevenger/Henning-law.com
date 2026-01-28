@@ -29,6 +29,7 @@ const LanguageToggle = () => {
   return (
     <div className="language-toggle" ref={dropdownRef}>
       <button
+        type="button"
         className="language-toggle-button"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Change language"
@@ -44,6 +45,7 @@ const LanguageToggle = () => {
         <div className="language-dropdown">
           {languages.map((lang) => (
             <button
+              type="button"
               key={lang.code}
               className={`language-option ${language === lang.code ? 'active' : ''}`}
               onClick={() => handleLanguageChange(lang.code)}

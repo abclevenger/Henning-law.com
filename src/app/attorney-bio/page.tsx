@@ -1,12 +1,63 @@
 "use client";
 
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { images } from '@/data/images';
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AttorneyBio() {
     const [imgError, setImgError] = useState(false);
     const [honoraryImgError, setHonoraryImgError] = useState(false);
+    const { language, t: translate } = useLanguage();
+    const t = (en: ReactNode, de?: ReactNode) => (language === 'de' ? de ?? en : en);
+    const faqItems = language === 'de'
+        ? [
+            {
+                question: 'Bieten Sie Beratung auf Deutsch an?',
+                answer:
+                    'Ja. Wir beraten Mandanten zu US‑Einwanderung, Unternehmensgründung und Immobilienfragen.',
+            },
+            {
+                question: 'Welche Erfahrung bringen Sie mit?',
+                answer:
+                    'Ms. Henning war Honorarkonsulin der Bundesrepublik Deutschland in Florida und berät seit vielen Jahren internationale Mandanten.',
+            },
+            {
+                question: 'Wie läuft die erste Beratung ab?',
+                answer:
+                    'Nach einer kurzen Schilderung Ihrer Ziele besprechen wir die nächsten Schritte und Unterlagen.',
+            },
+        ]
+        : [
+            {
+                question: 'Do you offer bilingual guidance?',
+                answer:
+                    'Yes. We advise clients on U.S. immigration, business formation, and property questions.',
+            },
+            {
+                question: 'What experience do you bring?',
+                answer:
+                    'Ms. Henning served as Honorary Consul of Germany in Florida and has advised international clients for many years.',
+            },
+            {
+                question: 'How does an initial consultation work?',
+                answer:
+                    'After a short summary of your goals, we outline next steps and required documents.',
+            },
+        ];
+    const faqSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer,
+            },
+        })),
+    };
     const galleryImages = [
         {
             src: '/images/2krCRQV6hI3DnsbJCcHzoQOt4LDpH7Mw5nYkkfyf-_x600-resize-trim(0,0,1500,2250).jpg',
@@ -44,11 +95,17 @@ export default function AttorneyBio() {
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
             <section className="page-header section-padding text-center" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
                 <div className="container">
-                    <h1 style={{ color: '#fff' }}>Attorney Bio</h1>
+                    <h1 style={{ color: '#fff' }}>
+                        {t('U.S. Immigration Attorney', 'US‑Einwanderungsanwältin')}
+                    </h1>
                     <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginTop: '1rem' }}>
-                        Meet Norma Henning, J.D.
+                        {t('Meet Norma Henning, J.D.', 'Norma Henning, J.D. kennenlernen')}
                     </p>
                 </div>
             </section>
@@ -60,7 +117,8 @@ export default function AttorneyBio() {
                             <div className="image-wrapper">
                                 <img
                                     src={imgError ? 'https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=800' : images.attorneyPortrait2}
-                                    alt="Norma Henning, J.D."
+                                    alt="Norma Henning, J.D., founding attorney at Henning Law Firm specializing in U.S. immigration law"
+                                    decoding="async"
                                     style={{
                                         width: '100%',
                                         height: 'auto',
@@ -82,75 +140,112 @@ export default function AttorneyBio() {
                         </div>
 
                         <div className="bio-content">
-                            <h1>Norma Henning, J.D.</h1>
+                            <h2>Norma Henning, J.D.</h2>
                             <h3 style={{ color: 'var(--color-secondary)', marginBottom: '2rem', fontSize: '1.5rem', fontWeight: '400' }}>
-                                Founding Attorney
+                                {t('Founding Attorney', 'Gründungsanwältin')}
                             </h3>
 
-                            <div style={{ marginBottom: '2rem' }}>
-                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    Welcome to <strong>Henning Law Firm PLLC</strong>, where nothing gives us greater satisfaction than assisting our clients in realizing their very own personal, professional or commercial goals in the United States.
+                            <div style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '12px' }}>
+                                <h3 style={{ marginBottom: '0.75rem' }}>
+                                    {t('Guidance available in German', 'Beratung auf Deutsch')}
+                                </h3>
+                                <p style={{ fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '0.75rem' }}>
+                                    {t(
+                                        'We advise clients on U.S. immigration, market entry, and property questions. Our strategy aligns with your goals and timeline.',
+                                        'Wir beraten Mandanten zu US‑Einwanderung, Markteintritt und Immobilienfragen. Unsere Strategie orientiert sich an Ihren Zielen und Ihrem Zeitplan.'
+                                    )}
+                                </p>
+                                <p style={{ marginBottom: 0 }}>
+                                    {t(
+                                        <>Reach out via the <Link href="/contact">contact page</Link> for an initial assessment.</>,
+                                        <>Kontaktieren Sie uns über die <Link href="/contact">Kontaktseite</Link> für eine erste Einschätzung.</>
+                                    )}
                                 </p>
                             </div>
 
                             <div style={{ marginBottom: '2rem' }}>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    Henning Law Firm is guided by Ms. Henning's own background as an immigrant, her service as former Honorary Consul of Germany in Florida, and her experience as a practicing attorney. Her background provides a unique perspective when it comes to the legal and cultural aspects of navigating market entry, establishing lasting business and personal relationships, and raising a family in the United States.
+                                    {t(
+                                        <>Welcome to <strong>Henning Law Firm PLLC</strong>, where nothing gives us greater satisfaction than assisting clients in achieving personal, professional, or commercial goals in the United States.</>,
+                                        <>Willkommen bei <strong>Henning Law Firm PLLC</strong>. Wir unterstützen Mandanten dabei, persönliche, berufliche oder unternehmerische Ziele in den USA zu erreichen.</>
+                                    )}
                                 </p>
                             </div>
 
                             <div style={{ marginBottom: '2rem' }}>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    Her approach to the practice is based on her appreciation for the opportunities the United States offers to newcomers as well as a deep respect for the contributions that immigrants have made and continue to make to this country. Based on this philosophy, the firm focuses on designing tailored visa and immigration strategies and counseling clients in areas of property ownership and U.S. market entry for business ventures in the United States.
-                                </p>
-                            </div>
-
-                            <div style={{ marginBottom: '2rem' }}>
-                                <h3 style={{ marginBottom: '1rem', marginTop: '2rem' }}>What Sets Us Apart</h3>
-                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    When it comes to moving your life to the United States, we have answers to the questions you may not even know to ask. Particularly for investors and immigrants from Civil Law countries, the U.S. common law legal system presents challenges that should not be underestimated. Our holistic approach takes into account our clients' individual goals and addresses complexities such as tax and estate planning considerations as well as corporate, contractual, intellectual property, and other aspects of the law.
+                                    {t(
+                                        "Ms. Henning's background as an immigrant, her service as former Honorary Consul of Germany in Florida, and her experience as a practicing attorney provide a unique perspective on the legal and cultural aspects of U.S. market entry and immigration.",
+                                        'Ms. Hennings eigener Migrationshintergrund, ihre Tätigkeit als frühere Honorarkonsulin Deutschlands in Florida und ihre Erfahrung als Anwältin bieten eine besondere Perspektive auf rechtliche und kulturelle Fragen.'
+                                    )}
                                 </p>
                             </div>
 
                             <div style={{ marginBottom: '2rem' }}>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    We work with a network of like-minded specialists who ensure you receive personalized guidance every step of the way.
+                                    {t(
+                                        'Her approach focuses on tailored visa and immigration strategies and counseling in areas of property ownership and U.S. market entry for business ventures.',
+                                        'Ihr Ansatz konzentriert sich auf maßgeschneiderte Visa‑ und Einwanderungsstrategien sowie Beratung zu Immobilieneigentum und Markteintritt.'
+                                    )}
+                                </p>
+                            </div>
+
+                            <div style={{ marginBottom: '2rem' }}>
+                                <h3 style={{ marginBottom: '1rem', marginTop: '2rem' }}>
+                                    {t('What Sets Us Apart', 'Was uns auszeichnet')}
+                                </h3>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
+                                    {t(
+                                        'We address questions you may not even know to ask. Our holistic approach considers individual goals and complexities such as tax planning, estate planning, corporate structure, and contracts.',
+                                        'Wir beantworten Fragen, die man oft erst spät stellt. Unser Ansatz berücksichtigt Ziele und komplexe Themen wie Steuer‑ und Nachlassplanung, Unternehmensstruktur und Verträge.'
+                                    )}
+                                </p>
+                            </div>
+
+                            <div style={{ marginBottom: '2rem' }}>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
+                                    {t(
+                                        'We work with a network of trusted specialists to ensure personalized guidance at every step.',
+                                        'Wir arbeiten mit einem Netzwerk spezialisierter Partner, um eine individuelle Begleitung sicherzustellen.'
+                                    )}
                                 </p>
                             </div>
 
                             <div style={{ marginTop: '3rem', padding: '2rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '8px' }}>
-                                <h4 style={{ marginBottom: '1rem' }}>Education & Professional Background</h4>
+                                <h4 style={{ marginBottom: '1rem' }}>
+                                    {t('Education & Professional Background', 'Ausbildung & beruflicher Hintergrund')}
+                                </h4>
                                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        Juris Doctor (J.D.)
+                                        {t('Juris Doctor (J.D.)', 'Juris Doctor (J.D.)')}
                                     </li>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        Former Honorary Consul of Germany in Florida
+                                        {t('Former Honorary Consul of Germany in Florida', 'Ehemalige Honorarkonsulin der Bundesrepublik Deutschland in Florida')}
                                     </li>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        Member of the Florida Bar
+                                        {t('Member of the Florida Bar and Minnesota Bar', 'Mitglied der Florida Bar und Minnesota Bar')}
                                     </li>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        Extensive experience in U.S. immigration law
+                                        {t('Extensive experience in U.S. immigration law', 'Umfangreiche Erfahrung im US-Einwanderungsrecht')}
                                     </li>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        Personal experience as an immigrant
+                                        {t('Personal experience as an immigrant', 'Persönliche Erfahrung als Einwanderin')}
                                     </li>
                                 </ul>
                             </div>
 
                             <div className="bio-cta" style={{ marginTop: '3rem' }}>
                                 <Link href="/contact" className="btn btn-primary">
-                                    Schedule a Consultation
+                                    {translate('cta.contactForm')}
                                 </Link>
-                                <Link href="/practice-areas" className="btn btn-outline">
-                                    Learn About Our Practice Areas
-                                </Link>
+                                <a href="tel:2398216504" className="btn btn-outline">
+                                    {translate('cta.callUs')}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -159,12 +254,16 @@ export default function AttorneyBio() {
                 {/* Honorary Consul Section */}
                 <div className="container" style={{ marginTop: '4rem' }}>
                     <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Honorary Consul of Germany in Florida</h2>
+                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                            {t('Honorary Consul of Germany in Florida', 'Honorarkonsulin der Bundesrepublik Deutschland in Florida')}
+                        </h2>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', alignItems: 'center' }}>
                             <div className="honorary-consul-image" style={{ borderRadius: '8px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
                                 <img
                                     src={honoraryImgError ? 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800' : images.attorneyHonoraryConsul}
-                                    alt="Norma Henning as Honorary Consul of Germany in Florida"
+                                    alt="Norma Henning standing with the Honorary Consul emblem of the Federal Republic of Germany in Florida"
+                                    loading="lazy"
+                                    decoding="async"
                                     style={{
                                         width: '100%',
                                         height: 'auto',
@@ -182,7 +281,10 @@ export default function AttorneyBio() {
                             </div>
                             <div>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8', textAlign: 'center' }}>
-                                    Ms. Henning served as the Honorary Consul of Germany in Florida, bringing a unique international perspective and deep understanding of cross-cultural legal matters to her practice. This experience, combined with her personal background as an immigrant, enables her to provide exceptional guidance to clients navigating the complexities of immigration and business law.
+                                    {t(
+                                        'Ms. Henning served as the Honorary Consul of Germany in Florida, bringing an international perspective and deep understanding of cross-cultural legal matters to her practice.',
+                                        'Ms. Henning war Honorarkonsulin Deutschlands in Florida und bringt eine internationale Perspektive sowie tiefes Verständnis für grenzüberschreitende Rechtsfragen ein.'
+                                    )}
                                 </p>
                             </div>
                         </div>
@@ -190,13 +292,44 @@ export default function AttorneyBio() {
                 </div>
 
                 <div className="container" style={{ marginTop: '4rem' }}>
+                    <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                            {t('Frequently Asked Questions', 'Häufige Fragen')}
+                        </h2>
+                        <div style={{ display: 'grid', gap: '1.5rem' }}>
+                            {faqItems.map((item) => (
+                                <div
+                                    key={item.question}
+                                    style={{
+                                        padding: '1.5rem',
+                                        borderRadius: '12px',
+                                        border: '1px solid var(--color-border)',
+                                        backgroundColor: '#fff',
+                                        boxShadow: 'var(--shadow-sm)',
+                                    }}
+                                >
+                                    <h3 style={{ marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
+                                        {item.question}
+                                    </h3>
+                                    <p style={{ margin: 0, color: 'var(--color-text-light)', lineHeight: '1.7' }}>
+                                        {item.answer}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="container" style={{ marginTop: '4rem' }}>
                     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Gallery</h2>
+                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                            {t('Gallery: Legal Community Highlights', 'Galerie: Einblicke aus der Rechtscommunity')}
+                        </h2>
                         <div className="bio-gallery">
                             {galleryImages.map((image) => (
                                 <div key={image.src} className="bio-gallery-item">
-                                    <img src={image.src} alt={image.alt} loading="lazy" />
-                                </div>
+                                                    <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+                                                </div>
                             ))}
                         </div>
                     </div>
@@ -222,7 +355,7 @@ export default function AttorneyBio() {
                         overflow: hidden;
                     }
                     
-                    .bio-content h1 {
+                    .bio-content h2 {
                         margin-bottom: 0.5rem;
                         font-size: 3rem;
                     }

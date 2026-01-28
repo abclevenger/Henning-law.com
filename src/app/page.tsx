@@ -1,43 +1,157 @@
 "use client";
 
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import Hero from '@/components/Hero';
 import { IconStrategy, IconGlobe, IconKey } from '@/components/Icons';
 import { images } from '@/data/images';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Home() {
+  const { language, t: translate } = useLanguage();
+  const t = (en: ReactNode, de?: ReactNode) => (language === 'de' ? de ?? en : en);
+  const faqItems = [
+    {
+      question: t(
+        'Do you work with clients outside the U.S.?',
+        'Arbeiten Sie mit Mandanten außerhalb der USA?'
+      ),
+      answer:
+        t(
+          'Yes. We regularly assist clients abroad through virtual consultations and strategic planning.',
+          'Ja. Wir beraten Mandanten im Ausland regelmäßig per Videokonferenz und strategischer Planung.'
+        ),
+    },
+    {
+      question: t(
+        'Which visa categories are common for professionals and companies?',
+        'Welche Visakategorien sind für Fachkräfte und Unternehmen häufig relevant?'
+      ),
+      answer:
+        t(
+          'Common options include E-1/E-2 treaty visas, L-1 intra-company transfers, O-1 extraordinary ability, and EB categories for permanent residency.',
+          'Häufige Optionen sind E-1/E-2, L-1, O-1 sowie EB-Kategorien für die dauerhafte Aufenthaltsgenehmigung.'
+        ),
+    },
+    {
+      question: t(
+        'Can you help with U.S. market entry and property ownership?',
+        'Können Sie bei Markteintritt und Immobilienthemen in den USA helfen?'
+      ),
+      answer:
+        t(
+          'Yes. We advise on market entry strategy, corporate structure, and legal considerations for property ownership as a non-resident.',
+          'Ja. Wir beraten zu Markteintritt, Unternehmensstruktur und rechtlichen Fragen beim Immobilieneigentum als Nicht‑Resident.'
+        ),
+    },
+    {
+      question: t(
+        'How do we start a consultation?',
+        'Wie starten wir eine Beratung?'
+      ),
+      answer:
+        t(
+          'Start by contacting us with a short summary of your goals. We will outline the next steps and required documents.',
+          'Starten Sie mit einer kurzen Zusammenfassung Ihrer Ziele. Wir skizzieren die nächsten Schritte und benötigten Unterlagen.'
+        ),
+    },
+  ];
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
       <Hero />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
       {/* Let us Help You Design Your Path Section */}
       <section className="section-padding">
         <div className="container">
           <div className="text-center reveal" style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <h2>Let us Help You Design Your Path to Success in the United States</h2>
+            <h2>{t('U.S. Immigration Strategy for Individuals & Businesses', 'US‑Einwanderungsstrategie für Privatpersonen und Unternehmen')}</h2>
             <p style={{ marginTop: '1.5rem', fontSize: '1.1rem' }}>
-              The rules and regulations that govern living, working, or purchasing property in the United States can be time consuming and overwhelming. Spend your time doing what you do best and let us do what we do best.
+              {t(
+                'The rules that govern living, working, or purchasing property in the United States can be time consuming and overwhelming. Spend your time doing what you do best and let us do what we do best.',
+                'Die Regeln für Leben, Arbeiten oder Immobilieneigentum in den USA können zeitaufwendig und komplex sein. Konzentrieren Sie sich auf Ihr Kerngeschäft – wir kümmern uns um den rechtlichen Rahmen.'
+              )}
+            </p>
+            <div
+              className="german-intro"
+              style={{
+                marginTop: '1.75rem',
+                padding: '1.5rem',
+                borderRadius: '12px',
+                backgroundColor: 'var(--color-bg-light)',
+                textAlign: 'left',
+              }}
+            >
+              <h3 style={{ marginBottom: '0.75rem' }}>
+                {t('Guidance available in German', 'Willkommen – Beratung auf Deutsch')}
+              </h3>
+              <p style={{ marginBottom: '0.75rem', fontSize: '1.05rem' }}>
+                {t(
+                  'We advise clients on U.S. immigration, market entry, and property questions. Our strategies are individualized and aligned with your goals in the United States.',
+                  'Wir beraten zu US‑Einwanderung, Markteintritt und Immobilienfragen. Unsere Strategien sind individuell und auf Ihre Ziele in den USA abgestimmt.'
+                )}
+              </p>
+              <p style={{ marginBottom: 0, fontSize: '1.05rem' }}>
+                {t(
+                  <>Schedule a conversation through our <Link href="/contact">contact page</Link>.</>,
+                  <>Vereinbaren Sie ein Gespräch über unsere <Link href="/contact">Kontaktseite</Link>.</>
+                )}
+              </p>
+            </div>
+            <p style={{ marginTop: '1.25rem', fontSize: '1.05rem' }}>
+              {t(
+                <>Explore our <Link href="/practice-areas">practice areas</Link>, meet our <Link href="/attorney-bio">attorney</Link>, or <Link href="/contact">schedule a consultation</Link>.</>,
+                <>Entdecken Sie unsere <Link href="/practice-areas">Rechtsgebiete</Link>, lernen Sie unsere <Link href="/attorney-bio">Anwältin</Link> kennen oder <Link href="/contact">vereinbaren Sie eine Beratung</Link>.</>
+              )}
             </p>
             
             <div style={{ marginTop: '3rem', textAlign: 'left', maxWidth: '700px', marginLeft: 'auto', marginRight: 'auto' }}>
-              <h3 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>We're good at what we do:</h3>
+              <h3 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+                {t('What We Do Best', 'Worin wir besonders stark sind')}
+              </h3>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li style={{ marginBottom: '1.5rem', paddingLeft: '2rem', position: 'relative' }}>
                   <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.5rem' }}>•</span>
                   <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
-                    Deciphering the visa process and helping you achieve the best solutions for you, your family or your business
+                    {t(
+                      'Clarifying the visa process and identifying the right solutions for you, your family, or your business',
+                      'Den Visaprozess verständlich machen und passende Lösungen für Sie, Ihre Familie oder Ihr Unternehmen finden'
+                    )}
                   </strong>
                 </li>
                 <li style={{ marginBottom: '1.5rem', paddingLeft: '2rem', position: 'relative' }}>
                   <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.5rem' }}>•</span>
                   <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
-                    Understanding the legalities of owning U.S. property as a non-resident
+                    {t(
+                      'Understanding the legalities of owning U.S. property as a non-resident',
+                      'Rechtliche Aspekte des Immobilieneigentums in den USA als Nicht‑Resident verstehen'
+                    )}
                   </strong>
                 </li>
                 <li style={{ marginBottom: '1.5rem', paddingLeft: '2rem', position: 'relative' }}>
                   <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.5rem' }}>•</span>
                   <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
-                    Navigating the complexities of starting and managing a U.S. business
+                    {t(
+                      'Navigating the complexities of starting and managing a U.S. business',
+                      'Komplexität bei Gründung und Führung eines US‑Unternehmens souverän meistern'
+                    )}
                   </strong>
                 </li>
               </ul>
@@ -49,7 +163,9 @@ export default function Home() {
       {/* Building Bridges Section */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container text-center reveal">
-          <h2 style={{ fontSize: '3rem', marginBottom: '2rem' }}>Building Bridges To The Land of Opportunity</h2>
+          <h2 style={{ fontSize: '3rem', marginBottom: '2rem' }}>
+            {t('Building Bridges to U.S. Opportunity', 'Brücken in Richtung USA schaffen')}
+          </h2>
         </div>
       </section>
 
@@ -58,39 +174,76 @@ export default function Home() {
         <div className="container">
           <div className="content-image-grid">
             <div className="content-text reveal">
-              <h2>From Temporary and Permanent Residence to Citizenship - We've Got the Answers to Your Questions</h2>
+              <h2>{t('U.S. Visas, Green Cards, and Citizenship', 'US‑Visa, Green Cards und Staatsbürgerschaft')}</h2>
               <p style={{ fontSize: '1.1rem', marginTop: '1.5rem' }}>
-                If your personal or business plans include living, working or investing in the United States, we assist with strategies that open doors for you and avoid costly pitfalls.
+                {t(
+                  'If your personal or business plans include living, working, or investing in the United States, we assist with strategies that open doors and avoid costly pitfalls.',
+                  'Wenn Ihre privaten oder geschäftlichen Pläne Leben, Arbeiten oder Investitionen in den USA umfassen, unterstützen wir Sie mit klaren Strategien und vermeiden kostspielige Fehler.'
+                )}
               </p>
               <p style={{ fontSize: '1.1rem', marginTop: '1rem' }}>
-                It's not just about paperwork. It's about understanding your unique story and ambitions and helping you get to where you want to be as smoothly as possible.
+                {t(
+                  "It's not just about paperwork. It's about understanding your unique story and ambitions and helping you get to where you want to be as smoothly as possible.",
+                  'Es geht nicht nur um Formulare, sondern um Ihre Ziele und den bestmöglichen Weg dorthin.'
+                )}
               </p>
 
               <div style={{ marginTop: '2.5rem' }}>
-                <h3 style={{ marginBottom: '1.5rem' }}>Let us Guide You:</h3>
+                <h3 style={{ marginBottom: '1.5rem' }}>{t('How We Guide Clients', 'So begleiten wir Mandanten')}</h3>
                 <ul style={{ listStyle: 'none', padding: 0 }}>
                   <li style={{ marginBottom: '2rem' }}>
                     <strong style={{ display: 'block', marginBottom: '0.75rem', color: 'var(--color-primary)', fontSize: '1.1rem' }}>
-                      Personalized Visa Plans:
+                      {t('Personalized Visa Plans:', 'Individuelle Visa‑Strategien:')}
                     </strong>
                     <p style={{ marginBottom: 0 }}>
-                      One size does not fit all. Your journey deserves attention to detail and solutions that work for your company or personal life. That may involve creating a path to U.S. residency - or optimizing your ability to visit without incurring the obligations of residency.
+                      {t(
+                        'One size does not fit all. Your journey deserves attention to detail and solutions that work for your company or personal life. That may involve creating a path to U.S. residency or optimizing your ability to visit without incurring the obligations of residency.',
+                        'Standardlösungen passen selten. Wir entwickeln einen Weg, der zu Ihrem Unternehmen oder Privatleben passt – ob mit Perspektive auf dauerhaften Aufenthalt oder für flexible Aufenthalte ohne Wohnsitzpflichten.'
+                      )}
+                    </p>
+                    <p style={{ marginTop: '0.75rem', marginBottom: 0 }}>
+                      {t(
+                        <>Compare official guidance at{' '}
+                          <a href="https://www.uscis.gov/" target="_blank" rel="noopener noreferrer">
+                            USCIS
+                          </a>{' '}
+                          and the{' '}
+                          <a href="https://travel.state.gov/" target="_blank" rel="noopener noreferrer">
+                            U.S. Department of State
+                          </a>
+                          .</>,
+                        <>Offizielle Hinweise finden Sie bei{' '}
+                          <a href="https://www.uscis.gov/" target="_blank" rel="noopener noreferrer">
+                            USCIS
+                          </a>{' '}
+                          und beim{' '}
+                          <a href="https://travel.state.gov/" target="_blank" rel="noopener noreferrer">
+                            U.S. Department of State
+                          </a>
+                          .</>
+                      )}
                     </p>
                   </li>
                   <li style={{ marginBottom: '2rem' }}>
                     <strong style={{ display: 'block', marginBottom: '0.75rem', color: 'var(--color-primary)', fontSize: '1.1rem' }}>
-                      Comprehensive Representation in Other Areas of the Law:
+                      {t('Comprehensive Representation in Other Areas of the Law:', 'Umfassende Beratung in weiteren Rechtsgebieten:')}
                     </strong>
                     <p style={{ marginBottom: 0 }}>
-                      Whether you are starting a new business venture or purchasing property for personal reasons, we can assist you with market entry into the U.S.A. and the legal complexities of buying and owning property as a non-resident.
+                      {t(
+                        'Whether you are starting a new business venture or purchasing property for personal reasons, we can assist you with U.S. market entry and the legal complexities of buying and owning property as a non-resident.',
+                        'Ob Unternehmensgründung oder Immobilienkauf – wir unterstützen bei Markteintritt und den rechtlichen Besonderheiten des Eigentums als Nicht‑Resident.'
+                      )}
                     </p>
                   </li>
                   <li style={{ marginBottom: '2rem' }}>
                     <strong style={{ display: 'block', marginBottom: '0.75rem', color: 'var(--color-primary)', fontSize: '1.1rem' }}>
-                      Global Perspective:
+                      {t('Global Perspective:', 'Internationale Perspektive:')}
                     </strong>
                     <p style={{ marginBottom: 0 }}>
-                      Our international background and decades of serving clients from all corners of the globe mean sensitivity to cultural issues, the immigrant experience and creating a holistic approach that ensures educated decisions.
+                      {t(
+                        'Our international background and decades of serving clients from around the world mean sensitivity to cultural issues, the immigrant experience, and a holistic approach that supports informed decisions.',
+                        'Unser internationaler Hintergrund und die langjährige Arbeit mit Mandanten weltweit sorgen für kulturelles Verständnis und einen ganzheitlichen Blick.'
+                      )}
                     </p>
                   </li>
                 </ul>
@@ -136,7 +289,7 @@ export default function Home() {
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container">
           <div className="text-center reveal" style={{ marginBottom: '4rem' }}>
-            <h2>Why Choose Us</h2>
+            <h2>{t('Why Clients Choose Henning Law', 'Warum Mandanten Henning Law wählen')}</h2>
           </div>
 
           <div className="features-grid">
@@ -144,9 +297,12 @@ export default function Home() {
               <div className="feature-icon">
                 <IconStrategy />
               </div>
-              <h3>Personalized Immigration Strategies for individuals, families, startups and employers</h3>
+              <h3>{t('Personalized U.S. Immigration Strategies for Families and Businesses', 'Individuelle Einwanderungsstrategien für Familien und Unternehmen')}</h3>
               <p>
-                We recognize that each immigration journey is distinct, and shaped by individual backgrounds and aspirations. By choosing us, you benefit from expert advice and creativity based on years of experience in the U.S. market. We pride ourselves on fashioning customized strategies that are created with your best long-term interest in mind.
+                {t(
+                  'We recognize that each immigration journey is distinct and shaped by individual backgrounds and aspirations. You benefit from personalized advice and creativity based on years of experience in the U.S. market.',
+                  'Jede Einwanderung ist individuell. Sie profitieren von Erfahrung, Weitblick und maßgeschneiderten Strategien für Ihre langfristigen Ziele.'
+                )}
               </p>
             </div>
 
@@ -154,9 +310,12 @@ export default function Home() {
               <div className="feature-icon">
                 <IconGlobe />
               </div>
-              <h3>Global Perspective and Expert Guidance to protect your interests in the long term</h3>
+              <h3>{t('Global Perspective for International Clients', 'Internationale Perspektive für Mandanten weltweit')}</h3>
               <p>
-                Ms. Henning brings to the table a wealth of personal experience as an immigrant and in advising individuals, businesses and families from various corners of the globe in their transition to the United States. Whether you're looking to live, work or play in the United States, the firm's expertise can help ensure a soft landing stateside.
+                {t(
+                  "Ms. Henning brings personal experience as an immigrant and decades of advising individuals, businesses, and families in their transition to the United States. The firm's expertise supports a smooth landing.",
+                  'Ms. Henning bringt eigene Migrationserfahrung und jahrzehntelange Beratung internationaler Mandanten mit. So entsteht ein sicherer, gut vorbereiteter Weg in die USA.'
+                )}
               </p>
             </div>
 
@@ -164,17 +323,23 @@ export default function Home() {
               <div className="feature-icon">
                 <IconKey />
               </div>
-              <h3>Comprehensive representation to guide your property purchase or market entry into the U.S.A.</h3>
+              <h3>{t('Comprehensive U.S. Market Entry and Property Guidance', 'Umfassende Begleitung bei Markteintritt und Immobilien')}</h3>
               <p>
-                Not all questions are immigration questions. We offer comprehensive representation to protect our clients' interests in the areas of real estate, corporate, taxation, estate planning and other areas of the law. In that respect, Ms. Henning often acts as "general counsel" to help build relationships and calls in experts in other speciality areas as needed.
+                {t(
+                  'Not all questions are immigration questions. We offer comprehensive representation in real estate, corporate, taxation, estate planning, and related areas, and coordinate with specialists as needed.',
+                  'Nicht jede Frage ist rein immigration‑rechtlich. Wir beraten zu Immobilien, Unternehmen, Steuern, Nachlassplanung und koordinieren bei Bedarf Spezialisten.'
+                )}
               </p>
             </div>
           </div>
 
-          <div className="text-center reveal" style={{ marginTop: '4rem' }}>
-            <Link href="/practice-areas" className="btn btn-primary">
-              Learn More About Our Practice Areas
+          <div className="text-center reveal cta-buttons" style={{ marginTop: '4rem' }}>
+            <Link href="/contact" className="btn btn-primary">
+              {translate('cta.contactForm')}
             </Link>
+            <a href="tel:2398216504" className="btn btn-outline">
+              {translate('cta.callUs')}
+            </a>
           </div>
         </div>
 
@@ -236,28 +401,42 @@ export default function Home() {
       <section className="section-padding">
         <div className="container">
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <h2 className="text-center reveal" style={{ marginBottom: '2rem' }}>Supporting Immigrants to Thrive in The U.S.</h2>
+            <h2 className="text-center reveal" style={{ marginBottom: '2rem' }}>
+              {t('Supporting Immigrants to Thrive in the U.S.', 'Menschen auf ihrem Weg in die USA begleiten')}
+            </h2>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              Welcome to <strong>Henning Law Firm PLLC</strong>, where nothing gives us greater satisfaction than assisting our clients in realizing their very own personal, professional or commercial goals in the United States.
+              {t(
+                <>Welcome to <strong>Henning Law Firm PLLC</strong>, where nothing gives us greater satisfaction than assisting clients in realizing personal, professional, or commercial goals in the United States.</>,
+                <>Willkommen bei <strong>Henning Law Firm PLLC</strong>. Wir begleiten Mandanten dabei, persönliche, berufliche oder unternehmerische Ziele in den USA zu erreichen.</>
+              )}
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              Henning Law Firm is guided by Ms. Henning's own background as an immigrant, her service as former Honorary Consul of Germany in Florida, and her experience as a practicing attorney. Her background provides a unique perspective when it comes to the legal and cultural aspects of navigating market entry, establishing lasting business and personal relationships, and raising a family in the United States. Her approach to the practice is based on her appreciation for the opportunities the United States offers to newcomers as well as a deep respect for the contributions that immigrants have made and continue to make to this country. Based on this philosophy, the firm focuses on designing tailored visa and immigration strategies and counseling clients in areas of property ownership and U.S. market entry for business ventures in the United States.
+              {t(
+                "Ms. Henning's background as an immigrant, her service as former Honorary Consul of Germany in Florida, and her experience as a practicing attorney provide a unique perspective on the legal and cultural aspects of U.S. market entry and immigration.",
+                'Ms. Hennings eigener Migrationshintergrund, ihre Tätigkeit als frühere Honorarkonsulin Deutschlands in Florida und ihre Erfahrung als Anwältin bieten eine besondere Perspektive auf rechtliche und kulturelle Aspekte von Markteintritt und Einwanderung.'
+              )}
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              <strong>What sets us apart?</strong>
+              {t(<strong>What sets us apart?</strong>, <strong>Was uns auszeichnet?</strong>)}
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              When it comes to moving your life to the United States, we have answers to the questions you may not even know to ask. Particularly for investors and immigrants from Civil Law countries, the U.S. common law legal system presents challenges that should not be underestimated. Our holistic approach takes into account our clients' individual goals and addresses complexities such as tax and estate planning considerations as well as corporate, contractual, intellectual property, and other aspects of the law. We work with a network of like-minded specialists who ensure you receive personalized guidance every step of the way.
+              {t(
+                "We address questions you may not even know to ask. Our holistic approach considers individual goals and complex issues like tax planning, estate planning, corporate structure, and contracts. We also work with a trusted specialist network to ensure personalized guidance.",
+                'Wir beantworten Fragen, die man oft erst spät stellt. Unser ganzheitlicher Ansatz berücksichtigt Ziele und komplexe Themen wie Steuer‑ und Nachlassplanung, Unternehmensstruktur und Verträge. Zudem arbeiten wir mit einem Netzwerk spezialisierter Partner.'
+              )}
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              <strong>What we do not do</strong>:
+              {t(<strong>What we do not do</strong>, <strong>Was wir nicht tun</strong>)}
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: 0 }}>
-              While we stand ready to help you with all the legal challenges of coming to the United States, neither the firm nor Ms. Henning provide any financial advice or investment recommendations. All financial decisions are made by clients or in concert with their independently selected or retained licensed investment advisors or real estate brokers.
+              {t(
+                'While we stand ready to help with legal challenges, we do not provide financial advice or investment recommendations. Financial decisions are made by clients or with their independently selected advisors.',
+                'Wir unterstützen bei rechtlichen Fragen, bieten jedoch keine Finanz‑ oder Anlageberatung. Finanzentscheidungen treffen Mandanten selbst oder mit ihren eigenen Beratern.'
+              )}
             </p>
             <div className="text-center" style={{ marginTop: '3rem' }}>
-              <Link href="/practice-areas" className="btn btn-outline">
-                Continue reading
+              <Link href="/contact" className="btn btn-outline">
+                {translate('cta.contactForm')}
               </Link>
             </div>
           </div>
@@ -268,7 +447,7 @@ export default function Home() {
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container">
           <div className="text-center reveal" style={{ marginBottom: '4rem' }}>
-            <h2>Hear It Straight from Our Happy Clients</h2>
+            <h2>{t('What Our Clients Say', 'Was unsere Mandanten sagen')}</h2>
           </div>
 
           <div className="testimonials-grid">
@@ -281,7 +460,7 @@ export default function Home() {
                   Now some time ago, I opened my own consulting firm and get to contribute my experience and skills to U.S. clients while enjoying the flexibility that permanent residence brings with it. Traveling back and forth to Europe has been possible even during the pandemic, and I am very <strong>grateful</strong> to Ms. Henning for guiding and supporting me and my wife throughout the process.
                 </p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  She has shown so much <strong>knowledge</strong> and <strong>experience</strong> in this matter, that I always felt like I was in the <strong>best</strong> of hands. And she navigated all matters of the process at the very <strong>high standard</strong> which I expected as an executive manager. Also, it has been a lot of <strong>fun</strong> to work with Norma Henning and I have recommended her in the past more than a dozen times to friends and other entrepreneurs.
+                  She has shown so much <strong>knowledge</strong> and <strong>experience</strong> in this matter, that I always felt confident in the process. And she navigated all matters of the process at the very <strong>high standard</strong> which I expected as an executive manager. Also, it has been a lot of <strong>fun</strong> to work with Norma Henning and I have recommended her in the past more than a dozen times to friends and other entrepreneurs.
                 </p>
               </blockquote>
               <footer style={{ marginTop: '2rem', textAlign: 'right', fontStyle: 'normal' }}>
@@ -292,10 +471,10 @@ export default function Home() {
             <div className="testimonial-card reveal">
               <blockquote style={{ margin: 0, fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-text-light)' }}>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  The immigration process can be a stressful and challenging journey. This is exactly how I felt before I met Norma Henning. I was going through a rough divorce, had an arrest record and did not have any family around. I was not sure if I would be able to have my case approved. Norma was able to prepare everything. She assured and supported me throughout the entire process. After going through another similar process without an attorney, this was a completely <strong>unique</strong> experience to have Norma by my side attending my interviews in the USCIS. She was like Immigration <strong>Fairy Godmother</strong> who made things magically happen.
+                  The immigration process can be a stressful and challenging journey. This is exactly how I felt before I met Norma Henning. I was going through a rough divorce, had an arrest record and did not have any family around. I was not sure if I would be able to have my case approved. Norma was able to prepare everything. She assured and supported me throughout the entire process. After going through another similar process without an attorney, this was a completely <strong>unique</strong> experience to have Norma by my side attending my interviews at USCIS. Her <strong>thorough preparation</strong> and support made all the difference.
                 </p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  I am beyond <strong>grateful</strong> for all the <strong>professionalism</strong> and <strong>care</strong> that Norma always provided. After receiving my green card and citizenship, I referred Norma to my parents to apply for their green cards. It was also a challenging case due to my father's military background. But her level of <strong>experience</strong> and <strong>expertise</strong> helped us get the application done the right way. I told Norma once that I trusted her 110% and if she told me to dress up as a clown for the interview, I would have done it because she knows best. Do not hesitate, get your case managed by a professional immigration attorney who <strong>cares</strong>!
+                  I am beyond <strong>grateful</strong> for all the <strong>professionalism</strong> and <strong>care</strong> that Norma always provided. After receiving my green card and citizenship, I referred Norma to my parents to apply for their green cards. It was also a challenging case due to my father's military background. But her level of <strong>experience</strong> helped us get the application done the right way. I felt confident in her guidance throughout the entire process.
                 </p>
               </blockquote>
               <footer style={{ marginTop: '2rem', textAlign: 'right', fontStyle: 'normal' }}>
@@ -315,7 +494,7 @@ export default function Home() {
                   Most important for us is the fact that Mrs. Henning was <strong>efficient</strong> and <strong>timely</strong> in preparing the paperwork and forms for every stage of the application and was diligent and thorough in creating a comprehensive case file to ensure we were providing all information necessary for a successful adjudication of our case.
                 </p>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  She was on top of things every step of the way and we knew we could <strong>rely</strong> on her to make sure everything was taken care. We were in <strong>fantastic</strong> hands and would not hesitate to highly recommend working with her to anyone. Thanks so much.
+                  She was on top of things every step of the way and we knew we could <strong>rely</strong> on her to make sure everything was taken care of. We felt confident throughout the process and would not hesitate to recommend working with her. Thanks so much.
                 </p>
               </blockquote>
               <footer style={{ marginTop: '2rem', textAlign: 'right', fontStyle: 'normal' }}>
@@ -355,7 +534,136 @@ export default function Home() {
           .testimonial-card blockquote p {
             margin-bottom: 1.5rem;
           }
+          
+          .testimonial-disclaimer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.5);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+          }
         `}</style>
+        
+        <div className="testimonial-disclaimer reveal">
+          <p style={{ margin: 0 }}>
+            {translate('legal.testimonialDisclaimer')}
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="section-padding">
+        <div className="container">
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <h2 className="text-center reveal" style={{ marginBottom: '2rem' }}>
+              {t('Frequently Asked Questions', 'Häufige Fragen')}
+            </h2>
+            <div style={{ display: 'grid', gap: '1.5rem' }}>
+              {faqItems.map((item) => (
+                <div
+                  key={item.question}
+                  className="reveal"
+                  style={{
+                    padding: '1.5rem',
+                    borderRadius: '12px',
+                    border: '1px solid var(--color-border)',
+                    backgroundColor: '#fff',
+                    boxShadow: 'var(--shadow-sm)',
+                  }}
+                >
+                  <h3 style={{ marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
+                    {item.question}
+                  </h3>
+                  <p style={{ margin: 0, color: 'var(--color-text-light)', lineHeight: '1.7' }}>
+                    {item.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Path Section */}
+      <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
+        <div className="container">
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <h2 className="text-center reveal" style={{ marginBottom: '2rem' }}>
+              {t('Your Path & Next Steps', 'Ihr Weg & nächste Schritte')}
+            </h2>
+            <p className="text-center reveal" style={{ fontSize: '1.1rem', marginBottom: '2.5rem' }}>
+              {t(
+                'A clear, step-by-step process for planning U.S. immigration or market entry.',
+                'Ein klarer, schrittweiser Prozess für Einwanderung oder Markteintritt in die USA.'
+              )}
+            </p>
+            <div style={{ display: 'grid', gap: '1.5rem' }}>
+              {[
+                {
+                  title: t('1) Contact & Intake', '1) Kontakt & Erstaufnahme'),
+                  text: t(
+                    'Fill out the contact form or call us. We review your goals, timeline, and current status.',
+                    'Füllen Sie das Formular aus oder rufen Sie an. Wir prüfen Ziele, Zeitrahmen und Status.'
+                  ),
+                },
+                {
+                  title: t('2) Strategy & Options', '2) Strategie & Optionen'),
+                  text: t(
+                    'We identify the best visa or residency pathway and outline risks, costs, and timelines.',
+                    'Wir identifizieren den passenden Weg und erläutern Risiken, Kosten und Ablauf.'
+                  ),
+                },
+                {
+                  title: t('3) Document Plan', '3) Dokumentenplan'),
+                  text: t(
+                    'You receive a document checklist and guidance for evidence, translations, and filings.',
+                    'Sie erhalten eine Checkliste sowie Hinweise zu Nachweisen, Übersetzungen und Einreichungen.'
+                  ),
+                },
+                {
+                  title: t('4) Filing & Follow‑Up', '4) Einreichung & Nachverfolgung'),
+                  text: t(
+                    'We prepare and submit your case, track updates, and respond to government requests.',
+                    'Wir bereiten den Fall vor, reichen ein, verfolgen Updates und reagieren auf Behördenanfragen.'
+                  ),
+                },
+                {
+                  title: t('5) Decision & Next Steps', '5) Entscheidung & nächste Schritte'),
+                  text: t(
+                    'We prepare you for interviews, approvals, and long‑term compliance requirements.',
+                    'Wir bereiten auf Interviews, Entscheidungen und langfristige Anforderungen vor.'
+                  ),
+                },
+              ].map((step) => (
+                <div
+                  key={step.title}
+                  className="reveal"
+                  style={{
+                    padding: '1.5rem',
+                    borderRadius: '12px',
+                    border: '1px solid var(--color-border)',
+                    backgroundColor: '#fff',
+                    boxShadow: 'var(--shadow-sm)',
+                  }}
+                >
+                  <h3 style={{ marginBottom: '0.5rem', color: 'var(--color-primary)' }}>{step.title}</h3>
+                  <p style={{ margin: 0, color: 'var(--color-text-light)', lineHeight: '1.7' }}>{step.text}</p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center reveal cta-buttons" style={{ marginTop: '2.5rem' }}>
+              <Link href="/contact" className="btn btn-primary">
+                {translate('cta.contactForm')}
+              </Link>
+              <a href="tel:2398216504" className="btn btn-outline">
+                {translate('cta.callUs')}
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Unlock Your American Dream CTA Section */}
@@ -370,7 +678,7 @@ export default function Home() {
       >
         <div className="container text-center reveal">
           <h2 style={{ color: 'var(--color-white)', marginBottom: '1.5rem' }}>
-            Unlock Your American Dream Today
+            {t('Unlock Your American Dream Today', 'Starten Sie Ihren Weg in die USA')}
           </h2>
           <p style={{ 
             fontSize: '1.3rem', 
@@ -380,14 +688,14 @@ export default function Home() {
             marginLeft: 'auto',
             marginRight: 'auto'
           }}>
-            Tailored Solutions for your U.S. Immigration Journey
+            {t('Tailored solutions for your U.S. immigration journey', 'Individuelle Lösungen für Ihren Einwanderungsweg')}
           </p>
           <Link href="/contact" className="btn" style={{ 
             backgroundColor: 'var(--color-secondary)', 
             color: 'var(--color-white)',
             borderColor: 'var(--color-secondary)'
           }}>
-            Contact
+            {translate('cta.contactForm')}
           </Link>
         </div>
       </section>

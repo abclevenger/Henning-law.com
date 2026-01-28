@@ -1,9 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 
 const TermsPage = () => {
   return (
     <section className="section-padding">
-      <div className="container">
+      <div className="container" style={{ maxWidth: '900px' }}>
         <h1>Terms and Conditions</h1>
         <p>
           By using this website, you agree to the following terms and conditions.
@@ -61,6 +62,28 @@ const TermsPage = () => {
           Questions about these terms? Email{' '}
           <a href="mailto:nhenning@henning-law.com">nhenning@henning-law.com</a>.
         </p>
+        
+        {/* CTA Section */}
+        <div style={{
+          marginTop: '3rem',
+          padding: '2rem',
+          backgroundColor: 'var(--color-bg-light)',
+          borderRadius: '8px',
+          textAlign: 'center',
+        }}>
+          <h3 style={{ marginBottom: '1rem' }}>Have Immigration Questions?</h3>
+          <p style={{ marginBottom: '1.5rem', color: 'var(--color-text-light)' }}>
+            Schedule a consultation to discuss your goals.
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/contact" className="btn btn-primary">
+              Contact Us
+            </Link>
+            <Link href="/practice-areas" className="btn btn-outline">
+              View Practice Areas
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

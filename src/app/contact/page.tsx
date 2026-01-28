@@ -1,10 +1,14 @@
 "use client";
 
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import BookingWidget from '@/components/BookingWidget';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Contact() {
+    const { language, t: translate } = useLanguage();
+    const t = (en: ReactNode, de?: ReactNode) => (language === 'de' ? de ?? en : en);
     useEffect(() => {
         // Check if script is already loaded
         const existingScript = document.querySelector('script[src="https://link.ymbs.pro/js/form_embed.js"]');
@@ -31,9 +35,9 @@ export default function Contact() {
         <>
             <section className="page-header section-padding text-center" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
                 <div className="container">
-                    <h1 style={{ color: '#fff' }}>Contact</h1>
+                    <h1 style={{ color: '#fff' }}>{t('Contact', 'Kontakt')}</h1>
                     <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginTop: '1rem' }}>
-                        Get in touch with us to start your immigration journey
+                        {t('Get in touch with us to start your immigration journey', 'Kontaktieren Sie uns, um Ihren Weg zu starten')}
                     </p>
                 </div>
             </section>
@@ -42,10 +46,29 @@ export default function Contact() {
                 <div className="container">
                     <div className="contact-layout">
                         <div className="contact-info">
-                            <h2>Contact</h2>
+                            <h2>{t('Contact', 'Kontakt')}</h2>
                             <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
-                                We look forward to hearing from you. Please contact us via phone or email to schedule a consultation.
+                                {t(
+                                    'We look forward to hearing from you. Please contact us via phone or email to schedule a consultation.',
+                                    'Wir freuen uns auf Ihre Nachricht. Kontaktieren Sie uns per Telefon oder E‑Mail für eine Beratung.'
+                                )}
                             </p>
+                            <p style={{ fontSize: '1.05rem', marginBottom: '1.5rem' }}>
+                                {t(
+                                    <>Start with our <Link href="/practice-areas">practice areas</Link> or learn more about <Link href="/attorney-bio">Norma Henning, J.D.</Link>.</>,
+                                    <>Starten Sie mit unseren <Link href="/practice-areas">Rechtsgebieten</Link> oder erfahren Sie mehr über <Link href="/attorney-bio">Norma Henning, J.D.</Link>.</>
+                                )}
+                            </p>
+                            <div style={{ marginBottom: '2rem' }}>
+                                <h3 style={{ marginBottom: '1rem' }}>{t('How It Works', 'So funktioniert es')}</h3>
+                                <ol style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--color-text-light)', lineHeight: '1.7' }}>
+                                    <li>{t('Submit the contact form or call us.', 'Formular absenden oder anrufen.')}</li>
+                                    <li>{t('We review your goals and recommend a path.', 'Wir prüfen Ihre Ziele und empfehlen einen Weg.')}</li>
+                                    <li>{t('You receive a document checklist and timeline.', 'Sie erhalten eine Dokumentenliste und einen Ablauf.')}</li>
+                                    <li>{t('We prepare and file your case.', 'Wir bereiten Ihren Fall vor und reichen ihn ein.')}</li>
+                                    <li>{t('We guide you through approvals and next steps.', 'Wir begleiten Sie durch Entscheidungen und nächste Schritte.')}</li>
+                                </ol>
+                            </div>
 
                             <div className="info-item">
                                 <h4>Tampa</h4>
@@ -75,15 +98,46 @@ export default function Contact() {
                                 <p style={{ fontSize: '1.1rem' }}>By Appointment Only</p>
                             </div>
 
-                            <div className="info-item" style={{ marginTop: '3rem' }}>
-                                <Link href="/practice-areas" className="btn btn-primary">
-                                    Learn More About Our Practice Areas
-                                </Link>
+                            {/* Trust Signal - Client Testimonial */}
+                            <div className="testimonial-trust" style={{
+                                marginTop: '2.5rem',
+                                padding: '1.5rem',
+                                backgroundColor: 'var(--color-bg-light)',
+                                borderRadius: '8px',
+                                borderLeft: '4px solid var(--color-secondary)',
+                            }}>
+                                <p style={{ 
+                                    fontStyle: 'italic', 
+                                    fontSize: '1rem', 
+                                    lineHeight: '1.7',
+                                    color: 'var(--color-text-light)',
+                                    marginBottom: '1rem',
+                                }}>
+                                    {t(
+                                        '"She was always very accessible, responsive, and reliable, and was a knowledgeable resource on timelines, procedures, and current immigration laws."',
+                                        '"Sie war immer sehr zugänglich, reaktionsschnell und zuverlässig und eine kompetente Ansprechpartnerin für Fristen, Verfahren und aktuelle Einwanderungsgesetze."'
+                                    )}
+                                </p>
+                                <p style={{ 
+                                    fontWeight: 600, 
+                                    color: 'var(--color-primary)', 
+                                    marginBottom: '0.5rem',
+                                    fontSize: '0.9rem',
+                                }}>
+                                    {t('— Green Card Recipient, Minnesota', '— Green Card-Empfänger, Minnesota')}
+                                </p>
+                                <p style={{ 
+                                    fontSize: '0.75rem', 
+                                    color: 'var(--color-text-light)',
+                                    margin: 0,
+                                }}>
+                                    {translate('legal.resultsDisclaimer')}
+                                </p>
                             </div>
                         </div>
 
                         <div className="contact-form-wrapper">
-                            <h3 style={{ marginBottom: '2rem' }}>Send Us a Message</h3>
+                            <h3 style={{ marginBottom: '2rem' }}>{t('Send Us a Message', 'Nachricht senden')}</h3>
                             <div className="embedded-form-container">
                                 <iframe
                                     src="https://link.ymbs.pro/widget/form/vkKECO8y8SRTuPh4vNeM"
@@ -103,6 +157,12 @@ export default function Contact() {
                                     title="Immigration Lawyer Contact "
                                 />
                             </div>
+                            <p className="form-disclaimer">
+                                {t(
+                                    <>Submitting this form does not create an attorney-client relationship. Please do not send confidential information until a formal engagement is confirmed. By submitting, you agree to our <Link href="/privacy">Privacy Policy</Link> and <Link href="/terms">Terms &amp; Conditions</Link>.</>,
+                                    <>Das Absenden dieses Formulars begründet kein Mandatsverhältnis. Bitte senden Sie keine vertraulichen Informationen, bis eine formelle Beauftragung bestätigt wurde. Mit dem Absenden stimmen Sie unserer <Link href="/privacy">Datenschutzerklärung</Link> und den <Link href="/terms">Nutzungsbedingungen</Link> zu.</>
+                                )}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -166,6 +226,23 @@ export default function Contact() {
                     
                     .contact-form-wrapper h3 {
                         color: var(--color-primary);
+                    }
+
+                    .form-disclaimer {
+                        margin-top: 1.25rem;
+                        font-size: 0.95rem;
+                        color: var(--color-text-light);
+                        line-height: 1.6;
+                    }
+
+                    .form-disclaimer a {
+                        color: var(--color-secondary);
+                        text-decoration: none;
+                        font-weight: 600;
+                    }
+
+                    .form-disclaimer a:hover {
+                        text-decoration: underline;
                     }
                     
                     .form-group {
