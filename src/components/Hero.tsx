@@ -149,7 +149,7 @@ const Hero = () => {
           bottom: 0;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
           opacity: 0;
           transform: scale(1.04);
           transition: opacity 1s ease-in-out, transform 1.6s ease;
@@ -163,8 +163,11 @@ const Hero = () => {
         .hero-content {
           position: relative;
           z-index: 3;
-          max-width: 900px;
-          padding: 2rem;
+          max-width: 560px;
+          margin-left: clamp(2rem, 6vw, 4rem);
+          margin-right: auto;
+          padding: 2rem 2rem 2rem 0;
+          text-align: left;
         }
         
         .hero h1 {
@@ -179,8 +182,8 @@ const Hero = () => {
         .hero p {
           color: rgba(255,255,255,0.95);
           font-size: 1.4rem;
-          max-width: 800px;
-          margin: 0 auto 3rem;
+          max-width: 100%;
+          margin: 0 0 3rem 0;
           line-height: 1.6;
         }
         
@@ -189,7 +192,7 @@ const Hero = () => {
           display: flex;
           flex-wrap: wrap;
           gap: 1rem;
-          justify-content: center;
+          justify-content: flex-start;
         }
         
         .btn-outline-light {
