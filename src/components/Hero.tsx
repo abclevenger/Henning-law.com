@@ -60,12 +60,13 @@ const Hero = () => {
     <section className="hero">
       <div className="hero-bg-image">
         <Image
-          src="/images/hero-background.png"
-          alt=""
+          src="/images/hero-consultation.png"
+          alt="Attorney consultation with clients"
           fill
           priority
           sizes="100vw"
           className="object-cover"
+          style={{ objectPosition: 'center' }}
         />
       </div>
       <div className="hero-overlay"></div>
