@@ -1,17 +1,18 @@
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
+import { getAttorneyBioMetadata, parseLang } from '@/data/metadataByLang';
 
-export const metadata: Metadata = {
-    title: 'Norma Henning, J.D. - U.S. Immigration Attorney',
-    description: 'Meet Norma Henning, J.D., founding attorney at Henning Law Firm. Former Honorary Consul of Germany in Florida with decades of experience in U.S. immigration law.',
-    openGraph: {
-        title: 'Norma Henning, J.D. | Henning Law Firm PLLC',
-        description: 'Meet Norma Henning, J.D., founding attorney specializing in U.S. immigration for German-speaking clients.',
-        url: 'https://henning-law.com/attorney-bio',
-    },
-    alternates: {
-        canonical: 'https://henning-law.com/attorney-bio',
-    },
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const cookieStore = await cookies();
+    const lang = parseLang(cookieStore.get('language')?.value);
+    const meta = getAttorneyBioMetadata(lang);
+    return {
+        ...meta,
+        alternates: {
+            canonical: 'https://henning-law.com/attorney-bio',
+        },
+    };
+}
 
 export default function AttorneyBioLayout({
     children,

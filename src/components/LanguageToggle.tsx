@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
-import { useLanguage, languages } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { languages } from '@/constants/languages';
 
 const LanguageToggle = () => {
   const { language, setLanguage } = useLanguage();
@@ -24,6 +25,14 @@ const LanguageToggle = () => {
   const handleLanguageChange = (langCode: string) => {
     setLanguage(langCode as any);
     setIsOpen(false);
+    // Move focus to main content so screen readers announce the language change
+    requestAnimationFrame(() => {
+      const main = document.getElementById('main-content');
+      if (main) {
+        main.setAttribute('tabIndex', '-1');
+        main.focus({ preventScroll: true });
+      }
+    });
   };
 
   return (

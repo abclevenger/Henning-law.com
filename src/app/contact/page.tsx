@@ -1,14 +1,39 @@
-"use client";
+ "use client";
 
+import React, { useEffect, type ReactNode } from 'react';
 import Link from 'next/link';
-import type { ReactNode } from 'react';
-import { useEffect } from 'react';
 import BookingWidget from '@/components/BookingWidget';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Contact() {
-    const { language, t: translate } = useLanguage();
-    const t = (en: ReactNode, de?: ReactNode) => (language === 'de' ? de ?? en : en);
+    const { t: translate } = useLanguage();
+
+    const renderWithReplacements = (
+        key: string,
+        replacements: Record<string, ReactNode>
+    ) => {
+        const raw = translate(key);
+        const segments = raw.split(/(\{[^}]+\})/g).filter(Boolean);
+        return (
+            <>
+                {segments.map((segment, index) => {
+                    const match = segment.match(/^\{([^}]+)\}$/);
+                    if (match) {
+                        return (
+                            <React.Fragment key={`${key}-${index}`}>
+                                {replacements[match[1]] ?? null}
+                            </React.Fragment>
+                        );
+                    }
+                    return (
+                        <React.Fragment key={`${key}-${index}`}>
+                            {segment}
+                        </React.Fragment>
+                    );
+                })}
+            </>
+        );
+    };
     useEffect(() => {
         // Check if script is already loaded
         const existingScript = document.querySelector('script[src="https://link.ymbs.pro/js/form_embed.js"]');
@@ -34,10 +59,10 @@ export default function Contact() {
     return (
         <>
             <section className="page-header section-padding text-center" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
-                <div className="container">
-                    <h1 style={{ color: '#fff' }}>{t('Contact', 'Kontakt')}</h1>
+            <div className="container">
+                    <h1 style={{ color: '#fff' }}>{translate('contact.page.heading')}</h1>
                     <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginTop: '1rem' }}>
-                        {t('Get in touch with us to start your immigration journey', 'Kontaktieren Sie uns, um Ihren Weg zu starten')}
+                        {translate('contact.page.subheading')}
                     </p>
                 </div>
             </section>
@@ -46,27 +71,32 @@ export default function Contact() {
                 <div className="container">
                     <div className="contact-layout">
                         <div className="contact-info">
-                            <h2>{t('Contact', 'Kontakt')}</h2>
+                            <h2>{translate('contact.page.heading')}</h2>
                             <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
-                                {t(
-                                    'We look forward to hearing from you. Please contact us via phone or email to schedule a consultation.',
-                                    'Wir freuen uns auf Ihre Nachricht. Kontaktieren Sie uns per Telefon oder E‑Mail für eine Beratung.'
-                                )}
+                                {translate('contact.info.description')}
                             </p>
                             <p style={{ fontSize: '1.05rem', marginBottom: '1.5rem' }}>
-                                {t(
-                                    <>Start with our <Link href="/practice-areas">practice areas</Link> or learn more about <Link href="/attorney-bio">Norma Henning, J.D.</Link>.</>,
-                                    <>Starten Sie mit unseren <Link href="/practice-areas">Rechtsgebieten</Link> oder erfahren Sie mehr über <Link href="/attorney-bio">Norma Henning, J.D.</Link>.</>
-                                )}
+                                {renderWithReplacements('contact.info.linksSentence', {
+                                    practiceLink: (
+                                        <Link href="/practice-areas">
+                                            {translate('contact.links.practiceLabel')}
+                                        </Link>
+                                    ),
+                                    attorneyLink: (
+                                        <Link href="/attorney-bio">
+                                            {translate('contact.links.attorneyLabel')}
+                                        </Link>
+                                    ),
+                                })}
                             </p>
                             <div style={{ marginBottom: '2rem' }}>
-                                <h3 style={{ marginBottom: '1rem' }}>{t('How It Works', 'So funktioniert es')}</h3>
+                                <h3 style={{ marginBottom: '1rem' }}>{translate('contact.workflow.heading')}</h3>
                                 <ol style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--color-text-light)', lineHeight: '1.7' }}>
-                                    <li>{t('Submit the contact form or call us.', 'Formular absenden oder anrufen.')}</li>
-                                    <li>{t('We review your goals and recommend a path.', 'Wir prüfen Ihre Ziele und empfehlen einen Weg.')}</li>
-                                    <li>{t('You receive a document checklist and timeline.', 'Sie erhalten eine Dokumentenliste und einen Ablauf.')}</li>
-                                    <li>{t('We prepare and file your case.', 'Wir bereiten Ihren Fall vor und reichen ihn ein.')}</li>
-                                    <li>{t('We guide you through approvals and next steps.', 'Wir begleiten Sie durch Entscheidungen und nächste Schritte.')}</li>
+                                    <li>{translate('contact.workflow.step1')}</li>
+                                    <li>{translate('contact.workflow.step2')}</li>
+                                    <li>{translate('contact.workflow.step3')}</li>
+                                    <li>{translate('contact.workflow.step4')}</li>
+                                    <li>{translate('contact.workflow.step5')}</li>
                                 </ol>
                             </div>
 
@@ -94,8 +124,8 @@ export default function Contact() {
                             </div>
 
                             <div className="info-item">
-                                <h4>Hours</h4>
-                                <p style={{ fontSize: '1.1rem' }}>By Appointment Only</p>
+                                <h4>{translate('footer.hours')}</h4>
+                                <p style={{ fontSize: '1.1rem' }}>{translate('footer.byAppointment')}</p>
                             </div>
 
                             {/* Trust Signal - Client Testimonial */}
@@ -113,10 +143,7 @@ export default function Contact() {
                                     color: 'var(--color-text-light)',
                                     marginBottom: '1rem',
                                 }}>
-                                    {t(
-                                        '"She was always very accessible, responsive, and reliable, and was a knowledgeable resource on timelines, procedures, and current immigration laws."',
-                                        '"Sie war immer sehr zugänglich, reaktionsschnell und zuverlässig und eine kompetente Ansprechpartnerin für Fristen, Verfahren und aktuelle Einwanderungsgesetze."'
-                                    )}
+                                    "She was always very accessible, responsive, and reliable, and was a knowledgeable resource on timelines, procedures, and current immigration laws."
                                 </p>
                                 <p style={{ 
                                     fontWeight: 600, 
@@ -124,7 +151,7 @@ export default function Contact() {
                                     marginBottom: '0.5rem',
                                     fontSize: '0.9rem',
                                 }}>
-                                    {t('— Green Card Recipient, Minnesota', '— Green Card-Empfänger, Minnesota')}
+                                    {translate('contact.testimonial.attribution')}
                                 </p>
                                 <p style={{ 
                                     fontSize: '0.75rem', 
@@ -137,7 +164,10 @@ export default function Contact() {
                         </div>
 
                         <div className="contact-form-wrapper">
-                            <h3 style={{ marginBottom: '2rem' }}>{t('Send Us a Message', 'Nachricht senden')}</h3>
+                            <h3 style={{ marginBottom: '0.5rem' }}>{translate('contact.form.heading')}</h3>
+                            <p style={{ marginBottom: '2rem', color: 'var(--color-text-light)', fontSize: '0.95rem' }}>
+                                {translate('contact.form.afterSubmit')}
+                            </p>
                             <div className="embedded-form-container">
                                 <iframe
                                     src="https://link.ymbs.pro/widget/form/vkKECO8y8SRTuPh4vNeM"
@@ -158,10 +188,18 @@ export default function Contact() {
                                 />
                             </div>
                             <p className="form-disclaimer">
-                                {t(
-                                    <>Submitting this form does not create an attorney-client relationship. Please do not send confidential information until a formal engagement is confirmed. By submitting, you agree to our <Link href="/privacy">Privacy Policy</Link> and <Link href="/terms">Terms &amp; Conditions</Link>.</>,
-                                    <>Das Absenden dieses Formulars begründet kein Mandatsverhältnis. Bitte senden Sie keine vertraulichen Informationen, bis eine formelle Beauftragung bestätigt wurde. Mit dem Absenden stimmen Sie unserer <Link href="/privacy">Datenschutzerklärung</Link> und den <Link href="/terms">Nutzungsbedingungen</Link> zu.</>
-                                )}
+                                {renderWithReplacements('contact.form.disclaimer', {
+                                    privacyLink: (
+                                        <Link href="/privacy">
+                                            {translate('footer.privacyPolicy')}
+                                        </Link>
+                                    ),
+                                    termsLink: (
+                                        <Link href="/terms">
+                                            {translate('footer.terms')}
+                                        </Link>
+                                    ),
+                                })}
                             </p>
                         </div>
                     </div>

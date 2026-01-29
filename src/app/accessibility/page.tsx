@@ -1,54 +1,58 @@
+'use client';
+
+import React from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Accessibility() {
+  const { t } = useLanguage();
+
   return (
     <section className="section-padding">
       <div className="container" style={{ maxWidth: '900px' }}>
-        <h1>Accessibility Statement</h1>
-        <p>
-          Henning Law Firm PLLC is committed to providing a website that is accessible to the widest
-          possible audience, including individuals with disabilities. We aim to conform to
-          applicable accessibility standards and continuously improve the user experience.
-        </p>
-        <h2>Measures We Support</h2>
+        <h1>{t('accessibility.title')}</h1>
+        <p>{t('accessibility.intro')}</p>
+
+        <h2>{t('accessibility.measuresHeading')}</h2>
         <ul style={{ listStyle: 'disc', paddingLeft: '1.25rem' }}>
-          <li>Clear heading structure and readable typography</li>
-          <li>Keyboard-friendly navigation and focus visibility</li>
-          <li>Meaningful link text and alternative text for images</li>
-          <li>Responsive layouts for different devices</li>
+          <li>{t('accessibility.measures1')}</li>
+          <li>{t('accessibility.measures2')}</li>
+          <li>{t('accessibility.measures3')}</li>
+          <li>{t('accessibility.measures4')}</li>
         </ul>
-        <h2>Feedback</h2>
+
+        <h2>{t('accessibility.feedbackHeading')}</h2>
+        <p>{t('accessibility.feedbackP1')}</p>
         <p>
-          If you experience any difficulty accessing content on this website, please contact us so
-          we can assist you and improve our accessibility.
-        </p>
-        <p>
-          Email us at{' '}
-          <a href="mailto:nhenning@henning-law.com">nhenning@henning-law.com</a> or call{' '}
+          {t('accessibility.feedbackP2')}{' '}
+          <a href="mailto:nhenning@henning-law.com">nhenning@henning-law.com</a>{' '}
+          {t('accessibility.feedbackP3')}{' '}
           <a href="tel:2398216504">(239) 821-6504</a>.
         </p>
         <p>
-          You can also use the <Link href="/contact">contact form</Link>.
+          {t('accessibility.feedbackP4')}{' '}
+          <Link href="/contact">{t('accessibility.feedbackP5')}</Link>.
         </p>
-        
-        {/* CTA Section */}
-        <div style={{
-          marginTop: '3rem',
-          padding: '2rem',
-          backgroundColor: 'var(--color-bg-light)',
-          borderRadius: '8px',
-          textAlign: 'center',
-        }}>
-          <h3 style={{ marginBottom: '1rem' }}>Have Immigration Questions?</h3>
+
+        <div
+          style={{
+            marginTop: '3rem',
+            padding: '2rem',
+            backgroundColor: 'var(--color-bg-light)',
+            borderRadius: '8px',
+            textAlign: 'center',
+          }}
+        >
+          <h3 style={{ marginBottom: '1rem' }}>{t('cta.immigrationQuestions')}</h3>
           <p style={{ marginBottom: '1.5rem', color: 'var(--color-text-light)' }}>
-            Schedule a consultation to discuss your goals.
+            {t('cta.scheduleSubtext')}
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/contact" className="btn btn-primary">
-              Contact Us
+              {t('nav.contact')}
             </Link>
             <Link href="/practice-areas" className="btn btn-outline">
-              View Practice Areas
+              {t('cta.viewPracticeAreas')}
             </Link>
           </div>
         </div>

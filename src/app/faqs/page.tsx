@@ -2,13 +2,14 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useLanguage, Language } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import type { Language } from '@/constants/languages';
 
 interface FAQ {
     id: number;
-    category: Record<Language, string>;
-    question: Record<Language, string>;
-    answer: Record<Language, string>;
+    category: Record<string, string>;
+    question: Record<string, string>;
+    answer: Record<string, string>;
 }
 
 const faqs: FAQ[] = [

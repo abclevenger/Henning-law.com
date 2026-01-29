@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
-        changeFrequency: route === '' ? 'weekly' : 'monthly' as const,
+        changeFrequency: (route === '' ? 'weekly' : 'monthly') as MetadataRoute.Sitemap[0]['changeFrequency'],
         priority: route === '' ? 1 : route === '/practice-areas' ? 0.9 : 0.8,
     }));
 

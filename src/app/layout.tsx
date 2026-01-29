@@ -1,18 +1,16 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import Script from 'next/script';
+import { cookies } from 'next/headers';
 import './globals.css';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
+import LayoutA11yLinks from '@/components/LayoutA11yLinks';
+import { getRootMetadata, parseLang } from '@/data/metadataByLang';
 
-export const metadata: Metadata = {
-  title: {
-    default: 'Henning Law Firm PLLC | US-Einwanderung & Visa für Deutsche und internationale Mandanten',
-    template: '%s | Henning Law Firm PLLC',
-  },
-  description: 'US-Einwanderungsanwältin mit Beratung auf Deutsch. Visa, Green Cards und Staatsbürgerschaft für Mandanten aus Deutschland, Österreich, Schweiz und weltweit. Kanzleien in Florida und Minnesota.',
+const staticMetadata: Metadata = {
   keywords: [
     // German keywords (primary)
     'US Einwanderungsanwalt',
@@ -48,22 +46,9 @@ export const metadata: Metadata = {
     languages: {
       'de-DE': 'https://henning-law.com',
       'en-US': 'https://henning-law.com',
+      'es-ES': 'https://henning-law.com',
       'x-default': 'https://henning-law.com',
     },
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'de_DE',
-    alternateLocale: ['en_US'],
-    url: 'https://henning-law.com',
-    siteName: 'Henning Law Firm PLLC',
-    title: 'US-Einwanderungsanwältin | Beratung auf Deutsch | Henning Law Firm',
-    description: 'US-Einwanderung, Visa und Green Cards. Beratung auf Deutsch für Mandanten aus Deutschland, Österreich, Schweiz und weltweit.',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'US-Einwanderungsanwältin | Beratung auf Deutsch | Henning Law Firm',
-    description: 'US-Einwanderung, Visa und Green Cards. Beratung auf Deutsch für Mandanten weltweit.',
   },
   robots: {
     index: true,
@@ -74,6 +59,16 @@ export const metadata: Metadata = {
     'geo.placename': 'Tampa, Florida',
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const lang = parseLang(cookieStore.get('language')?.value);
+  const localeMeta = getRootMetadata(lang);
+  return {
+    ...staticMetadata,
+    ...localeMeta,
+  };
+}
 
 export default function RootLayout({
   children,
@@ -113,8 +108,9 @@ export default function RootLayout({
     availableLanguage: [
       { '@type': 'Language', name: 'English', alternateName: 'en' },
       { '@type': 'Language', name: 'German', alternateName: 'de' },
+      { '@type': 'Language', name: 'Spanish', alternateName: 'es' },
     ],
-    knowsLanguage: ['English', 'German'],
+    knowsLanguage: ['English', 'German', 'Spanish'],
     founder: {
       '@type': 'Person',
       name: 'Norma Henning',
@@ -144,19 +140,14 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <LanguageProvider>
           <ScrollReveal />
-          <a className="skip-link" href="#main-content">
-            Skip to main content
-          </a>
+          <LayoutA11yLinks />
           <Navbar />
           <main id="main-content">{children}</main>
           <Footer />
-          <div className="mobile-call-bar" aria-label="Quick call bar">
-            <a href="tel:2398216504">Call (239) 821-6504</a>
-          </div>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

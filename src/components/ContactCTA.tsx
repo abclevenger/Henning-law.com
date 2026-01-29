@@ -64,15 +64,6 @@ const ctaText = {
         ja: "— グリーンカード取得者、ミネソタ州",
         ar: "— حامل البطاقة الخضراء، مينيسوتا",
     },
-    disclaimer: {
-        en: "Past results do not guarantee future outcomes.",
-        de: "Frühere Ergebnisse garantieren keine zukünftigen Resultate.",
-        es: "Los resultados pasados no garantizan resultados futuros.",
-        fr: "Les résultats passés ne garantissent pas les résultats futurs.",
-        zh: "过去的结果不能保证未来的结果。",
-        ja: "過去の結果は将来の結果を保証するものではありません。",
-        ar: "النتائج السابقة لا تضمن النتائج المستقبلية.",
-    },
     inlineText: {
         en: "Have questions? ",
         de: "Haben Sie Fragen? ",
@@ -94,7 +85,7 @@ const ctaText = {
 };
 
 const ContactCTA = ({ variant = 'full', showTestimonial = false, className = '' }: ContactCTAProps) => {
-    const { language } = useLanguage();
+    const { language, t } = useLanguage();
 
     if (variant === 'inline') {
         return (
@@ -195,7 +186,7 @@ const ContactCTA = ({ variant = 'full', showTestimonial = false, className = '' 
                         color: 'var(--color-text-light)',
                         margin: 0,
                     }}>
-                        {ctaText.disclaimer[language]}
+                        {t('legal.resultsDisclaimer')}
                     </p>
                 </div>
             )}

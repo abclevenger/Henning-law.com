@@ -61,8 +61,11 @@ body {
   font-weight: 600;
 }
 
-.skip-link:focus {
+.skip-link:focus,
+.skip-link:focus-visible {
   left: 1rem;
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 img {
@@ -517,7 +520,9 @@ input:focus, textarea:focus, select:focus {
 
 /* Focus visible for keyboard navigation */
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+.btn:focus-visible,
+[class*="language-"]:focus-visible {
   outline: 2px solid var(--color-secondary);
   outline-offset: 2px;
 }

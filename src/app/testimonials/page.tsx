@@ -2,12 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useLanguage, Language } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import type { Language } from '@/constants/languages';
 
 interface Testimonial {
     id: number;
-    quote: Record<Language, string>;
-    author: Record<Language, string>;
+    quote: Record<string, string>;
+    author: Record<string, string>;
     location: string;
 }
 
@@ -149,15 +150,6 @@ const uiText = {
         ja: "相談を予約する",
         ar: "حدد موعداً للاستشارة",
     },
-    disclaimer: {
-        en: "These testimonials reflect personal experiences. Results vary based on individual circumstances. Past results do not guarantee future outcomes.",
-        de: "Diese Erfahrungsberichte spiegeln persönliche Erfahrungen wider. Ergebnisse variieren je nach individuellen Umständen. Vergangene Ergebnisse garantieren keine zukünftigen Resultate.",
-        es: "Estos testimonios reflejan experiencias personales. Los resultados varían según las circunstancias individuales. Los resultados pasados no garantizan resultados futuros.",
-        fr: "Ces témoignages reflètent des expériences personnelles. Les résultats varient selon les circonstances individuelles. Les résultats passés ne garantissent pas les résultats futurs.",
-        zh: "这些推荐反映个人经历。结果因个人情况而异。过去的结果不能保证未来的结果。",
-        ja: "これらの推薦文は個人的な経験を反映しています。結果は個々の状況によって異なります。過去の結果は将来の結果を保証するものではありません。",
-        ar: "تعكس هذه الشهادات تجارب شخصية. تختلف النتائج بناءً على الظروف الفردية. النتائج السابقة لا تضمن النتائج المستقبلية.",
-    },
 };
 
 export default function TestimonialsPage() {
@@ -190,7 +182,7 @@ export default function TestimonialsPage() {
                     </div>
                     <div className="container" style={{ marginTop: '2rem' }}>
                         <p className="testimonial-disclaimer">
-                            {uiText.disclaimer[language]}
+                            {t('legal.testimonialDisclaimer')}
                         </p>
                     </div>
                 </section>

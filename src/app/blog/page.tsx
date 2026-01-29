@@ -2,14 +2,15 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useLanguage, Language } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import type { Language } from '@/constants/languages';
 
 interface BlogPost {
     id: number;
-    title: Record<Language, string>;
-    excerpt: Record<Language, string>;
-    category: Record<Language, string>;
-    date: Record<Language, string>;
+    title: Record<string, string>;
+    excerpt: Record<string, string>;
+    category: Record<string, string>;
+    date: Record<string, string>;
 }
 
 const blogPosts: BlogPost[] = [

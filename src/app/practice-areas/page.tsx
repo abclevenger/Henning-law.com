@@ -92,13 +92,10 @@ export default function PracticeAreas() {
             <section className="page-header section-padding text-center reveal" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
                 <div className="container">
                     <h1 style={{ color: '#fff' }}>
-                        {t('U.S. Immigration Practice Areas', 'US‑Einwanderung: Rechtsgebiete')}
+                        {translate('practiceAreas.pageHeading')}
                     </h1>
                     <p style={{ maxWidth: '900px', margin: '1.5rem auto 0', color: 'rgba(255,255,255,0.9)', fontSize: '1.2rem' }}>
-                        {t(
-                            'Comprehensive representation for families, companies, and entrepreneurs seeking to live or work in the U.S.A.',
-                            'Umfassende Vertretung für Familien, Unternehmen und Unternehmer mit Zielen in den USA.'
-                        )}
+                        {translate('practiceAreas.pageSubheading')}
                     </p>
                 </div>
             </section>
@@ -206,7 +203,7 @@ export default function PracticeAreas() {
                                         overflow: 'hidden',
                                     }}
                                 >
-                                    {service.title}
+                                    {translate(`pa.${service.id}.title`)}
                                 </h3>
                                 <p
                                     style={{
@@ -218,7 +215,7 @@ export default function PracticeAreas() {
                                         overflow: 'hidden',
                                     }}
                                 >
-                                    {service.shortDescription}
+                                    {translate(`pa.${service.id}.shortDescription`)}
                                 </p>
                                 <div style={{ display: 'flex', gap: '1rem', marginTop: 'auto', paddingTop: '1rem' }}>
                                     <Link href={`/practice-areas/${service.slug}`} className="read-more-link">

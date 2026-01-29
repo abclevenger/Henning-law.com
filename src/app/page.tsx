@@ -1,60 +1,65 @@
 "use client";
 
+import React, { type ReactNode } from 'react';
 import Link from 'next/link';
-import type { ReactNode } from 'react';
 import Hero from '@/components/Hero';
 import { IconStrategy, IconGlobe, IconKey } from '@/components/Icons';
 import { images } from '@/data/images';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Home() {
-  const { language, t: translate } = useLanguage();
-  const t = (en: ReactNode, de?: ReactNode) => (language === 'de' ? de ?? en : en);
+  const { t: translate } = useLanguage();
+
+  const renderWithReplacements = (
+    key: string,
+    replacements: Record<string, ReactNode>
+  ) => {
+    const raw = translate(key);
+    const segments = raw.split(/(\{[^}]+\})/g).filter(Boolean);
+    return (
+      <>
+        {segments.map((segment, index) => {
+          const match = segment.match(/^\{([^}]+)\}$/);
+          if (match) {
+            return (
+              <React.Fragment key={`${key}-${index}`}>
+                {replacements[match[1]] ?? null}
+              </React.Fragment>
+            );
+          }
+          return (
+            <React.Fragment key={`${key}-${index}`}>{segment}</React.Fragment>
+          );
+        })}
+      </>
+    );
+  };
+
   const faqItems = [
     {
-      question: t(
-        'Do you work with clients outside the U.S.?',
-        'Arbeiten Sie mit Mandanten außerhalb der USA?'
-      ),
-      answer:
-        t(
-          'Yes. We regularly assist clients abroad through virtual consultations and strategic planning.',
-          'Ja. Wir beraten Mandanten im Ausland regelmäßig per Videokonferenz und strategischer Planung.'
-        ),
+      questionKey: 'home.faq.q1.question',
+      answerKey: 'home.faq.q1.answer',
     },
     {
-      question: t(
-        'Which visa categories are common for professionals and companies?',
-        'Welche Visakategorien sind für Fachkräfte und Unternehmen häufig relevant?'
-      ),
-      answer:
-        t(
-          'Common options include E-1/E-2 treaty visas, L-1 intra-company transfers, O-1 extraordinary ability, and EB categories for permanent residency.',
-          'Häufige Optionen sind E-1/E-2, L-1, O-1 sowie EB-Kategorien für die dauerhafte Aufenthaltsgenehmigung.'
-        ),
+      questionKey: 'home.faq.q2.question',
+      answerKey: 'home.faq.q2.answer',
     },
     {
-      question: t(
-        'Can you help with U.S. market entry and property ownership?',
-        'Können Sie bei Markteintritt und Immobilienthemen in den USA helfen?'
-      ),
-      answer:
-        t(
-          'Yes. We advise on market entry strategy, corporate structure, and legal considerations for property ownership as a non-resident.',
-          'Ja. Wir beraten zu Markteintritt, Unternehmensstruktur und rechtlichen Fragen beim Immobilieneigentum als Nicht‑Resident.'
-        ),
+      questionKey: 'home.faq.q3.question',
+      answerKey: 'home.faq.q3.answer',
     },
     {
-      question: t(
-        'How do we start a consultation?',
-        'Wie starten wir eine Beratung?'
-      ),
-      answer:
-        t(
-          'Start by contacting us with a short summary of your goals. We will outline the next steps and required documents.',
-          'Starten Sie mit einer kurzen Zusammenfassung Ihrer Ziele. Wir skizzieren die nächsten Schritte und benötigten Unterlagen.'
-        ),
+      questionKey: 'home.faq.q4.question',
+      answerKey: 'home.faq.q4.answer',
     },
+  ];
+
+  const pathSteps = [
+    { titleKey: 'home.path.step1.title', textKey: 'home.path.step1.text' },
+    { titleKey: 'home.path.step2.title', textKey: 'home.path.step2.text' },
+    { titleKey: 'home.path.step3.title', textKey: 'home.path.step3.text' },
+    { titleKey: 'home.path.step4.title', textKey: 'home.path.step4.text' },
+    { titleKey: 'home.path.step5.title', textKey: 'home.path.step5.text' },
   ];
 
   const faqSchema = {
@@ -62,10 +67,10 @@ export default function Home() {
     '@type': 'FAQPage',
     mainEntity: faqItems.map((item) => ({
       '@type': 'Question',
-      name: item.question,
+      name: translate(item.questionKey),
       acceptedAnswer: {
         '@type': 'Answer',
-        text: item.answer,
+        text: translate(item.answerKey),
       },
     })),
   };
@@ -82,12 +87,9 @@ export default function Home() {
       <section className="section-padding">
         <div className="container">
           <div className="text-center reveal" style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <h2>{t('U.S. Immigration Strategy for Individuals & Businesses', 'US‑Einwanderungsstrategie für Privatpersonen und Unternehmen')}</h2>
+            <h2>{translate('home.design.heading')}</h2>
             <p style={{ marginTop: '1.5rem', fontSize: '1.1rem' }}>
-              {t(
-                'The rules that govern living, working, or purchasing property in the United States can be time consuming and overwhelming. Spend your time doing what you do best and let us do what we do best.',
-                'Die Regeln für Leben, Arbeiten oder Immobilieneigentum in den USA können zeitaufwendig und komplex sein. Konzentrieren Sie sich auf Ihr Kerngeschäft – wir kümmern uns um den rechtlichen Rahmen.'
-              )}
+              {translate('home.design.paragraph')}
             </p>
             <div
               className="german-intro"
@@ -100,60 +102,54 @@ export default function Home() {
               }}
             >
               <h3 style={{ marginBottom: '0.75rem' }}>
-                {t('Guidance available in German', 'Willkommen – Beratung auf Deutsch')}
+                {translate('home.design.german.heading')}
               </h3>
               <p style={{ marginBottom: '0.75rem', fontSize: '1.05rem' }}>
-                {t(
-                  'We advise clients on U.S. immigration, market entry, and property questions. Our strategies are individualized and aligned with your goals in the United States.',
-                  'Wir beraten zu US‑Einwanderung, Markteintritt und Immobilienfragen. Unsere Strategien sind individuell und auf Ihre Ziele in den USA abgestimmt.'
-                )}
+                {translate('home.design.german.paragraph1')}
               </p>
               <p style={{ marginBottom: 0, fontSize: '1.05rem' }}>
-                {t(
-                  <>Schedule a conversation through our <Link href="/contact">contact page</Link>.</>,
-                  <>Vereinbaren Sie ein Gespräch über unsere <Link href="/contact">Kontaktseite</Link>.</>
-                )}
+                {renderWithReplacements('home.design.scheduleConversation', {
+                  contactLink: (
+                    <Link href="/contact">
+                      {translate('home.design.contactLinkLabel')}
+                    </Link>
+                  ),
+                })}
               </p>
             </div>
             <p style={{ marginTop: '1.25rem', fontSize: '1.05rem' }}>
-              {t(
-                <>Explore our <Link href="/practice-areas">practice areas</Link>, meet our <Link href="/attorney-bio">attorney</Link>, or <Link href="/contact">schedule a consultation</Link>.</>,
-                <>Entdecken Sie unsere <Link href="/practice-areas">Rechtsgebiete</Link>, lernen Sie unsere <Link href="/attorney-bio">Anwältin</Link> kennen oder <Link href="/contact">vereinbaren Sie eine Beratung</Link>.</>
-              )}
+              {renderWithReplacements('home.design.linksSentence', {
+                practiceLink: (
+                  <Link href="/practice-areas">
+                    {translate('home.design.practiceLinkLabel')}
+                  </Link>
+                ),
+                attorneyLink: (
+                  <Link href="/attorney-bio">
+                    {translate('home.design.attorneyLinkLabel')}
+                  </Link>
+                ),
+                consultLink: (
+                  <Link href="/contact">
+                    {translate('home.design.consultLinkLabel')}
+                  </Link>
+                ),
+              })}
             </p>
             
             <div style={{ marginTop: '3rem', textAlign: 'left', maxWidth: '700px', marginLeft: 'auto', marginRight: 'auto' }}>
               <h3 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
-                {t('What We Do Best', 'Worin wir besonders stark sind')}
+                {translate('home.whatWeDo.heading')}
               </h3>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li style={{ marginBottom: '1.5rem', paddingLeft: '2rem', position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.5rem' }}>•</span>
-                  <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
-                    {t(
-                      'Clarifying the visa process and identifying the right solutions for you, your family, or your business',
-                      'Den Visaprozess verständlich machen und passende Lösungen für Sie, Ihre Familie oder Ihr Unternehmen finden'
-                    )}
-                  </strong>
-                </li>
-                <li style={{ marginBottom: '1.5rem', paddingLeft: '2rem', position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.5rem' }}>•</span>
-                  <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
-                    {t(
-                      'Understanding the legalities of owning U.S. property as a non-resident',
-                      'Rechtliche Aspekte des Immobilieneigentums in den USA als Nicht‑Resident verstehen'
-                    )}
-                  </strong>
-                </li>
-                <li style={{ marginBottom: '1.5rem', paddingLeft: '2rem', position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.5rem' }}>•</span>
-                  <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
-                    {t(
-                      'Navigating the complexities of starting and managing a U.S. business',
-                      'Komplexität bei Gründung und Führung eines US‑Unternehmens souverän meistern'
-                    )}
-                  </strong>
-                </li>
+                {['home.whatWeDo.item1', 'home.whatWeDo.item2', 'home.whatWeDo.item3'].map((itemKey) => (
+                  <li key={itemKey} style={{ marginBottom: '1.5rem', paddingLeft: '2rem', position: 'relative' }}>
+                    <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.5rem' }}>•</span>
+                    <strong style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
+                      {translate(itemKey)}
+                    </strong>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -164,7 +160,7 @@ export default function Home() {
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container text-center reveal">
           <h2 style={{ fontSize: '3rem', marginBottom: '2rem' }}>
-            {t('Building Bridges to U.S. Opportunity', 'Brücken in Richtung USA schaffen')}
+            {translate('home.bridges.heading')}
           </h2>
         </div>
       </section>
@@ -174,92 +170,72 @@ export default function Home() {
         <div className="container">
           <div className="content-image-grid">
             <div className="content-text reveal">
-              <h2>{t('U.S. Visas, Green Cards, and Citizenship', 'US‑Visa, Green Cards und Staatsbürgerschaft')}</h2>
+              <h2>{translate('home.visas.heading')}</h2>
               <p style={{ fontSize: '1.1rem', marginTop: '1.5rem' }}>
-                {t(
-                  'If your personal or business plans include living, working, or investing in the United States, we assist with strategies that open doors and avoid costly pitfalls.',
-                  'Wenn Ihre privaten oder geschäftlichen Pläne Leben, Arbeiten oder Investitionen in den USA umfassen, unterstützen wir Sie mit klaren Strategien und vermeiden kostspielige Fehler.'
-                )}
+                {translate('home.visas.paragraph1')}
               </p>
               <p style={{ fontSize: '1.1rem', marginTop: '1rem' }}>
-                {t(
-                  "It's not just about paperwork. It's about understanding your unique story and ambitions and helping you get to where you want to be as smoothly as possible.",
-                  'Es geht nicht nur um Formulare, sondern um Ihre Ziele und den bestmöglichen Weg dorthin.'
-                )}
+                {translate('home.visas.paragraph2')}
               </p>
 
               <div style={{ marginTop: '2.5rem' }}>
-                <h3 style={{ marginBottom: '1.5rem' }}>{t('How We Guide Clients', 'So begleiten wir Mandanten')}</h3>
+                <h3 style={{ marginBottom: '1.5rem' }}>{translate('home.guide.heading')}</h3>
                 <ul style={{ listStyle: 'none', padding: 0 }}>
                   <li style={{ marginBottom: '2rem' }}>
                     <strong style={{ display: 'block', marginBottom: '0.75rem', color: 'var(--color-primary)', fontSize: '1.1rem' }}>
-                      {t('Personalized Visa Plans:', 'Individuelle Visa‑Strategien:')}
+                      {translate('home.guide.item1.title')}
                     </strong>
                     <p style={{ marginBottom: 0 }}>
-                      {t(
-                        'One size does not fit all. Your journey deserves attention to detail and solutions that work for your company or personal life. That may involve creating a path to U.S. residency or optimizing your ability to visit without incurring the obligations of residency.',
-                        'Standardlösungen passen selten. Wir entwickeln einen Weg, der zu Ihrem Unternehmen oder Privatleben passt – ob mit Perspektive auf dauerhaften Aufenthalt oder für flexible Aufenthalte ohne Wohnsitzpflichten.'
-                      )}
+                      {translate('home.guide.item1.description')}
                     </p>
                     <p style={{ marginTop: '0.75rem', marginBottom: 0 }}>
-                      {t(
-                        <>Compare official guidance at{' '}
+                      {renderWithReplacements('home.guide.item1.resources', {
+                        uscisLink: (
                           <a href="https://www.uscis.gov/" target="_blank" rel="noopener noreferrer">
                             USCIS
-                          </a>{' '}
-                          and the{' '}
+                          </a>
+                        ),
+                        stateDept: (
                           <a href="https://travel.state.gov/" target="_blank" rel="noopener noreferrer">
                             U.S. Department of State
                           </a>
-                          .</>,
-                        <>Offizielle Hinweise finden Sie bei{' '}
-                          <a href="https://www.uscis.gov/" target="_blank" rel="noopener noreferrer">
-                            USCIS
-                          </a>{' '}
-                          und beim{' '}
-                          <a href="https://travel.state.gov/" target="_blank" rel="noopener noreferrer">
-                            U.S. Department of State
-                          </a>
-                          .</>
-                      )}
+                        ),
+                      })}
                     </p>
                   </li>
                   <li style={{ marginBottom: '2rem' }}>
                     <strong style={{ display: 'block', marginBottom: '0.75rem', color: 'var(--color-primary)', fontSize: '1.1rem' }}>
-                      {t('Comprehensive Representation in Other Areas of the Law:', 'Umfassende Beratung in weiteren Rechtsgebieten:')}
+                      {translate('home.guide.item2.title')}
                     </strong>
                     <p style={{ marginBottom: 0 }}>
-                      {t(
-                        'Whether you are starting a new business venture or purchasing property for personal reasons, we can assist you with U.S. market entry and the legal complexities of buying and owning property as a non-resident.',
-                        'Ob Unternehmensgründung oder Immobilienkauf – wir unterstützen bei Markteintritt und den rechtlichen Besonderheiten des Eigentums als Nicht‑Resident.'
-                      )}
+                      {translate('home.guide.item2.description')}
                     </p>
                   </li>
                   <li style={{ marginBottom: '2rem' }}>
                     <strong style={{ display: 'block', marginBottom: '0.75rem', color: 'var(--color-primary)', fontSize: '1.1rem' }}>
-                      {t('Global Perspective:', 'Internationale Perspektive:')}
+                      {translate('home.guide.item3.title')}
                     </strong>
                     <p style={{ marginBottom: 0 }}>
-                      {t(
-                        'Our international background and decades of serving clients from around the world mean sensitivity to cultural issues, the immigrant experience, and a holistic approach that supports informed decisions.',
-                        'Unser internationaler Hintergrund und die langjährige Arbeit mit Mandanten weltweit sorgen für kulturelles Verständnis und einen ganzheitlichen Blick.'
-                      )}
+                      {translate('home.guide.item3.description')}
                     </p>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="content-image reveal">
-              <div style={{
-                width: '100%',
-                height: '100%',
-                minHeight: '500px',
-                backgroundColor: '#ddd',
-                borderRadius: '8px',
-                backgroundImage: 'url(https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }} />
+              <div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  minHeight: '500px',
+                  backgroundColor: '#ddd',
+                  borderRadius: '8px',
+                  backgroundImage:
+                    'url(https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
             </div>
           </div>
         </div>
@@ -289,7 +265,7 @@ export default function Home() {
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container">
           <div className="text-center reveal" style={{ marginBottom: '4rem' }}>
-            <h2>{t('Why Clients Choose Henning Law', 'Warum Mandanten Henning Law wählen')}</h2>
+            <h2>{translate('home.features.heading')}</h2>
           </div>
 
           <div className="features-grid">
@@ -297,12 +273,9 @@ export default function Home() {
               <div className="feature-icon">
                 <IconStrategy />
               </div>
-              <h3>{t('Personalized U.S. Immigration Strategies for Families and Businesses', 'Individuelle Einwanderungsstrategien für Familien und Unternehmen')}</h3>
+              <h3>{translate('home.features.strategy.heading')}</h3>
               <p>
-                {t(
-                  'We recognize that each immigration journey is distinct and shaped by individual backgrounds and aspirations. You benefit from personalized advice and creativity based on years of experience in the U.S. market.',
-                  'Jede Einwanderung ist individuell. Sie profitieren von Erfahrung, Weitblick und maßgeschneiderten Strategien für Ihre langfristigen Ziele.'
-                )}
+                {translate('home.features.strategy.description')}
               </p>
             </div>
 
@@ -310,12 +283,9 @@ export default function Home() {
               <div className="feature-icon">
                 <IconGlobe />
               </div>
-              <h3>{t('Global Perspective for International Clients', 'Internationale Perspektive für Mandanten weltweit')}</h3>
+              <h3>{translate('home.features.globe.heading')}</h3>
               <p>
-                {t(
-                  "Ms. Henning brings personal experience as an immigrant and decades of advising individuals, businesses, and families in their transition to the United States. The firm's expertise supports a smooth landing.",
-                  'Ms. Henning bringt eigene Migrationserfahrung und jahrzehntelange Beratung internationaler Mandanten mit. So entsteht ein sicherer, gut vorbereiteter Weg in die USA.'
-                )}
+                {translate('home.features.globe.description')}
               </p>
             </div>
 
@@ -323,12 +293,9 @@ export default function Home() {
               <div className="feature-icon">
                 <IconKey />
               </div>
-              <h3>{t('Comprehensive U.S. Market Entry and Property Guidance', 'Umfassende Begleitung bei Markteintritt und Immobilien')}</h3>
+              <h3>{translate('home.features.market.heading')}</h3>
               <p>
-                {t(
-                  'Not all questions are immigration questions. We offer comprehensive representation in real estate, corporate, taxation, estate planning, and related areas, and coordinate with specialists as needed.',
-                  'Nicht jede Frage ist rein immigration‑rechtlich. Wir beraten zu Immobilien, Unternehmen, Steuern, Nachlassplanung und koordinieren bei Bedarf Spezialisten.'
-                )}
+                {translate('home.features.market.description')}
               </p>
             </div>
           </div>
@@ -402,37 +369,27 @@ export default function Home() {
         <div className="container">
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
             <h2 className="text-center reveal" style={{ marginBottom: '2rem' }}>
-              {t('Supporting Immigrants to Thrive in the U.S.', 'Menschen auf ihrem Weg in die USA begleiten')}
+              {translate('home.support.heading')}
             </h2>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              {t(
-                <>Welcome to <strong>Henning Law Firm PLLC</strong>, where nothing gives us greater satisfaction than assisting clients in realizing personal, professional, or commercial goals in the United States.</>,
-                <>Willkommen bei <strong>Henning Law Firm PLLC</strong>. Wir begleiten Mandanten dabei, persönliche, berufliche oder unternehmerische Ziele in den USA zu erreichen.</>
-              )}
+              {renderWithReplacements('home.support.paragraph1', {
+                firmName: <strong>Henning Law Firm PLLC</strong>,
+              })}
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              {t(
-                "Ms. Henning's background as an immigrant, her service as former Honorary Consul of Germany in Florida, and her experience as a practicing attorney provide a unique perspective on the legal and cultural aspects of U.S. market entry and immigration.",
-                'Ms. Hennings eigener Migrationshintergrund, ihre Tätigkeit als frühere Honorarkonsulin Deutschlands in Florida und ihre Erfahrung als Anwältin bieten eine besondere Perspektive auf rechtliche und kulturelle Aspekte von Markteintritt und Einwanderung.'
-              )}
+              {translate('home.support.paragraph2')}
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              {t(<strong>What sets us apart?</strong>, <strong>Was uns auszeichnet?</strong>)}
+              <strong>{translate('home.support.setsApartHeading')}</strong>
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              {t(
-                "We address questions you may not even know to ask. Our holistic approach considers individual goals and complex issues like tax planning, estate planning, corporate structure, and contracts. We also work with a trusted specialist network to ensure personalized guidance.",
-                'Wir beantworten Fragen, die man oft erst spät stellt. Unser ganzheitlicher Ansatz berücksichtigt Ziele und komplexe Themen wie Steuer‑ und Nachlassplanung, Unternehmensstruktur und Verträge. Zudem arbeiten wir mit einem Netzwerk spezialisierter Partner.'
-              )}
+              {translate('home.support.setsApartDetail')}
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-              {t(<strong>What we do not do</strong>, <strong>Was wir nicht tun</strong>)}
+              <strong>{translate('home.support.doNotDoHeading')}</strong>
             </p>
             <p style={{ fontSize: '1.1rem', marginBottom: 0 }}>
-              {t(
-                'While we stand ready to help with legal challenges, we do not provide financial advice or investment recommendations. Financial decisions are made by clients or with their independently selected advisors.',
-                'Wir unterstützen bei rechtlichen Fragen, bieten jedoch keine Finanz‑ oder Anlageberatung. Finanzentscheidungen treffen Mandanten selbst oder mit ihren eigenen Beratern.'
-              )}
+              {translate('home.support.disclaimer')}
             </p>
             <div className="text-center" style={{ marginTop: '3rem' }}>
               <Link href="/contact" className="btn btn-outline">
@@ -446,8 +403,8 @@ export default function Home() {
       {/* Testimonials Section */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container">
-          <div className="text-center reveal" style={{ marginBottom: '4rem' }}>
-            <h2>{t('What Our Clients Say', 'Was unsere Mandanten sagen')}</h2>
+        <div className="text-center reveal" style={{ marginBottom: '4rem' }}>
+            <h2>{translate('home.testimonials.heading')}</h2>
           </div>
 
           <div className="testimonials-grid">
@@ -559,12 +516,12 @@ export default function Home() {
         <div className="container">
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
             <h2 className="text-center reveal" style={{ marginBottom: '2rem' }}>
-              {t('Frequently Asked Questions', 'Häufige Fragen')}
+              {translate('home.faq.heading')}
             </h2>
             <div style={{ display: 'grid', gap: '1.5rem' }}>
               {faqItems.map((item) => (
                 <div
-                  key={item.question}
+                  key={item.questionKey}
                   className="reveal"
                   style={{
                     padding: '1.5rem',
@@ -575,10 +532,10 @@ export default function Home() {
                   }}
                 >
                   <h3 style={{ marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
-                    {item.question}
+                    {translate(item.questionKey)}
                   </h3>
                   <p style={{ margin: 0, color: 'var(--color-text-light)', lineHeight: '1.7' }}>
-                    {item.answer}
+                    {translate(item.answerKey)}
                   </p>
                 </div>
               ))}
@@ -592,54 +549,15 @@ export default function Home() {
         <div className="container">
           <div style={{ maxWidth: '900px', margin: '0 auto' }}>
             <h2 className="text-center reveal" style={{ marginBottom: '2rem' }}>
-              {t('Your Path & Next Steps', 'Ihr Weg & nächste Schritte')}
+              {translate('home.path.heading')}
             </h2>
             <p className="text-center reveal" style={{ fontSize: '1.1rem', marginBottom: '2.5rem' }}>
-              {t(
-                'A clear, step-by-step process for planning U.S. immigration or market entry.',
-                'Ein klarer, schrittweiser Prozess für Einwanderung oder Markteintritt in die USA.'
-              )}
+              {translate('home.path.description')}
             </p>
             <div style={{ display: 'grid', gap: '1.5rem' }}>
-              {[
-                {
-                  title: t('1) Contact & Intake', '1) Kontakt & Erstaufnahme'),
-                  text: t(
-                    'Fill out the contact form or call us. We review your goals, timeline, and current status.',
-                    'Füllen Sie das Formular aus oder rufen Sie an. Wir prüfen Ziele, Zeitrahmen und Status.'
-                  ),
-                },
-                {
-                  title: t('2) Strategy & Options', '2) Strategie & Optionen'),
-                  text: t(
-                    'We identify the best visa or residency pathway and outline risks, costs, and timelines.',
-                    'Wir identifizieren den passenden Weg und erläutern Risiken, Kosten und Ablauf.'
-                  ),
-                },
-                {
-                  title: t('3) Document Plan', '3) Dokumentenplan'),
-                  text: t(
-                    'You receive a document checklist and guidance for evidence, translations, and filings.',
-                    'Sie erhalten eine Checkliste sowie Hinweise zu Nachweisen, Übersetzungen und Einreichungen.'
-                  ),
-                },
-                {
-                  title: t('4) Filing & Follow‑Up', '4) Einreichung & Nachverfolgung'),
-                  text: t(
-                    'We prepare and submit your case, track updates, and respond to government requests.',
-                    'Wir bereiten den Fall vor, reichen ein, verfolgen Updates und reagieren auf Behördenanfragen.'
-                  ),
-                },
-                {
-                  title: t('5) Decision & Next Steps', '5) Entscheidung & nächste Schritte'),
-                  text: t(
-                    'We prepare you for interviews, approvals, and long‑term compliance requirements.',
-                    'Wir bereiten auf Interviews, Entscheidungen und langfristige Anforderungen vor.'
-                  ),
-                },
-              ].map((step) => (
+              {pathSteps.map((step) => (
                 <div
-                  key={step.title}
+                  key={step.titleKey}
                   className="reveal"
                   style={{
                     padding: '1.5rem',
@@ -649,8 +567,12 @@ export default function Home() {
                     boxShadow: 'var(--shadow-sm)',
                   }}
                 >
-                  <h3 style={{ marginBottom: '0.5rem', color: 'var(--color-primary)' }}>{step.title}</h3>
-                  <p style={{ margin: 0, color: 'var(--color-text-light)', lineHeight: '1.7' }}>{step.text}</p>
+                  <h3 style={{ marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
+                    {translate(step.titleKey)}
+                  </h3>
+                  <p style={{ margin: 0, color: 'var(--color-text-light)', lineHeight: '1.7' }}>
+                    {translate(step.textKey)}
+                  </p>
                 </div>
               ))}
             </div>
@@ -678,7 +600,7 @@ export default function Home() {
       >
         <div className="container text-center reveal">
           <h2 style={{ color: 'var(--color-white)', marginBottom: '1.5rem' }}>
-            {t('Unlock Your American Dream Today', 'Starten Sie Ihren Weg in die USA')}
+            {translate('home.cta.heading')}
           </h2>
           <p style={{ 
             fontSize: '1.3rem', 
@@ -688,7 +610,7 @@ export default function Home() {
             marginLeft: 'auto',
             marginRight: 'auto'
           }}>
-            {t('Tailored solutions for your U.S. immigration journey', 'Individuelle Lösungen für Ihren Einwanderungsweg')}
+            {translate('home.cta.subtext')}
           </p>
           <Link href="/contact" className="btn" style={{ 
             backgroundColor: 'var(--color-secondary)', 

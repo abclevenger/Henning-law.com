@@ -1,0 +1,142 @@
+{
+  "pages": [
+    {
+      "path": "/",
+      "titleKey": "home.design.heading",
+      "headings": [
+        "home.design.heading",
+        "home.bridges.heading",
+        "home.visas.heading",
+        "home.guide.heading",
+        "home.features.heading",
+        "home.support.heading",
+        "home.testimonials.heading",
+        "home.faq.heading",
+        "home.path.heading",
+        "home.cta.heading"
+      ],
+      "serviceClaims": [
+        "Tailored U.S. immigration strategies for individuals, families, entrepreneurs, and businesses, repeating the promise to help clients reach work, residency, and business goals.",
+        "Identifies visa paths, property ownership issues, and business complexities, with supportive bullet points for personalized visa plans, comprehensive representation, and global perspective.",
+        "Reiterates the focus on supporting immigrants with personalized, culturally-attuned guidance derived from Ms. Henning’s experience."
+      ],
+      "disclaimers": [
+        "Home page inherits the Spanish/English translation copy and mentions a holistic, culturally sensitive approach without introducing guarantees."
+      ]
+    },
+    {
+      "path": "/practice-areas",
+      "title": "Henning Law Firm PLLC | Practice Areas",
+      "headings": [
+        "Comprehensive Representation of Families, Companies and Entrepreneurs Seeking to Live and/or Work in the U.S.A.",
+        "Temporary Business and Work Visas for Non-Immigrants and Start-Ups",
+        "Permanent Residency through Employment or Investment (EB-5)",
+        "Visas and Green Cards for Persons with Outstanding Achievements in the Arts, Athletics, Academia or Business",
+        "Temporary Visas and Permanent Residence for Athletes",
+        "Reinventing Yourself for the Next Phase of your Life",
+        "Permanent Residency through Family Based Immigration and Marriage",
+        "Citizenship - the Final Step in Your Immigration Journey",
+        "Planning for the Tax Consequences of U.S. Residency",
+        "Real Estate and Estate Planning - Civil Law Notary Services",
+        "From Visas to Ventures"
+      ],
+      "serviceClaims": [
+        "Same set of visa categories and services as the old site, including temporary visas (visitor, E, L, O, student), EB employment/investment categories, athlete visas, family petitions, citizenship, tax, and real estate estate planning.",
+        "Emphasis on co-counseling with specialists and general counsel support."
+      ]
+    },
+    {
+      "path": "/attorney-bio",
+      "title": "Meet Norma Henning, J.D.",
+      "headings": [
+        "Meet Your Attorney, Norma Henning, J.D.",
+        "Passion for Germany and the United States",
+        "Honorary Consul background",
+        "German American Chamber Activities"
+      ],
+      "serviceClaims": [
+        "Ms. Henning’s biography labels her extensive credentials (Florida/Minnesota Bar, Civil Law Notary, Honorary Consul, member of AILA) and describes her role as trusted family/general counsel with a network of experts.",
+        "Includes testimonials (via home translation) that remain anecdotal."
+      ]
+    },
+    {
+      "path": "/contact",
+      "title": "Contact",
+      "headings": [
+        "Contact",
+        "Legal Disclaimer",
+        "How It Works"
+      ],
+      "serviceClaims": [
+        "Same consultation fee details: $400/hour with half-hour minimum, credit toward flat-fee work; clients pay filing fees.",
+        "Promotes the contact form/booking widget for consultations."
+      ],
+      "disclaimers": [
+        "General disclaimer now pulled from translation key: website content is general, not legal advice; communications do not create attorney-client relationship.",
+        "Repeats that no financial advice or investment recommendations are provided and that financial decisions remain with clients."
+      ]
+    }
+  ],
+  "practiceAreas": [
+    "Tailored immigration strategy for individuals, families, entrepreneurs, and businesses",
+    "Temporary business/work visas (B1/B2, E-1/E-2, L-1A/B, O-1, student, TN, E-3, H-1B)",
+    "Permanent residency via employment or investment (EB-1A/B/C, EB-2, EB-2 NIW, EB-3, EB-5)",
+    "Support for athletes (P-1, O-1) and high achievers pursuing permanent residence",
+    "Family-based immigration/marriage petitions",
+    "Naturalization/citizenship guidance",
+    "Tax/estate planning for foreign investors and real estate ownership",
+    "Civil Law Notary services for Florida real estate"
+  ],
+  "visaCategories": [
+    "B-1/B-2",
+    "E-1/E-2",
+    "L-1A/B",
+    "O-1",
+    "F-1",
+    "TN",
+    "E-3",
+    "H-1B",
+    "EB-1A/B/C",
+    "EB-2 (including NIW)",
+    "EB-3",
+    "EB-5",
+    "P-1"
+  ],
+  "industriesServed": [
+    "Families",
+    "Startups/entrepreneurs",
+    "International companies",
+    "Investors",
+    "High-performance professionals (arts, academia, business)",
+    "Athletes",
+    "Seasonal residents and retirees",
+    "German-speaking/European clientele"
+  ],
+  "jurisdictions": [
+    "United States (federal immigration)",
+    "Florida",
+    "Minnesota",
+    "German clients/consulates",
+    "U.S. consular posts referenced on practice page"
+  ],
+  "attorneyCredentials": [
+    "Florida attorney since 1996",
+    "Minnesota Bar admission 2022",
+    "Florida Civil Law Notary 2002",
+    "Former Honorary Consul of Germany, Western Florida",
+    "Member of AILA, Florida Bar, Minnesota Bar, Collier County Bar"
+  ],
+  "consultationLanguage": [
+    "Consultations billed at $400/hour with a half-hour minimum; amount credited toward flat-fee work when applicable",
+    "Clients cover filing fees and out-of-pocket costs",
+    "Communication via website does not create an attorney-client relationship"
+  ],
+  "promisesAndOutcomes": [
+    "Emphasis on individualized strategies rather than guarantees, mirroring old-site wording",
+    "Promises to guide clients toward their goals through tailored processes and cultural sensitivity"
+  ],
+  "disclaimers": [
+    "Repeats same general legal disclaimer and financial-advice disclaimer as old site via translated copy",
+    "Testimonials remain anecdotal without guarantees"
+  ]
+}

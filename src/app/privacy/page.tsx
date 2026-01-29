@@ -1,102 +1,82 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const PrivacyPage = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="section-padding">
       <div className="container" style={{ maxWidth: '900px' }}>
-        <h1>Privacy Policy</h1>
-        <p>
-          Henning Law Firm PLLC respects your privacy and is committed to protecting
-          your personal information. This Privacy Policy explains what information we
-          collect, how we use it, and the choices you have.
-        </p>
+        <h1>{t('privacy.title')}</h1>
+        <p>{t('privacy.intro')}</p>
 
-        <h2>Information We Collect</h2>
+        <h2>{t('privacy.collectHeading')}</h2>
         <ul>
-          <li>Contact details you provide through forms or email.</li>
-          <li>Appointment details when you request a consultation.</li>
-          <li>Mobile number and messaging preferences if you opt in to text updates.</li>
-          <li>Basic analytics data such as pages visited and time on site.</li>
+          <li>{t('privacy.collect1')}</li>
+          <li>{t('privacy.collect2')}</li>
+          <li>{t('privacy.collect3')}</li>
+          <li>{t('privacy.collect4')}</li>
         </ul>
 
-        <h2>How We Use Information</h2>
+        <h2>{t('privacy.useHeading')}</h2>
         <ul>
-          <li>To respond to inquiries and provide requested services.</li>
-          <li>To schedule and manage consultations.</li>
-          <li>To send text message updates if you have opted in.</li>
-          <li>To improve our website and client experience.</li>
+          <li>{t('privacy.use1')}</li>
+          <li>{t('privacy.use2')}</li>
+          <li>{t('privacy.use3')}</li>
+          <li>{t('privacy.use4')}</li>
         </ul>
 
-        <h2>Information Sharing</h2>
+        <h2>{t('privacy.sharingHeading')}</h2>
+        <p>{t('privacy.sharingP1')}</p>
         <p>
-          We do not sell your personal information. We may share information only
-          with service providers who assist in operating our website and delivering
-          services, or as required by law.
-        </p>
-        <p>
-          <strong>No mobile information will be shared with third parties or affiliates for
-          marketing or promotional purposes.</strong> Information sharing is limited to service
-          providers that support our operations (for example, scheduling or messaging
-          platforms) and only for the purpose of providing our services.
+          <strong>{t('privacy.sharingP2')}</strong>
         </p>
 
-        <h2>Text Messaging (A2P Compliance)</h2>
+        <h2>{t('privacy.textHeading')}</h2>
+        <p>{t('privacy.textP1')}</p>
         <p>
-          If you opt in to receive text messages from us, we will use your mobile number to
-          provide updates about your inquiry, appointment scheduling, and related service
-          information. Message frequency varies. Message and data rates may apply.
-        </p>
-        <p>
-          You can opt out at any time by replying STOP. For help, reply HELP or contact us at{' '}
+          {t('privacy.textP2')}{' '}
           <a href="mailto:nhenning@henning-law.com">nhenning@henning-law.com</a>.
         </p>
 
-        <h2>Cookies and Analytics</h2>
-        <p>
-          This website may use cookies or similar technologies for basic analytics and
-          site functionality. You can adjust cookie settings in your browser.
-        </p>
+        <h2>{t('privacy.cookiesHeading')}</h2>
+        <p>{t('privacy.cookiesP')}</p>
 
-        <h2>Data Security</h2>
-        <p>
-          We take reasonable measures to protect your information. No method of
-          transmission over the internet is 100% secure.
-        </p>
+        <h2>{t('privacy.securityHeading')}</h2>
+        <p>{t('privacy.securityP')}</p>
 
-        <h2>Your Choices</h2>
-        <p>
-          You may contact us to update, correct, or delete your information, subject
-          to legal and ethical obligations.
-        </p>
-        <p>
-          You may also opt out of text messages at any time by replying STOP.
-        </p>
+        <h2>{t('privacy.choicesHeading')}</h2>
+        <p>{t('privacy.choicesP1')}</p>
+        <p>{t('privacy.choicesP2')}</p>
 
-        <h2>Contact</h2>
+        <h2>{t('privacy.contactHeading')}</h2>
         <p>
-          If you have questions about this Privacy Policy, please contact us at{' '}
+          {t('privacy.contactP')}{' '}
           <a href="mailto:nhenning@henning-law.com">nhenning@henning-law.com</a>.
         </p>
-        
-        {/* CTA Section */}
-        <div style={{
-          marginTop: '3rem',
-          padding: '2rem',
-          backgroundColor: 'var(--color-bg-light)',
-          borderRadius: '8px',
-          textAlign: 'center',
-        }}>
-          <h3 style={{ marginBottom: '1rem' }}>Have Immigration Questions?</h3>
+
+        <div
+          style={{
+            marginTop: '3rem',
+            padding: '2rem',
+            backgroundColor: 'var(--color-bg-light)',
+            borderRadius: '8px',
+            textAlign: 'center',
+          }}
+        >
+          <h3 style={{ marginBottom: '1rem' }}>{t('cta.immigrationQuestions')}</h3>
           <p style={{ marginBottom: '1.5rem', color: 'var(--color-text-light)' }}>
-            Schedule a consultation to discuss your goals.
+            {t('cta.scheduleSubtext')}
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/contact" className="btn btn-primary">
-              Contact Us
+              {t('nav.contact')}
             </Link>
             <Link href="/practice-areas" className="btn btn-outline">
-              View Practice Areas
+              {t('cta.viewPracticeAreas')}
             </Link>
           </div>
         </div>

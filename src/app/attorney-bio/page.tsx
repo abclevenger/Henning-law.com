@@ -1,60 +1,65 @@
-"use client";
+ "use client";
 
+import React, { useState, type ReactNode } from 'react';
 import Link from 'next/link';
-import type { ReactNode } from 'react';
+import Image from 'next/image';
 import { images } from '@/data/images';
-import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AttorneyBio() {
     const [imgError, setImgError] = useState(false);
     const [honoraryImgError, setHonoraryImgError] = useState(false);
-    const { language, t: translate } = useLanguage();
-    const t = (en: ReactNode, de?: ReactNode) => (language === 'de' ? de ?? en : en);
-    const faqItems = language === 'de'
-        ? [
-            {
-                question: 'Bieten Sie Beratung auf Deutsch an?',
-                answer:
-                    'Ja. Wir beraten Mandanten zu US‑Einwanderung, Unternehmensgründung und Immobilienfragen.',
-            },
-            {
-                question: 'Welche Erfahrung bringen Sie mit?',
-                answer:
-                    'Ms. Henning war Honorarkonsulin der Bundesrepublik Deutschland in Florida und berät seit vielen Jahren internationale Mandanten.',
-            },
-            {
-                question: 'Wie läuft die erste Beratung ab?',
-                answer:
-                    'Nach einer kurzen Schilderung Ihrer Ziele besprechen wir die nächsten Schritte und Unterlagen.',
-            },
-        ]
-        : [
-            {
-                question: 'Do you offer bilingual guidance?',
-                answer:
-                    'Yes. We advise clients on U.S. immigration, business formation, and property questions.',
-            },
-            {
-                question: 'What experience do you bring?',
-                answer:
-                    'Ms. Henning served as Honorary Consul of Germany in Florida and has advised international clients for many years.',
-            },
-            {
-                question: 'How does an initial consultation work?',
-                answer:
-                    'After a short summary of your goals, we outline next steps and required documents.',
-            },
-        ];
+    const { t: translate } = useLanguage();
+
+    const renderWithReplacements = (
+        key: string,
+        replacements: Record<string, ReactNode>
+    ) => {
+        const raw = translate(key);
+        const segments = raw.split(/(\{[^}]+\})/g).filter(Boolean);
+        return (
+            <>
+                {segments.map((segment, index) => {
+                    const match = segment.match(/^\{([^}]+)\}$/);
+                    if (match) {
+                        return (
+                            <React.Fragment key={`${key}-${index}`}>
+                                {replacements[match[1]] ?? null}
+                            </React.Fragment>
+                        );
+                    }
+                    return (
+                        <React.Fragment key={`${key}-${index}`}>
+                            {segment}
+                        </React.Fragment>
+                    );
+                })}
+            </>
+        );
+    };
+    const faqItems = [
+        {
+            questionKey: 'attorney.faq.q1.question',
+            answerKey: 'attorney.faq.q1.answer',
+        },
+        {
+            questionKey: 'attorney.faq.q2.question',
+            answerKey: 'attorney.faq.q2.answer',
+        },
+        {
+            questionKey: 'attorney.faq.q3.question',
+            answerKey: 'attorney.faq.q3.answer',
+        },
+    ];
     const faqSchema = {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
         mainEntity: faqItems.map((item) => ({
             '@type': 'Question',
-            name: item.question,
+            name: translate(item.questionKey),
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: item.answer,
+                text: translate(item.answerKey),
             },
         })),
     };
@@ -102,10 +107,10 @@ export default function AttorneyBio() {
             <section className="page-header section-padding text-center" style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
                 <div className="container">
                     <h1 style={{ color: '#fff' }}>
-                        {t('U.S. Immigration Attorney', 'US‑Einwanderungsanwältin')}
+                        {translate('attorney.page.heading')}
                     </h1>
                     <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginTop: '1rem' }}>
-                        {t('Meet Norma Henning, J.D.', 'Norma Henning, J.D. kennenlernen')}
+                        {translate('attorney.page.subheading')}
                     </p>
                 </div>
             </section>
@@ -142,99 +147,86 @@ export default function AttorneyBio() {
                         <div className="bio-content">
                             <h2>Norma Henning, J.D.</h2>
                             <h3 style={{ color: 'var(--color-secondary)', marginBottom: '2rem', fontSize: '1.5rem', fontWeight: '400' }}>
-                                {t('Founding Attorney', 'Gründungsanwältin')}
+                                {translate('attorney.founding.title')}
                             </h3>
 
                             <div style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '12px' }}>
                                 <h3 style={{ marginBottom: '0.75rem' }}>
-                                    {t('Guidance available in German', 'Beratung auf Deutsch')}
+                                    {translate('attorney.german.heading')}
                                 </h3>
                                 <p style={{ fontSize: '1.05rem', lineHeight: '1.8', marginBottom: '0.75rem' }}>
-                                    {t(
-                                        'We advise clients on U.S. immigration, market entry, and property questions. Our strategy aligns with your goals and timeline.',
-                                        'Wir beraten Mandanten zu US‑Einwanderung, Markteintritt und Immobilienfragen. Unsere Strategie orientiert sich an Ihren Zielen und Ihrem Zeitplan.'
-                                    )}
+                                    {translate('home.design.german.paragraph1')}
                                 </p>
                                 <p style={{ marginBottom: 0 }}>
-                                    {t(
-                                        <>Reach out via the <Link href="/contact">contact page</Link> for an initial assessment.</>,
-                                        <>Kontaktieren Sie uns über die <Link href="/contact">Kontaktseite</Link> für eine erste Einschätzung.</>
-                                    )}
+                                    {renderWithReplacements('attorney.german.schedule', {
+                                        contactLink: (
+                                            <Link href="/contact">
+                                                {translate('home.design.contactLinkLabel')}
+                                            </Link>
+                                        ),
+                                    })}
                                 </p>
                             </div>
 
                             <div style={{ marginBottom: '2rem' }}>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    {t(
-                                        <>Welcome to <strong>Henning Law Firm PLLC</strong>, where nothing gives us greater satisfaction than assisting clients in achieving personal, professional, or commercial goals in the United States.</>,
-                                        <>Willkommen bei <strong>Henning Law Firm PLLC</strong>. Wir unterstützen Mandanten dabei, persönliche, berufliche oder unternehmerische Ziele in den USA zu erreichen.</>
-                                    )}
+                                    {renderWithReplacements('attorney.welcome', {
+                                        firmName: <strong>Henning Law Firm PLLC</strong>,
+                                    })}
                                 </p>
                             </div>
 
                             <div style={{ marginBottom: '2rem' }}>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    {t(
-                                        "Ms. Henning's background as an immigrant, her service as former Honorary Consul of Germany in Florida, and her experience as a practicing attorney provide a unique perspective on the legal and cultural aspects of U.S. market entry and immigration.",
-                                        'Ms. Hennings eigener Migrationshintergrund, ihre Tätigkeit als frühere Honorarkonsulin Deutschlands in Florida und ihre Erfahrung als Anwältin bieten eine besondere Perspektive auf rechtliche und kulturelle Fragen.'
-                                    )}
+                                    {translate('attorney.background')}
                                 </p>
                             </div>
 
                             <div style={{ marginBottom: '2rem' }}>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    {t(
-                                        'Her approach focuses on tailored visa and immigration strategies and counseling in areas of property ownership and U.S. market entry for business ventures.',
-                                        'Ihr Ansatz konzentriert sich auf maßgeschneiderte Visa‑ und Einwanderungsstrategien sowie Beratung zu Immobilieneigentum und Markteintritt.'
-                                    )}
+                                    {translate('attorney.approach')}
                                 </p>
                             </div>
 
                             <div style={{ marginBottom: '2rem' }}>
                                 <h3 style={{ marginBottom: '1rem', marginTop: '2rem' }}>
-                                    {t('What Sets Us Apart', 'Was uns auszeichnet')}
+                                    {translate('attorney.setsApartHeading')}
                                 </h3>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    {t(
-                                        'We address questions you may not even know to ask. Our holistic approach considers individual goals and complexities such as tax planning, estate planning, corporate structure, and contracts.',
-                                        'Wir beantworten Fragen, die man oft erst spät stellt. Unser Ansatz berücksichtigt Ziele und komplexe Themen wie Steuer‑ und Nachlassplanung, Unternehmensstruktur und Verträge.'
-                                    )}
+                                    {translate('home.support.setsApartDetail')}
                                 </p>
                             </div>
 
                             <div style={{ marginBottom: '2rem' }}>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                                    {t(
-                                        'We work with a network of trusted specialists to ensure personalized guidance at every step.',
-                                        'Wir arbeiten mit einem Netzwerk spezialisierter Partner, um eine individuelle Begleitung sicherzustellen.'
-                                    )}
+                                    {translate('attorney.network')}
                                 </p>
                             </div>
 
                             <div style={{ marginTop: '3rem', padding: '2rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '8px' }}>
                                 <h4 style={{ marginBottom: '1rem' }}>
-                                    {t('Education & Professional Background', 'Ausbildung & beruflicher Hintergrund')}
+                                    {translate('attorney.education.heading')}
                                 </h4>
                                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        {t('Juris Doctor (J.D.)', 'Juris Doctor (J.D.)')}
+                                        {translate('attorney.education.jd')}
                                     </li>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        {t('Former Honorary Consul of Germany in Florida', 'Ehemalige Honorarkonsulin der Bundesrepublik Deutschland in Florida')}
+                                        {translate('attorney.education.honorary')}
                                     </li>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        {t('Member of the Florida Bar and Minnesota Bar', 'Mitglied der Florida Bar und Minnesota Bar')}
+                                        {translate('attorney.education.bars')}
                                     </li>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        {t('Extensive experience in U.S. immigration law', 'Umfangreiche Erfahrung im US-Einwanderungsrecht')}
+                                        {translate('attorney.education.experience')}
                                     </li>
                                     <li style={{ marginBottom: '1rem', paddingLeft: '2rem', position: 'relative' }}>
                                         <span style={{ position: 'absolute', left: 0, color: 'var(--color-secondary)', fontSize: '1.2rem' }}>•</span>
-                                        {t('Personal experience as an immigrant', 'Persönliche Erfahrung als Einwanderin')}
+                                        {translate('attorney.education.personal')}
                                     </li>
                                 </ul>
                             </div>
@@ -255,7 +247,7 @@ export default function AttorneyBio() {
                 <div className="container" style={{ marginTop: '4rem' }}>
                     <div style={{ maxWidth: '900px', margin: '0 auto' }}>
                         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                            {t('Honorary Consul of Germany in Florida', 'Honorarkonsulin der Bundesrepublik Deutschland in Florida')}
+                            {translate('attorney.honorary.heading')}
                         </h2>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', alignItems: 'center' }}>
                             <div className="honorary-consul-image" style={{ borderRadius: '8px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
@@ -281,10 +273,7 @@ export default function AttorneyBio() {
                             </div>
                             <div>
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8', textAlign: 'center' }}>
-                                    {t(
-                                        'Ms. Henning served as the Honorary Consul of Germany in Florida, bringing an international perspective and deep understanding of cross-cultural legal matters to her practice.',
-                                        'Ms. Henning war Honorarkonsulin Deutschlands in Florida und bringt eine internationale Perspektive sowie tiefes Verständnis für grenzüberschreitende Rechtsfragen ein.'
-                                    )}
+                                    {translate('attorney.honorary.paragraph')}
                                 </p>
                             </div>
                         </div>
@@ -294,12 +283,12 @@ export default function AttorneyBio() {
                 <div className="container" style={{ marginTop: '4rem' }}>
                     <div style={{ maxWidth: '900px', margin: '0 auto' }}>
                         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                            {t('Frequently Asked Questions', 'Häufige Fragen')}
+                            {translate('home.faq.heading')}
                         </h2>
                         <div style={{ display: 'grid', gap: '1.5rem' }}>
                             {faqItems.map((item) => (
                                 <div
-                                    key={item.question}
+                                    key={item.questionKey}
                                     style={{
                                         padding: '1.5rem',
                                         borderRadius: '12px',
@@ -309,10 +298,10 @@ export default function AttorneyBio() {
                                     }}
                                 >
                                     <h3 style={{ marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
-                                        {item.question}
+                                        {translate(item.questionKey)}
                                     </h3>
                                     <p style={{ margin: 0, color: 'var(--color-text-light)', lineHeight: '1.7' }}>
-                                        {item.answer}
+                                        {translate(item.answerKey)}
                                     </p>
                                 </div>
                             ))}
@@ -323,13 +312,13 @@ export default function AttorneyBio() {
                 <div className="container" style={{ marginTop: '4rem' }}>
                     <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
                         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                            {t('Gallery: Legal Community Highlights', 'Galerie: Einblicke aus der Rechtscommunity')}
+                            {translate('attorney.gallery.heading')}
                         </h2>
                         <div className="bio-gallery">
                             {galleryImages.map((image) => (
-                                <div key={image.src} className="bio-gallery-item">
-                                                    <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
-                                                </div>
+                                <div key={image.src} className="bio-gallery-item" style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden' }}>
+                                    <Image src={image.src} alt={image.alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                                </div>
                             ))}
                         </div>
                     </div>
