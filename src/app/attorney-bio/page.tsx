@@ -180,6 +180,9 @@ export default function AttorneyBio() {
                                 <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
                                     {translate('attorney.background')}
                                 </p>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginTop: '1rem', marginBottom: 0 }}>
+                                    {translate('attorney.chamber')}
+                                </p>
                             </div>
 
                             <div style={{ marginBottom: '2rem' }}>

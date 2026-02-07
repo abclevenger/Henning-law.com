@@ -110,6 +110,30 @@ const faqs: FAQ[] = [
         }
     },
     {
+        id: 9,
+        category: {
+            en: "Visas & Immigration", de: "Visa & Einwanderung", es: "Visas e Inmigración", fr: "Visas et Immigration", zh: "签证和移民", ja: "ビザと移民", ar: "التأشيرات والهجرة"
+        },
+        question: {
+            en: "What is the Investor Visa or EB-5 program?",
+            de: "Was ist das Investor Visa- oder EB-5-Programm?",
+            es: "¿Qué es la Visa de Inversionista o el programa EB-5?",
+            fr: "Qu'est-ce que le visa investisseur ou le programme EB-5 ?",
+            zh: "什么是投资者签证或EB-5计划？",
+            ja: "投資家ビザまたはEB-5プログラムとは何ですか？",
+            ar: "ما هو تأشيرة المستثمر أو برنامج EB-5؟",
+        },
+        answer: {
+            en: "The Investor Visa and EB-5 program provide pathways to U.S. permanent residency for qualified investors. We provide immigration counsel on eligibility, case strategy, documentation, and process—immigration counsel only; we do not provide investment advice, select projects, or advise on financial returns.",
+            de: "Das Investor Visa- und EB-5-Programm bieten qualifizierten Investoren Wege zur dauerhaften Aufenthaltsgenehmigung in den USA. Wir bieten Einwanderungsberatung zu Eignung, Fallstrategie, Dokumentation und Prozess—nur Rechtsberatung, keine Anlageberatung.",
+            es: "La Visa de Inversionista y el programa EB-5 ofrecen vías hacia la residencia permanente en EE.UU. para inversionistas calificados. Ofrecemos asesoría migratoria sobre elegibilidad, estrategia de caso, documentación y proceso—solo asesoría migratoria.",
+            fr: "Le visa investisseur et le programme EB-5 offrent des voies vers la résidence permanente aux États-Unis pour les investisseurs qualifiés. Nous fournissons des conseils en immigration sur l'éligibilité, la stratégie de cas et le processus.",
+            zh: "投资者签证和EB-5计划为合格投资者提供获得美国永久居留权的途径。我们提供有关资格、案件策略、文件和流程的移民咨询——仅移民咨询。",
+            ja: "投資家ビザとEB-5プログラムは、資格のある投資家に米国永住権への道を提供します。適格性、ケース戦略、書類、プロセスについて移民相談を提供します。",
+            ar: "توفر تأشيرة المستثمر وبرنامج EB-5 pathways للإقامة الدائمة في الولايات المتحدة للمستثمرين المؤهلين. نقدم استشارات الهجرة بشأن الأهلية واستراتيجية القضية والوثائق والعملية.",
+        }
+    },
+    {
         id: 5,
         category: {
             en: "Business & Corporate", de: "Unternehmen", es: "Empresas", fr: "Affaires", zh: "商业", ja: "ビジネス", ar: "الأعمال"
@@ -207,39 +231,37 @@ const faqs: FAQ[] = [
     }
 ];
 
-// UI Text translations
-const uiText = {
+// UI Text translations (include all site languages: en, de, es, ru, fr)
+const uiText: Record<string, Record<string, string>> = {
     pageTitle: {
-        en: "Frequently Asked Questions", de: "Häufig gestellte Fragen", es: "Preguntas frecuentes", 
-        fr: "Questions fréquemment posées", zh: "常见问题", ja: "よくある質問", ar: "الأسئلة الشائعة"
+        en: "Frequently Asked Questions", de: "Häufig gestellte Fragen", es: "Preguntas frecuentes",
+        ru: "Часто задаваемые вопросы", fr: "Questions fréquemment posées", zh: "常见问题", ja: "よくある質問", ar: "الأسئلة الشائعة"
     },
     heroSubtitle: {
         en: "Find answers to common questions about U.S. immigration, visas, and our services.",
         de: "Finden Sie Antworten auf häufige Fragen zu US-Einwanderung, Visa und unseren Leistungen.",
         es: "Encuentre respuestas a preguntas comunes sobre inmigración a EE.UU., visas y nuestros servicios.",
+        ru: "Ответы на частые вопросы об иммиграции в США, визах и наших услугах.",
         fr: "Trouvez des réponses aux questions courantes sur l'immigration américaine, les visas et nos services.",
-        zh: "查找有关美国移民、签证和我们服务的常见问题解答。",
-        ja: "米国移民、ビザ、当事務所のサービスに関するよくある質問への回答をご覧ください。",
-        ar: "اعثر على إجابات للأسئلة الشائعة حول الهجرة إلى الولايات المتحدة والتأشيرات وخدماتنا.",
+        zh: "查找有关美国移民、签证和我们服务的常见问题解答。", ja: "米国移民、ビザ、当事務所のサービスに関するよくある質問への回答をご覧ください。", ar: "اعثر على إجابات للأسئلة الشائعة حول الهجرة إلى الولايات المتحدة والتأشيرات وخدماتنا.",
     },
     allCategories: {
-        en: "All", de: "Alle", es: "Todos", fr: "Tous", zh: "全部", ja: "すべて", ar: "الكل"
+        en: "All", de: "Alle", es: "Todos", ru: "Все", fr: "Tous", zh: "全部", ja: "すべて", ar: "الكل"
     },
     ctaTitle: {
         en: "Still Have Questions?", de: "Noch Fragen?", es: "¿Todavía tiene preguntas?",
-        fr: "Vous avez encore des questions ?", zh: "还有问题吗？", ja: "まだ質問がありますか？", ar: "لا تزال لديك أسئلة؟"
+        ru: "Остались вопросы?", fr: "Vous avez encore des questions ?", zh: "还有问题吗？", ja: "まだ質問がありますか？", ar: "لا تزال لديك أسئلة؟"
     },
     ctaSubtitle: {
         en: "Contact us for personalized guidance on your immigration journey.",
         de: "Kontaktieren Sie uns für eine individuelle Beratung zu Ihrer Einwanderung.",
         es: "Contáctenos para orientación personalizada en su viaje de inmigración.",
+        ru: "Свяжитесь с нами для персональной консультации по иммиграции.",
         fr: "Contactez-nous pour un accompagnement personnalisé dans votre parcours d'immigration.",
-        zh: "联系我们获取个性化的移民指导。",
-        ja: "移民の旅についての個別ガイダンスについてお問い合わせください。",
-        ar: "اتصل بنا للحصول على إرشادات شخصية في رحلة الهجرة الخاصة بك.",
+        zh: "联系我们获取个性化的移民指导。", ja: "移民の旅についての個別ガイダンスについてお問い合わせください。", ar: "اتصل بنا للحصول على إرشادات شخصية في رحلة الهجرة الخاصة بك.",
     },
     ctaButton: {
-        en: "Contact Us", de: "Kontakt", es: "Contáctenos", fr: "Contactez-nous", 
+        en: "Contact Us", de: "Kontakt", es: "Contáctenos", ru: "Связаться с нами", fr: "Contactez-nous",
         zh: "联系我们", ja: "お問い合わせ", ar: "اتصل بنا"
     },
 };
@@ -249,28 +271,31 @@ export default function FAQsPage() {
     const [openId, setOpenId] = useState<number | null>(null);
     const [activeCategory, setActiveCategory] = useState<string>("All");
 
-    // Get unique categories in current language
-    const categorySet = new Set(faqs.map(faq => faq.category[language]));
-    const categories = [uiText.allCategories[language], ...Array.from(categorySet)];
-    
-    const filteredFaqs = activeCategory === uiText.allCategories[language]
-        ? faqs 
-        : faqs.filter(faq => faq.category[language] === activeCategory);
+    // Resolve text in current language with fallback to English for keys not yet translated (e.g. ru)
+    const getCat = (faq: FAQ) => faq.category[language] ?? faq.category['en'];
+    const getQ = (faq: FAQ) => faq.question[language] ?? faq.question['en'];
+    const getA = (faq: FAQ) => faq.answer[language] ?? faq.answer['en'];
+
+    const categorySet = new Set(faqs.map(getCat));
+    const categories = [uiText.allCategories[language] ?? uiText.allCategories['en'], ...Array.from(categorySet)];
+
+    const filteredFaqs = activeCategory === (uiText.allCategories[language] ?? uiText.allCategories['en'])
+        ? faqs
+        : faqs.filter(faq => getCat(faq) === activeCategory);
 
     const toggleFaq = (id: number) => {
         setOpenId(openId === id ? null : id);
     };
 
-    // FAQ structured data for SEO (uses current language)
     const faqSchema = {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
         mainEntity: faqs.map((faq) => ({
             '@type': 'Question',
-            name: faq.question[language],
+            name: getQ(faq),
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: faq.answer[language],
+                text: getA(faq),
             },
         })),
     };
@@ -284,9 +309,9 @@ export default function FAQsPage() {
             <section className="faqs-page">
                 <section className="faqs-hero">
                     <div className="container">
-                        <h1>{uiText.pageTitle[language]}</h1>
+                        <h1>{uiText.pageTitle[language] ?? uiText.pageTitle['en']}</h1>
                         <p className="hero-subtitle">
-                            {uiText.heroSubtitle[language]}
+                            {uiText.heroSubtitle[language] ?? uiText.heroSubtitle['en']}
                         </p>
                     </div>
                 </section>
@@ -316,12 +341,12 @@ export default function FAQsPage() {
                                         onClick={() => toggleFaq(faq.id)}
                                         aria-expanded={openId === faq.id}
                                     >
-                                        <span className="faq-category-tag">{faq.category[language]}</span>
-                                        <span className="question-text">{faq.question[language]}</span>
+                                        <span className="faq-category-tag">{getCat(faq)}</span>
+                                        <span className="question-text">{getQ(faq)}</span>
                                         <span className="faq-icon">{openId === faq.id ? '−' : '+'}</span>
                                     </button>
                                     <div className="faq-answer">
-                                        <p>{faq.answer[language]}</p>
+                                        <p>{getA(faq)}</p>
                                     </div>
                                 </div>
                             ))}
@@ -331,9 +356,9 @@ export default function FAQsPage() {
 
                 <section className="faqs-cta">
                     <div className="container">
-                        <h2>{uiText.ctaTitle[language]}</h2>
-                        <p>{uiText.ctaSubtitle[language]}</p>
-                        <Link href="/contact" className="btn btn-primary">{uiText.ctaButton[language]}</Link>
+                        <h2>{uiText.ctaTitle[language] ?? uiText.ctaTitle['en']}</h2>
+                        <p>{uiText.ctaSubtitle[language] ?? uiText.ctaSubtitle['en']}</p>
+                        <Link href="/contact" className="btn btn-primary">{uiText.ctaButton[language] ?? uiText.ctaButton['en']}</Link>
                     </div>
                 </section>
             </section>

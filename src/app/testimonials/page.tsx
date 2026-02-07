@@ -103,66 +103,51 @@ const testimonials: Testimonial[] = [
     }
 ];
 
-// UI Translations
-const uiText = {
+// UI Translations (include all site languages: en, de, es, ru, fr)
+const uiText: Record<string, Record<string, string>> = {
     pageTitle: {
-        en: "Client Testimonials",
-        de: "Mandantenstimmen",
-        es: "Testimonios de clientes",
-        fr: "Témoignages de clients",
-        zh: "客户评价",
-        ja: "お客様の声",
-        ar: "شهادات العملاء",
+        en: "Client Testimonials", de: "Mandantenstimmen", es: "Testimonios de clientes",
+        ru: "Отзывы клиентов", fr: "Témoignages de clients", zh: "客户评价", ja: "お客様の声", ar: "شهادات العملاء",
     },
     heroSubtitle: {
         en: "Hear from clients who have successfully navigated their U.S. immigration journey with our guidance.",
         de: "Erfahren Sie von Mandanten, die ihren Weg in die USA mit unserer Begleitung erfolgreich gemeistert haben.",
         es: "Escuche de clientes que han navegado con éxito su viaje de inmigración a EE.UU. con nuestra orientación.",
+        ru: "Отзывы клиентов, успешно прошедших путь иммиграции в США с нашей поддержкой.",
         fr: "Découvrez les témoignages de clients qui ont réussi leur parcours d'immigration aux États-Unis avec notre accompagnement.",
-        zh: "聆听在我们指导下成功完成美国移民之旅的客户的心声。",
-        ja: "私たちのガイダンスで米国移民の旅を成功させたお客様の声をお聞きください。",
-        ar: "استمع إلى العملاء الذين نجحوا في رحلة الهجرة إلى الولايات المتحدة بتوجيهاتنا.",
+        zh: "聆听在我们指导下成功完成美国移民之旅的客户的心声。", ja: "私たちのガイダンスで米国移民の旅を成功させたお客様の声をお聞きください。", ar: "استمع إلى العملاء الذين نجحوا في رحلة الهجرة إلى الولايات المتحدة بتوجيهاتنا.",
     },
     ctaTitle: {
-        en: "Ready to Start Your Journey?",
-        de: "Bereit, Ihre Reise zu beginnen?",
-        es: "¿Listo para comenzar su viaje?",
-        fr: "Prêt à commencer votre voyage ?",
-        zh: "准备好开始您的旅程了吗？",
-        ja: "旅を始める準備はできましたか？",
-        ar: "هل أنت مستعد لبدء رحلتك؟",
+        en: "Ready to Start Your Journey?", de: "Bereit, Ihre Reise zu beginnen?", es: "¿Listo para comenzar su viaje?",
+        ru: "Готовы начать?", fr: "Prêt à commencer votre voyage ?", zh: "准备好开始您的旅程了吗？", ja: "旅を始める準備はできましたか？", ar: "هل أنت مستعد لبدء رحلتك؟",
     },
     ctaSubtitle: {
         en: "Contact us today to discuss your immigration goals and learn how we can help.",
         de: "Kontaktieren Sie uns noch heute, um Ihre Einwanderungsziele zu besprechen.",
         es: "Contáctenos hoy para discutir sus metas de inmigración y saber cómo podemos ayudar.",
+        ru: "Свяжитесь с нами, чтобы обсудить ваши иммиграционные цели.",
         fr: "Contactez-nous aujourd'hui pour discuter de vos objectifs d'immigration et découvrir comment nous pouvons vous aider.",
-        zh: "立即联系我们，讨论您的移民目标，了解我们如何提供帮助。",
-        ja: "今すぐお問い合わせいただき、移民の目標についてご相談ください。",
-        ar: "اتصل بنا اليوم لمناقشة أهداف الهجرة الخاصة بك ومعرفة كيف يمكننا المساعدة.",
+        zh: "立即联系我们，讨论您的移民目标，了解我们如何提供帮助。", ja: "今すぐお問い合わせいただき、移民の目標についてご相談ください。", ar: "اتصل بنا اليوم لمناقشة أهداف الهجرة الخاصة بك ومعرفة كيف يمكننا المساعدة.",
     },
     ctaButton: {
-        en: "Schedule a Consultation",
-        de: "Beratung vereinbaren",
-        es: "Programar una consulta",
-        fr: "Planifier une consultation",
-        zh: "预约咨询",
-        ja: "相談を予約する",
-        ar: "حدد موعداً للاستشارة",
+        en: "Schedule a Consultation", de: "Beratung vereinbaren", es: "Programar una consulta",
+        ru: "Записаться на консультацию", fr: "Planifier une consultation", zh: "预约咨询", ja: "相談を予約する", ar: "حدد موعداً للاستشارة",
     },
 };
 
 export default function TestimonialsPage() {
     const { language, t } = useLanguage();
-    
+    const getQuote = (testimonial: Testimonial) => testimonial.quote[language] ?? testimonial.quote['en'];
+    const getAuthor = (testimonial: Testimonial) => testimonial.author[language] ?? testimonial.author['en'];
+
     return (
         <>
             <section className="testimonials-page">
                 <section className="testimonials-hero">
                     <div className="container">
-                        <h1>{uiText.pageTitle[language]}</h1>
+                        <h1>{uiText.pageTitle[language] ?? uiText.pageTitle['en']}</h1>
                         <p className="hero-subtitle">
-                            {uiText.heroSubtitle[language]}
+                            {uiText.heroSubtitle[language] ?? uiText.heroSubtitle['en']}
                         </p>
                     </div>
                 </section>
@@ -172,9 +157,9 @@ export default function TestimonialsPage() {
                         {testimonials.map((testimonial) => (
                             <div key={testimonial.id} className="testimonial-card">
                                 <div className="quote-icon">"</div>
-                                <blockquote>{testimonial.quote[language]}</blockquote>
+                                <blockquote>{getQuote(testimonial)}</blockquote>
                                 <div className="testimonial-author">
-                                    <strong>{testimonial.author[language]}</strong>
+                                    <strong>{getAuthor(testimonial)}</strong>
                                     <span>{testimonial.location}</span>
                                 </div>
                             </div>
@@ -189,9 +174,9 @@ export default function TestimonialsPage() {
 
                 <section className="testimonials-cta">
                     <div className="container">
-                        <h2>{uiText.ctaTitle[language]}</h2>
-                        <p>{uiText.ctaSubtitle[language]}</p>
-                        <Link href="/contact" className="btn btn-primary">{uiText.ctaButton[language]}</Link>
+                        <h2>{uiText.ctaTitle[language] ?? uiText.ctaTitle['en']}</h2>
+                        <p>{uiText.ctaSubtitle[language] ?? uiText.ctaSubtitle['en']}</p>
+                        <Link href="/contact" className="btn btn-primary">{uiText.ctaButton[language] ?? uiText.ctaButton['en']}</Link>
                     </div>
                 </section>
             </section>

@@ -218,6 +218,9 @@ export default function Home() {
                     <p style={{ marginBottom: 0 }}>
                       {translate('home.guide.item3.description')}
                     </p>
+                    <p style={{ marginTop: '0.75rem', marginBottom: 0 }}>
+                      {translate('home.guide.item3.chamber')}
+                    </p>
                   </li>
                 </ul>
               </div>

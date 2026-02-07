@@ -12,12 +12,11 @@ import { getRootMetadata, parseLang } from '@/data/metadataByLang';
 
 const staticMetadata: Metadata = {
   keywords: [
-    // Primary: Investor Visa, EB-5, global
-    'Investor Visa',
-    'EB-5',
-    'EB-5 immigration attorney',
+    // Primary: strategic, global mobility
+    'Strategic U.S. immigration counsel',
+    'global mobility',
+    'residence strategy',
     'immigration counsel',
-    'global investors',
     'U.S. residence',
     'mobility strategy',
     'visa services Florida',
@@ -25,11 +24,17 @@ const staticMetadata: Metadata = {
     'citizenship attorney',
     'Florida immigration lawyer',
     'Minnesota immigration attorney',
-    // Secondary: German SEO
+    // Secondary: EB-5, Investor Visa, German SEO (preserved for rankings)
+    'EB-5',
+    'Investor Visa',
+    'EB-5 immigration attorney',
+    'Investor Visa attorney',
     'US Einwanderungsanwalt',
     'Einwanderungsanwalt Florida',
     'EB-5 Investor Visum',
+    'Investorenvisum',
     'Visum USA',
+    'German-speaking immigration lawyer',
   ],
   authors: [{ name: 'Norma Henning, J.D.' }],
   creator: 'Henning Law Firm PLLC',
@@ -46,6 +51,8 @@ const staticMetadata: Metadata = {
       'de-DE': 'https://henning-law.com',
       'en-US': 'https://henning-law.com',
       'es-ES': 'https://henning-law.com',
+      'ru-RU': 'https://henning-law.com',
+      'fr-FR': 'https://henning-law.com',
       'x-default': 'https://henning-law.com',
     },
   },
@@ -83,7 +90,7 @@ export default function RootLayout({
     url: 'https://henning-law.com',
     telephone: '+1-239-821-6504',
     email: 'nhenning@henning-law.com',
-    description: 'U.S. immigration counsel for global investors: Investor Visa, EB-5, residence and mobility strategy. Widely known for advising German investors while serving clients worldwide. Former Honorary Consul of Germany in Florida. Immigration counsel only—no investment or financial advice.',
+    description: 'Strategic U.S. immigration counsel for global principals and investors. Global mobility and residence strategy, including Investor Visa and EB-5 pathways. Widely known for advising German investors while serving clients worldwide. Former Honorary Consul of Germany in Florida. Immigration counsel only—no investment or financial advice.',
     areaServed: [
       { '@type': 'Country', name: 'United States' },
       { '@type': 'Country', name: 'Germany' },
@@ -94,6 +101,9 @@ export default function RootLayout({
     ],
     serviceType: [
       'Immigration Law',
+      'Strategic Immigration Counsel',
+      'Global Mobility',
+      'Residence Strategy',
       'Investor Visa',
       'EB-5',
       'Visa Services',
@@ -108,8 +118,10 @@ export default function RootLayout({
       { '@type': 'Language', name: 'English', alternateName: 'en' },
       { '@type': 'Language', name: 'German', alternateName: 'de' },
       { '@type': 'Language', name: 'Spanish', alternateName: 'es' },
+      { '@type': 'Language', name: 'Russian', alternateName: 'ru' },
+      { '@type': 'Language', name: 'French', alternateName: 'fr' },
     ],
-    knowsLanguage: ['English', 'German', 'Spanish'],
+    knowsLanguage: ['English', 'German', 'Spanish', 'Russian', 'French'],
     founder: {
       '@type': 'Person',
       name: 'Norma Henning',
@@ -141,24 +153,26 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <LanguageProvider>
-          <ScrollReveal />
-          <LayoutA11yLinks />
-          <Navbar />
-          <main id="main-content">{children}</main>
-          <Footer />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-          />
-          {/* Lead Connector Chat Widget */}
-          <Script
-            src="https://widgets.leadconnectorhq.com/loader.js"
-            data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-            data-widget-id="691b47b4f4a10e654a163323"
-            strategy="lazyOnload"
-          />
-        </LanguageProvider>
+        <div suppressHydrationWarning id="app-root">
+          <LanguageProvider>
+            <ScrollReveal />
+            <LayoutA11yLinks />
+            <Navbar />
+            <main id="main-content">{children}</main>
+            <Footer />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            />
+            {/* Lead Connector Chat Widget */}
+            <Script
+              src="https://widgets.leadconnectorhq.com/loader.js"
+              data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+              data-widget-id="691b47b4f4a10e654a163323"
+              strategy="lazyOnload"
+            />
+          </LanguageProvider>
+        </div>
       </body>
     </html>
   );

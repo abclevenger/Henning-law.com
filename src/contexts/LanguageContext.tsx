@@ -39,8 +39,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
-    document.documentElement.lang = language;
-    document.documentElement.dir = 'ltr';
+    const root = document.documentElement;
+    if (root.lang !== language) root.lang = language;
+    if (root.dir !== 'ltr') root.dir = 'ltr';
   }, [language]);
 
   return (

@@ -106,8 +106,8 @@ export default function PracticeAreas() {
                         <h2>{t('How We Help Clients', 'So helfen wir Mandanten')}</h2>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginTop: '1.5rem' }}>
                             {t(
-                                'We provide immigration counsel for global investors, families, and businesses—including Investor Visa and EB-5, residence and mobility strategy, and related pathways. Immigration counsel only; no investment or financial advice.',
-                                'Einwanderungsberatung für internationale Investoren, Familien und Unternehmen: Investorenvisum, EB-5, Aufenthalts- und Mobilitätsstrategie. Nur Rechtsberatung.'
+                                'We provide strategic immigration counsel for principals, families, and businesses. Global mobility and residence strategy—including EB-5 and investor-based pathways. Immigration counsel only; no investment or financial advice.',
+                                'Strategische Einwanderungsberatung für Mandanten, Familien und Unternehmen. Globale Mobilität und Aufenthaltsstrategie—u. a. EB-5 und investorenbasierte Wege. Nur Rechtsberatung.'
                             )}
                         </p>
                         <div
@@ -120,7 +120,7 @@ export default function PracticeAreas() {
                             }}
                         >
                             <h3 style={{ marginBottom: '0.75rem' }}>
-                                {t('Language support', 'Sprachliche Unterstützung')}
+                                {translate('practiceAreas.languageSupport')}
                             </h3>
                             <p style={{ marginBottom: '0.75rem', fontSize: '1.05rem' }}>
                                 {t(
@@ -137,8 +137,8 @@ export default function PracticeAreas() {
                         </div>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
                             {t(
-                                'Click the tiles below to explore practice areas, including Investor Visa & EB-5, travel and work visas, family immigration, and citizenship.',
-                                'Klicken Sie auf die Kacheln für Investorenvisum, EB-5, Reise- und Arbeitsvisa, Familieneinwanderung und Staatsbürgerschaft.'
+                                'Click the tiles below to explore practice areas: global mobility and residence, EB-5 and investor-based pathways, travel and work visas, family immigration, and citizenship.',
+                                'Klicken Sie auf die Kacheln: globale Mobilität, EB-5 und investorenbasierte Wege, Reise- und Arbeitsvisa, Familieneinwanderung, Staatsbürgerschaft.'
                             )}
                         </p>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: 0 }}>

@@ -17,7 +17,7 @@ const Navbar = () => {
             description: 'Visitor, work, and start-up visa strategy',
         },
         'permanent-residency-green-cards': {
-            title: 'Investor Visa & EB-5',
+            title: 'EB-5 & Investor-Based Pathways',
             description: 'EB-5 and employment-based green cards',
         },
         'family-based-immigration': {
