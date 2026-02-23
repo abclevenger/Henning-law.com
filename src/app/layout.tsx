@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 import Script from 'next/script';
 import { cookies } from 'next/headers';
+import { playfair, lato } from '@/app/fonts';
 import './globals.css';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import Navbar from '@/components/Navbar';
@@ -57,6 +58,9 @@ const staticMetadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  verification: {
+    google: 'rHAyXOsynAK4YfUKsXqFXJuVwmOjSAzCw4dwjKW5zGg',
   },
   other: {
     'geo.region': 'US-FL',
@@ -148,7 +152,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${playfair.variable} ${lato.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <div suppressHydrationWarning id="app-root">
           <LanguageProvider>
@@ -161,6 +165,19 @@ export default function RootLayout({
               type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
+            {/* Google Analytics (gtag.js) */}
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-XT1KWZ3YGL"
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-XT1KWZ3YGL');
+              `}
+            </Script>
             {/* Lead Connector Chat Widget */}
             <Script
               src="https://widgets.leadconnectorhq.com/loader.js"

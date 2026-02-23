@@ -119,27 +119,15 @@ export default function AttorneyBio() {
                 <div className="container">
                     <div className="bio-grid">
                         <div className="bio-image">
-                            <div className="image-wrapper">
-                                <img
+                            <div className="image-wrapper" style={{ position: 'relative', aspectRatio: '3/4', minHeight: '400px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
+                                <Image
                                     src={imgError ? 'https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=800' : images.attorneyPortrait2}
                                     alt="Norma Henning, J.D., founding attorney at Henning Law Firm specializing in U.S. immigration law"
-                                    decoding="async"
-                                    style={{
-                                        width: '100%',
-                                        height: 'auto',
-                                        borderRadius: '8px',
-                                        objectFit: 'cover',
-                                        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-                                        display: 'block',
-                                        minHeight: '500px',
-                                        backgroundColor: '#f0f0f0'
-                                    }}
-                                    onError={(e) => {
-                                        if (!imgError) {
-                                            setImgError(true);
-                                            (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=800';
-                                        }
-                                    }}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    className="object-cover"
+                                    style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                                    onError={() => setImgError(true)}
                                 />
                             </div>
                         </div>
@@ -253,25 +241,16 @@ export default function AttorneyBio() {
                             {translate('attorney.honorary.heading')}
                         </h2>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', alignItems: 'center' }}>
-                            <div className="honorary-consul-image" style={{ borderRadius: '8px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
-                                <img
+                            <div className="honorary-consul-image" style={{ position: 'relative', aspectRatio: '4/3', minHeight: '300px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' }}>
+                                <Image
                                     src={honoraryImgError ? 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800' : images.attorneyHonoraryConsul}
                                     alt="Norma Henning standing with the Honorary Consul emblem of the Federal Republic of Germany in Florida"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 900px"
+                                    className="object-cover"
+                                    style={{ objectFit: 'cover', objectPosition: 'center' }}
                                     loading="lazy"
-                                    decoding="async"
-                                    style={{
-                                        width: '100%',
-                                        height: 'auto',
-                                        display: 'block',
-                                        minHeight: '400px',
-                                        backgroundColor: '#f0f0f0'
-                                    }}
-                                    onError={(e) => {
-                                        if (!honoraryImgError) {
-                                            setHonoraryImgError(true);
-                                            (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800';
-                                        }
-                                    }}
+                                    onError={() => setHonoraryImgError(true)}
                                 />
                             </div>
                             <div>
@@ -320,7 +299,7 @@ export default function AttorneyBio() {
                         <div className="bio-gallery">
                             {galleryImages.map((image) => (
                                 <div key={image.src} className="bio-gallery-item" style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden' }}>
-                                    <Image src={image.src} alt={image.alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                                    <Image src={image.src} alt={image.alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" style={{ objectFit: 'cover', objectPosition: 'center' }} />
                                 </div>
                             ))}
                         </div>

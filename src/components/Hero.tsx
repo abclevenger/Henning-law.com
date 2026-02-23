@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-import { images } from '@/data/images';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HeroSlide {
@@ -59,15 +58,16 @@ const Hero = () => {
   return (
     <section className="hero">
       <div className="hero-bg-image">
-        <Image
-          src="/images/hero-consultation.png"
-          alt="Attorney consultation with clients"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition: 'center' }}
-        />
+        <div className="hero-image-wrapper">
+          <Image
+            src="/images/hero-consultation.png"
+            alt="Attorney consultation with clients"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
       </div>
       <div className="hero-overlay"></div>
       <div className="hero-slides">
@@ -120,6 +120,15 @@ const Hero = () => {
           position: absolute;
           inset: 0;
           z-index: 0;
+          overflow: hidden;
+        }
+
+        .hero-image-wrapper {
+          position: relative;
+          width: 100%;
+          min-height: 100%;
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
         }
 
         .hero-overlay {

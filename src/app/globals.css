@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap');
+/* Fonts loaded via next/font in layout - no render-blocking @import */
 
 :root {
   /* Colors - Premium Palette */
@@ -18,9 +18,9 @@
   --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.18);
   --transition-base: 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  /* Typography */
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Lato', sans-serif;
+  /* Typography - next/font overrides these on html; fallbacks here */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Lato', system-ui, sans-serif;
 
   /* Spacing */
   --container-width: 1200px;
@@ -455,6 +455,7 @@ ul {
     font-weight: 700;
     letter-spacing: 0.5px;
   }
+}
 
 .page-icon {
   color: var(--color-secondary);
@@ -504,7 +505,6 @@ ul {
 .related-icon svg {
   width: 36px;
   height: 36px;
-}
 }
 
 /* Form Styles */

@@ -2,6 +2,7 @@
 
 import React, { type ReactNode } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Hero from '@/components/Hero';
 import { IconStrategy, IconGlobe, IconKey } from '@/components/Icons';
 import { images } from '@/data/images';
@@ -225,19 +226,15 @@ export default function Home() {
                 </ul>
               </div>
             </div>
-            <div className="content-image reveal">
-              <div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  minHeight: '500px',
-                  backgroundColor: '#ddd',
-                  borderRadius: '8px',
-                  backgroundImage:
-                    'url(https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
+            <div className="content-image reveal" style={{ position: 'relative', aspectRatio: '16/9', minHeight: '300px', borderRadius: '8px', overflow: 'hidden' }}>
+              <Image
+                src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt=""
+                fill
+                sizes="(max-width: 968px) 100vw, 50vw"
+                loading="lazy"
+                className="object-cover"
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
               />
             </div>
           </div>
@@ -594,14 +591,28 @@ export default function Home() {
       {/* Unlock Your American Dream CTA Section */}
       <section
         className="section-padding"
-        style={{
-          backgroundImage: `linear-gradient(rgba(10, 25, 47, 0.5), rgba(10, 25, 47, 0.75)), url(${images.consultation})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          color: 'var(--color-white)',
-        }}
+        style={{ position: 'relative', color: 'var(--color-white)', overflow: 'hidden' }}
       >
-        <div className="container text-center reveal">
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden' }}>
+          <Image
+            src={images.consultation}
+            alt=""
+            fill
+            sizes="100vw"
+            loading="lazy"
+            className="object-cover"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(rgba(10, 25, 47, 0.5), rgba(10, 25, 47, 0.75))',
+            zIndex: 1,
+          }}
+        />
+        <div className="container text-center reveal" style={{ position: 'relative', zIndex: 2 }}>
           <h2 style={{ color: 'var(--color-white)', marginBottom: '1.5rem' }}>
             {translate('home.cta.heading')}
           </h2>

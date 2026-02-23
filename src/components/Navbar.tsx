@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import LanguageToggle from '@/components/LanguageToggle';
 import { images } from '@/data/images';
@@ -15,12 +16,15 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="container navbar-content">
                 <Link href="/" className="logo">
-                    <img
+                    <Image
                         src={images.logo || '/favicon.png'}
                         alt="Henning Law Firm PLLC - Home"
+                        width={150}
+                        height={50}
                         className="logo-image"
-                        width="150"
-                        height="50"
+                        priority
+                        sizes="150px"
+                        style={{ objectFit: 'contain' }}
                     />
                 </Link>
                 
