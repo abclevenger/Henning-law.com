@@ -5,6 +5,7 @@ export const playfair = Playfair_Display({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-heading',
+  preload: true,
 });
 
 export const lato = Lato({
@@ -12,4 +13,5 @@ export const lato = Lato({
   weight: ['300', '400', '700'],
   display: 'swap',
   variable: '--font-body',
+  preload: true,
 });

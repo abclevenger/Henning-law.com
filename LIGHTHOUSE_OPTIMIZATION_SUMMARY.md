@@ -1,62 +1,64 @@
-# Lighthouse / Mobile Performance Optimization Summary
+# Lighthouse / PageSpeed Optimization Summary
 
 ## Changes Implemented
 
-### 1. Hero Image Optimization ✓
-- **Next.js Image**: Already using `<Image />` with `fill`, `priority`, `object-cover`
-- **Aspect ratio**: 16:9 wrapper (`hero-image-wrapper`) with `aspect-ratio: 16/9`, `min-height: 100%`
-- **Responsive sizes**: Updated to `(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px` for optimal image selection on mobile
-- **SEO alt text**: "Strategic U.S. Counsel for International Companies and Private Clients - Attorney consultation"
-- **Structure**: `hero-bg-image` → `hero-image-wrapper` (aspect-ratio) → `Image` (fill, object-cover)
+### 1. Cumulative Layout Shift (CLS) Fixes ✓
 
-### 2. Layout Space / CLS Prevention ✓
-- Hero container has fixed `min-height: 600px` (500px mobile)
-- All large images use `aspect-ratio` on parent containers
-- `object-cover` prevents distortion and reserves space
+- **Hero image**: Aspect-ratio container reserves space before paint
+  - Mobile: `aspect-ratio: 4/5`
+  - Tablet (640px+): `aspect-ratio: 16/9`
+  - Desktop (1024px+): `aspect-ratio: 3/2`
+  - `contain: layout` for layout containment
+- **Chat widget placeholder**: Fixed-position div (60×60px) reserves bottom-right slot so widget appears in-place without layout shift
+- **Content images**: All use `aspect-ratio` on parent containers with `width: 100%`
+- **CTA section**: `minHeight: 350px` reserves space for background image
 
-### 3. Font Optimization ✓
-- **next/font**: Playfair Display and Lato via `@/app/fonts`
-- **font-display: swap**: Applied to both font families
-- **Weights**: Playfair (400, 500, 600, 700), Lato (300, 400, 700)
-- No render-blocking `@import` from Google Fonts
+### 2. Hero Image Delivery ✓
 
-### 4. Third-Party Scripts ✓
-- **Google Analytics**: `strategy="afterInteractive"`
-- **Lead Connector Chat**: `strategy="lazyOnload"`
-- Both use `next/script` for optimal loading
+- **Next.js Image**: `fill`, `priority`, `sizes="100vw"`
+- **Object fit**: `object-cover`, `object-position: center` (left on desktop)
+- **Formats**: AVIF/WebP via `next.config.ts` (`formats: ['image/avif', 'image/webp']`)
+- **Responsive aspect container**: Matches spec (4/5 → 16/9 → 3/2)
 
-### 5. Image Configuration ✓
-- **deviceSizes**: [640, 750, 828, 1080, 1200, 1920, 2048] for responsive breakpoints
-- **imageSizes**: [16, 32, 48, 64, 96, 128, 256] for thumbnails
-- **formats**: AVIF, WebP for modern browsers
+### 3. Total Blocking Time (TBT) Reduction ✓
 
-### 6. Cache Headers ✓
-- `/images/:path*`: `Cache-Control: public, max-age=31536000, immutable`
-- `/favicon.png`: Same
-- Vercel handles `_next/static` assets by default
+- **Google Analytics**: `strategy="lazyOnload"` (was `afterInteractive`)
+- **Chat widget**: Loads on first interaction (scroll, click, touchstart, keydown) or after 4s fallback
+- **Scripts**: All third-party use `next/script` with deferred strategies
 
-### 7. Code Splitting
-- ScrollReveal kept as static import (dynamic with `ssr: false` not allowed in Server Component layout)
-- Footer and Navbar remain static for above-the-fold content
+### 4. Fonts & CSS ✓
+
+- **next/font**: Playfair Display and Lato with `display: 'swap'`
+- **Preload**: next/font preloads critical fonts by default
+- **Tailwind**: Project uses styled-jsx and globals.css—no Tailwind config
+
+### 5. Image Delivery & Resolution ✓
+
+- **Responsive sizes**: All images use appropriate `sizes` attributes
+- **next/image**: All large visuals use Next.js Image component
+- **Alt text**: Descriptive alts added (content image, CTA image)
+
+### 6. Accessibility & Best Practices ✓
+
+- **Buttons**: `aria-label` on hero dots, menu toggle, language options
+- **Language toggle**: `aria-label="Select {lang}"` on each option
+- **Heading order**: h1 (hero) → h2 (sections) → h3 (subsections)
 
 ---
 
-## Tailwind Note
-This project uses **plain CSS** (styled-jsx, globals.css), not Tailwind. No Tailwind config to verify.
+## Target Metrics
 
----
-
-## Expected Lighthouse Improvements
-
-| Metric | Target | How |
-|--------|--------|-----|
-| **LCP** | < 3s | Hero priority, responsive sizes, next/font, AVIF/WebP |
-| **CLS** | < 0.1 | Aspect-ratio containers, explicit dimensions |
-| **TBT** | Reduced | Deferred scripts, optimized fonts |
+| Metric | Target | Implementation |
+|--------|--------|----------------|
+| **CLS** | < 0.1 | Aspect containers, chat placeholder, min-heights |
+| **LCP** | < 2.5s | Hero priority, AVIF/WebP, font preload |
+| **TBT** | < 150ms | lazyOnload scripts, deferred chat widget |
 
 ---
 
 ## Validation
-- `npm run build` completed successfully
-- No SEO or design changes
-- Hero image displays without distortion
+
+- `npm run build` succeeds
+- No layout jumps on load
+- Hero displays correctly at all breakpoints
+- SEO and design integrity preserved

@@ -64,8 +64,8 @@ const Hero = () => {
             alt="Strategic U.S. Counsel for International Companies and Private Clients - Attorney consultation"
             fill
             priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
-            className="object-cover"
+            sizes="100vw"
+            className="hero-image"
           />
         </div>
       </div>
@@ -105,8 +105,9 @@ const Hero = () => {
       <style jsx>{`
         .hero {
           position: relative;
-          height: 85vh;
-          min-height: 600px;
+          width: 100%;
+          aspect-ratio: 4 / 5;
+          min-height: 500px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -114,6 +115,20 @@ const Hero = () => {
           background-color: #0a192f;
           color: var(--color-white);
           overflow: hidden;
+          contain: layout;
+        }
+
+        @media (min-width: 640px) {
+          .hero {
+            aspect-ratio: 16 / 9;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .hero {
+            aspect-ratio: 3 / 2;
+            min-height: 600px;
+          }
         }
 
         .hero-bg-image {
@@ -124,11 +139,22 @@ const Hero = () => {
         }
 
         .hero-image-wrapper {
-          position: relative;
+          position: absolute;
+          inset: 0;
           width: 100%;
-          min-height: 100%;
-          aspect-ratio: 16 / 9;
+          height: 100%;
           overflow: hidden;
+        }
+
+        .hero-image {
+          object-fit: cover;
+          object-position: center;
+        }
+
+        @media (min-width: 1024px) {
+          .hero-image {
+            object-position: left;
+          }
         }
 
         .hero-overlay {
@@ -268,11 +294,6 @@ const Hero = () => {
         }
         
         @media (max-width: 768px) {
-          .hero {
-            height: 70vh;
-            min-height: 500px;
-          }
-          
           .hero h1 {
             font-size: 2.5rem;
           }

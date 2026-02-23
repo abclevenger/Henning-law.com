@@ -9,6 +9,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollReveal from '@/components/ScrollReveal';
 import LayoutA11yLinks from '@/components/LayoutA11yLinks';
+import ChatWidgetLoader from '@/components/ChatWidgetLoader';
 import { getRootMetadata, parseLang } from '@/data/metadataByLang';
 
 const staticMetadata: Metadata = {
@@ -165,12 +166,25 @@ export default function RootLayout({
               type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
-            {/* Google Analytics (gtag.js) */}
+            {/* Chat widget placeholder - reserves bottom-right slot to prevent CLS when widget loads */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: 'fixed',
+                bottom: 16,
+                right: 16,
+                width: 60,
+                height: 60,
+                zIndex: 998,
+                pointerEvents: 'none',
+              }}
+            />
+            {/* Google Analytics (gtag.js) - lazyOnload to reduce TBT */}
             <Script
               src="https://www.googletagmanager.com/gtag/js?id=G-XT1KWZ3YGL"
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
+            <Script id="google-analytics" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -178,13 +192,8 @@ export default function RootLayout({
                 gtag('config', 'G-XT1KWZ3YGL');
               `}
             </Script>
-            {/* Lead Connector Chat Widget */}
-            <Script
-              src="https://widgets.leadconnectorhq.com/loader.js"
-              data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-              data-widget-id="691b47b4f4a10e654a163323"
-              strategy="lazyOnload"
-            />
+            {/* Lead Connector Chat Widget - loads on first interaction to reduce TBT */}
+            <ChatWidgetLoader />
           </LanguageProvider>
         </div>
       </body>

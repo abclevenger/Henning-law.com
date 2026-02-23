@@ -226,10 +226,10 @@ export default function Home() {
                 </ul>
               </div>
             </div>
-            <div className="content-image reveal" style={{ position: 'relative', aspectRatio: '16/9', minHeight: '300px', borderRadius: '8px', overflow: 'hidden' }}>
+            <div className="content-image reveal" style={{ position: 'relative', width: '100%', aspectRatio: '16/9', minHeight: '300px', borderRadius: '8px', overflow: 'hidden' }}>
               <Image
                 src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt=""
+                alt="Professional team collaboration and immigration strategy planning"
                 fill
                 sizes="(max-width: 968px) 100vw, 50vw"
                 loading="lazy"
@@ -591,14 +591,14 @@ export default function Home() {
       {/* Unlock Your American Dream CTA Section */}
       <section
         className="section-padding"
-        style={{ position: 'relative', color: 'var(--color-white)', overflow: 'hidden' }}
+        style={{ position: 'relative', color: 'var(--color-white)', overflow: 'hidden', minHeight: '350px' }}
       >
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden' }}>
           <Image
             src={images.consultation}
-            alt=""
+            alt="Attorney consultation - Unlock your American dream with Henning Law Firm"
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, 1200px"
             loading="lazy"
             className="object-cover"
             style={{ objectFit: 'cover', objectPosition: 'center' }}

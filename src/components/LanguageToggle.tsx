@@ -58,6 +58,7 @@ const LanguageToggle = () => {
               key={lang.code}
               className={`language-option ${language === lang.code ? 'active' : ''}`}
               onClick={() => handleLanguageChange(lang.code)}
+              aria-label={`Select ${lang.name}`}
             >
               <span className="language-option-name">{lang.nativeName}</span>
               <span className="language-option-english">{lang.name}</span>
