@@ -61,10 +61,10 @@ const Hero = () => {
         <div className="hero-image-wrapper">
           <Image
             src="/images/hero-consultation.png"
-            alt="Attorney consultation with clients"
+            alt="Strategic U.S. Counsel for International Companies and Private Clients - Attorney consultation"
             fill
             priority
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
             className="object-cover"
           />
         </div>
