@@ -18,25 +18,25 @@ const heroSlides: HeroSlide[] = [
     titleKey: 'hero.slide1.title',
     subtitleKey: 'hero.slide1.subtitle',
     ctaKey: 'hero.slide.cta',
-    ctaLink: '/practice-areas',
+    ctaLink: '/practice-areas/us-market-entry',
   },
   {
     titleKey: 'hero.slide2.title',
     subtitleKey: 'hero.slide2.subtitle',
     ctaKey: 'hero.slide.cta',
-    ctaLink: '/practice-areas',
+    ctaLink: '/practice-areas/us-market-entry',
   },
   {
     titleKey: 'hero.slide3.title',
     subtitleKey: 'hero.slide3.subtitle',
     ctaKey: 'hero.slide.cta',
-    ctaLink: '/practice-areas',
+    ctaLink: '/practice-areas/us-market-entry',
   },
   {
     titleKey: 'hero.slide4.title',
     subtitleKey: 'hero.slide4.subtitle',
     ctaKey: 'hero.slide.cta',
-    ctaLink: '/practice-areas',
+    ctaLink: '/practice-areas/us-market-entry',
   },
 ];
 

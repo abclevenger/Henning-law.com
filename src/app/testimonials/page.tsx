@@ -110,11 +110,11 @@ const uiText: Record<string, Record<string, string>> = {
         ru: "Отзывы клиентов", fr: "Témoignages de clients", zh: "客户评价", ja: "お客様の声", ar: "شهادات العملاء",
     },
     heroSubtitle: {
-        en: "Hear from clients who have successfully navigated their U.S. immigration journey with our guidance.",
-        de: "Erfahren Sie von Mandanten, die ihren Weg in die USA mit unserer Begleitung erfolgreich gemeistert haben.",
-        es: "Escuche de clientes que han navegado con éxito su viaje de inmigración a EE.UU. con nuestra orientación.",
-        ru: "Отзывы клиентов, успешно прошедших путь иммиграции в США с нашей поддержкой.",
-        fr: "Découvrez les témoignages de clients qui ont réussi leur parcours d'immigration aux États-Unis avec notre accompagnement.",
+        en: "Hear from clients who have worked with us on their U.S. immigration and mobility matters.",
+        de: "Erfahren Sie von Mandanten, die uns bei ihren US-Einwanderungs- und Mobilitätsangelegenheiten begleitet haben.",
+        es: "Escuche de clientes que han trabajado con nosotros en sus asuntos de inmigración y movilidad en EE.UU.",
+        ru: "Отзывы клиентов, работавших с нами по вопросам иммиграции и мобильности в США.",
+        fr: "Découvrez les témoignages de clients qui ont travaillé avec nous sur leurs questions d'immigration et de mobilité aux États-Unis.",
         zh: "聆听在我们指导下成功完成美国移民之旅的客户的心声。", ja: "私たちのガイダンスで米国移民の旅を成功させたお客様の声をお聞きください。", ar: "استمع إلى العملاء الذين نجحوا في رحلة الهجرة إلى الولايات المتحدة بتوجيهاتنا.",
     },
     ctaTitle: {

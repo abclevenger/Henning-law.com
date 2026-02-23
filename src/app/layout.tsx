@@ -12,11 +12,14 @@ import { getRootMetadata, parseLang } from '@/data/metadataByLang';
 
 const staticMetadata: Metadata = {
   keywords: [
-    // Primary: strategic, global mobility
-    'Strategic U.S. immigration counsel',
+    // Primary: strategic U.S. counsel
+    'Strategic U.S. counsel',
+    'U.S. market entry legal counsel',
+    'Cross-border legal advisory',
+    'Private client legal services',
+    'U.S. entry strategy for international companies',
     'global mobility',
     'residence strategy',
-    'immigration counsel',
     'U.S. residence',
     'mobility strategy',
     'visa services Florida',
@@ -24,15 +27,10 @@ const staticMetadata: Metadata = {
     'citizenship attorney',
     'Florida immigration lawyer',
     'Minnesota immigration attorney',
-    // Secondary: EB-5, Investor Visa, German SEO (preserved for rankings)
+    // Secondary: preserved for rankings
     'EB-5',
-    'Investor Visa',
-    'EB-5 immigration attorney',
-    'Investor Visa attorney',
     'US Einwanderungsanwalt',
     'Einwanderungsanwalt Florida',
-    'EB-5 Investor Visum',
-    'Investorenvisum',
     'Visum USA',
     'German-speaking immigration lawyer',
   ],
@@ -90,7 +88,7 @@ export default function RootLayout({
     url: 'https://henning-law.com',
     telephone: '+1-239-821-6504',
     email: 'nhenning@henning-law.com',
-    description: 'Strategic U.S. immigration counsel for global principals and investors. Global mobility and residence strategy, including Investor Visa and EB-5 pathways. Widely known for advising German investors while serving clients worldwide. Former Honorary Consul of Germany in Florida. Immigration counsel only—no investment or financial advice.',
+    description: 'Strategic U.S. counsel for international companies and private clients. U.S. market entry, mobility strategy, and ongoing legal oversight. Former Honorary Consul. Legal counsel only—no investment or financial advice.',
     areaServed: [
       { '@type': 'Country', name: 'United States' },
       { '@type': 'Country', name: 'Germany' },
@@ -104,7 +102,6 @@ export default function RootLayout({
       'Strategic Immigration Counsel',
       'Global Mobility',
       'Residence Strategy',
-      'Investor Visa',
       'EB-5',
       'Visa Services',
       'Green Card Applications',

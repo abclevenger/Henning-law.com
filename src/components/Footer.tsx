@@ -79,8 +79,12 @@ const Footer = () => {
                         <ul className="footer-links">
                             <li><Link href="/">{t('nav.home')}</Link></li>
                             <li><Link href="/attorney-bio">{t('nav.attorney')}</Link></li>
-                            <li><Link href="/practice-areas">{t('nav.practice')}</Link></li>
+                            <li><Link href="/practice-areas/us-market-entry">{t('nav.usMarketEntry')}</Link></li>
+                            <li><Link href="/practice-areas/private-client-advisory">{t('nav.privateClientAdvisory')}</Link></li>
+                            <li><Link href="/practice-areas/us-mobility-immigration-strategy">{t('nav.mobilityImmigration')}</Link></li>
                             <li><Link href="/contact">{t('nav.contact')}</Link></li>
+                            <li><Link href="/testimonials">{t('nav.testimonials')}</Link></li>
+                            <li><Link href="/faqs">{t('nav.faqs')}</Link></li>
                             <li><Link href="/blog">{t('nav.blog')}</Link></li>
                             <li>
                                 <a 
@@ -106,6 +110,9 @@ const Footer = () => {
                     fontSize: '0.75rem',
                     color: 'rgba(255,255,255,0.7)'
                 }}>
+                    <p style={{ marginBottom: '1.5rem', lineHeight: '1.6', fontStyle: 'italic' }}>
+                        {t('legal.websiteDisclaimer')}
+                    </p>
                     <h4 style={{ fontSize: '0.9rem', marginBottom: '1rem', color: 'rgba(255,255,255,0.9)' }}>
                         {t('legal.attorneyAdvertising')}
                     </h4>

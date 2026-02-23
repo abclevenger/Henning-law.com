@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Client Testimonials',
-    description: 'Read testimonials from clients who successfully navigated U.S. immigration with Henning Law Firm. Real stories of visa approvals, green cards, and citizenship.',
+    description: 'Read testimonials from clients who have worked with Henning Law Firm on U.S. immigration and mobility matters. Past results do not guarantee future outcomes.',
     openGraph: {
         title: 'Client Testimonials | Henning Law Firm PLLC',
-        description: 'Read testimonials from clients who successfully navigated U.S. immigration with Henning Law Firm.',
+        description: 'Read testimonials from clients who have worked with Henning Law Firm. Past results do not guarantee future outcomes.',
         url: 'https://henning-law.com/testimonials',
     },
     alternates: {

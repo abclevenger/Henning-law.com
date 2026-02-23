@@ -115,8 +115,8 @@ const faqs: FAQ[] = [
             en: "Visas & Immigration", de: "Visa & Einwanderung", es: "Visas e Inmigración", fr: "Visas et Immigration", zh: "签证和移民", ja: "ビザと移民", ar: "التأشيرات والهجرة"
         },
         question: {
-            en: "What is the Investor Visa or EB-5 program?",
-            de: "Was ist das Investor Visa- oder EB-5-Programm?",
+            en: "What is the EB-5 program for U.S. permanent residency?",
+            de: "Was ist das EB-5-Programm für dauerhaften US-Aufenthalt?",
             es: "¿Qué es la Visa de Inversionista o el programa EB-5?",
             fr: "Qu'est-ce que le visa investisseur ou le programme EB-5 ?",
             zh: "什么是投资者签证或EB-5计划？",
@@ -124,8 +124,8 @@ const faqs: FAQ[] = [
             ar: "ما هو تأشيرة المستثمر أو برنامج EB-5؟",
         },
         answer: {
-            en: "The Investor Visa and EB-5 program provide pathways to U.S. permanent residency for qualified investors. We provide immigration counsel on eligibility, case strategy, documentation, and process—immigration counsel only; we do not provide investment advice, select projects, or advise on financial returns.",
-            de: "Das Investor Visa- und EB-5-Programm bieten qualifizierten Investoren Wege zur dauerhaften Aufenthaltsgenehmigung in den USA. Wir bieten Einwanderungsberatung zu Eignung, Fallstrategie, Dokumentation und Prozess—nur Rechtsberatung, keine Anlageberatung.",
+            en: "The EB-5 program provides a pathway to U.S. permanent residency for qualified investors. We provide legal counsel on eligibility, case strategy, documentation, and process—legal counsel only; we do not provide investment advice, select projects, or advise on financial returns.",
+            de: "Das EB-5-Programm bietet qualifizierten Investoren einen Weg zur dauerhaften Aufenthaltsgenehmigung in den USA. Wir bieten Rechtsberatung zu Eignung, Fallstrategie, Dokumentation und Prozess—nur Rechtsberatung, keine Anlageberatung.",
             es: "La Visa de Inversionista y el programa EB-5 ofrecen vías hacia la residencia permanente en EE.UU. para inversionistas calificados. Ofrecemos asesoría migratoria sobre elegibilidad, estrategia de caso, documentación y proceso—solo asesoría migratoria.",
             fr: "Le visa investisseur et le programme EB-5 offrent des voies vers la résidence permanente aux États-Unis pour les investisseurs qualifiés. Nous fournissons des conseils en immigration sur l'éligibilité, la stratégie de cas et le processus.",
             zh: "投资者签证和EB-5计划为合格投资者提供获得美国永久居留权的途径。我们提供有关资格、案件策略、文件和流程的移民咨询——仅移民咨询。",

@@ -25,9 +25,9 @@ export default function PracticeAreas() {
                     'Ja. Wir beraten Mandanten weltweit per Videokonferenz und strategischer Planung.',
             },
             {
-                question: 'Welche Visakategorien sind für Investoren und Unternehmen relevant?',
+                question: 'Welche Visakategorien sind für internationale Unternehmen und Mandanten relevant?',
                 answer:
-                    'Häufige Optionen: E-1/E-2, L-1, O-1, EB-Kategorien einschließlich EB-5 für dauerhaften Aufenthalt. Nur Einwanderungsberatung.',
+                    'Häufige Optionen: E-1/E-2, L-1, O-1, EB-Kategorien für dauerhaften Aufenthalt. Nur Rechtsberatung; Koordination mit Ihren Beratern.',
             },
             {
                 question: 'Bieten Sie Anlage- oder Finanzberatung?',
@@ -47,9 +47,9 @@ export default function PracticeAreas() {
                     'Yes. We regularly assist clients abroad through virtual consultations and strategic planning.',
             },
             {
-                question: 'Which visa categories are common for investors and companies?',
+                question: 'Which visa categories are common for international companies and principals?',
                 answer:
-                    'Common options include E-1/E-2 treaty visas, L-1 intra-company transfers, O-1 extraordinary ability, and EB categories including EB-5 for permanent residency. Immigration counsel only.',
+                    'Common options include E-1/E-2 treaty visas, L-1 intra-company transfers, O-1 extraordinary ability, and employment-based categories for permanent residency. Legal counsel only; we coordinate with your advisors.',
             },
             {
                 question: 'Do you provide investment or financial advice?',
@@ -106,8 +106,8 @@ export default function PracticeAreas() {
                         <h2>{t('How We Help Clients', 'So helfen wir Mandanten')}</h2>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginTop: '1.5rem' }}>
                             {t(
-                                'We provide strategic immigration counsel for principals, families, and businesses. Global mobility and residence strategy—including EB-5 and investor-based pathways. Immigration counsel only; no investment or financial advice.',
-                                'Strategische Einwanderungsberatung für Mandanten, Familien und Unternehmen. Globale Mobilität und Aufenthaltsstrategie—u. a. EB-5 und investorenbasierte Wege. Nur Rechtsberatung.'
+                                'We provide strategic U.S. counsel for international companies and private clients. Market entry, mobility strategy, and ongoing legal oversight. Legal counsel only; we coordinate with your tax and financial advisors.',
+                                'Strategische US-Rechtsberatung für internationale Unternehmen und Privatkunden. Markteintritt, Mobilitätsstrategie und laufende Beratung. Nur Rechtsberatung; Koordination mit Steuer- und Finanzberatern.'
                             )}
                         </p>
                         <div
@@ -137,8 +137,8 @@ export default function PracticeAreas() {
                         </div>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
                             {t(
-                                'Click the tiles below to explore practice areas: global mobility and residence, EB-5 and investor-based pathways, travel and work visas, family immigration, and citizenship.',
-                                'Klicken Sie auf die Kacheln: globale Mobilität, EB-5 und investorenbasierte Wege, Reise- und Arbeitsvisa, Familieneinwanderung, Staatsbürgerschaft.'
+                                'Click the tiles below to explore practice areas: U.S. market entry, private client advisory, mobility and residence strategy, visas, family immigration, and citizenship.',
+                                'Klicken Sie auf die Kacheln: US-Markteintritt, Private Client Beratung, Mobilitäts- und Aufenthaltsstrategie, Visa, Familieneinwanderung, Staatsbürgerschaft.'
                             )}
                         </p>
                         <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: 0 }}>
@@ -258,12 +258,12 @@ export default function PracticeAreas() {
 
                     <div className="cta-section reveal" style={{ marginTop: '4rem', textAlign: 'center', padding: '3rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
                         <h3 style={{ marginBottom: '1.5rem' }}>
-                            {t('Ready to Start Your U.S. Immigration Plan?', 'Bereit für Ihren US‑Einwanderungsplan?')}
+                            {t('Ready to Discuss Your U.S. Strategy?', 'Bereit für Ihre US‑Strategie?')}
                         </h3>
                         <p style={{ fontSize: '1.1rem', marginBottom: '2rem', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto' }}>
                             {t(
-                                'We help you design your path to U.S. residence and long-term presence. Contact us for a consultation.',
-                                'Wir unterstützen Sie bei Aufenthalts- und Mobilitätsfragen. Kontaktieren Sie uns für eine Beratung.'
+                                'We help you design your path to U.S. market entry, mobility, and long-term presence. Contact us for a consultation.',
+                                'Wir unterstützen Sie bei Markteintritt, Mobilität und Aufenthalt. Kontaktieren Sie uns für eine Beratung.'
                             )}
                         </p>
                         <div className="cta-buttons">

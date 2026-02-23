@@ -21,6 +21,132 @@ export interface PracticeArea {
 
 export const practiceAreas: PracticeArea[] = [
   {
+    id: 'us-market-entry',
+    title: 'U.S. Market Entry Legal Counsel',
+    slug: 'us-market-entry',
+    icon: 'corporate',
+    shortDescription: 'Strategic structuring of U.S. presence, entity formation, regulatory navigation, and cross-border compliance for international companies.',
+    fullDescription: 'International companies entering the U.S. market require strategic legal counsel—not merely transactional support. We advise on the structuring of your U.S. presence, entity formation strategy, regulatory navigation, and cross-border compliance planning. Our role is ongoing legal oversight and coordination with your tax and financial advisors. We do not provide tax or investment advice; we provide the legal framework that supports your market entry and long-term U.S. operations. Whether you are establishing a subsidiary, opening an office, or navigating U.S. regulatory requirements, we offer advisory-level counsel tailored to sophisticated business clients.',
+    services: [
+      'Strategic structuring of U.S. presence',
+      'Entity formation strategy',
+      'Regulatory navigation',
+      'Cross-border compliance planning',
+      'Ongoing legal oversight',
+      'Coordination with tax and financial advisors',
+      'Corporate structure guidance for international expansion',
+      'Compliance and audits',
+    ],
+    benefits: [
+      'Advisory-level counsel for market entry',
+      'Strategic planning aligned with business objectives',
+      'Coordination with your professional advisors',
+      'Ongoing legal oversight for U.S. operations',
+    ],
+    faqs: [
+      {
+        question: 'How do you support international companies entering the U.S.?',
+        answer:
+          'We provide strategic structuring, entity formation, regulatory navigation, and ongoing legal oversight. We coordinate with your tax and financial advisors without providing tax or investment advice.',
+      },
+      {
+        question: 'Do you provide tax or financial advice?',
+        answer:
+          'No. We provide legal counsel only. We coordinate with your tax and financial advisors to align legal planning with your overall objectives.',
+      },
+      {
+        question: 'What does ongoing legal oversight include?',
+        answer:
+          'We offer general counsel–style support for compliance, entity maintenance, and coordination with U.S. and foreign advisors as your U.S. presence evolves.',
+      },
+    ],
+    relatedAreas: ['corporate-business-support', 'temporary-business-work-visas', 'us-mobility-immigration-strategy'],
+  },
+  {
+    id: 'private-client-advisory',
+    title: 'Private Client & Family Advisory',
+    slug: 'private-client-advisory',
+    icon: 'home',
+    shortDescription: 'Mobility strategy, cross-border governance, asset protection, and ongoing general counsel for globally mobile families.',
+    fullDescription: 'Ultra-high-net-worth individuals and families with global mobility require high-touch, relationship-based legal counsel—not transactional services. We provide mobility strategy and long-term planning, cross-border governance, asset protection structuring, and ongoing general counsel–style support. Our advisory services are discreet and tailored to globally mobile families who value clarity, privacy, and long-term outcomes. We coordinate with your tax and financial advisors; we do not provide tax or investment advice. Whether you are planning residence transitions, structuring cross-border assets, or seeking ongoing legal oversight for your family\'s U.S. interests, we offer strategic counsel designed for sophisticated private clients.',
+    services: [
+      'Mobility strategy and long-term planning',
+      'Cross-border governance',
+      'Asset protection structuring',
+      'Ongoing general counsel–style support',
+      'Discreet advisory for globally mobile families',
+      'Residence and presence strategy',
+      'Coordination with tax and financial advisors',
+      'Estate planning coordination',
+    ],
+    benefits: [
+      'High-touch, relationship-based counsel',
+      'Discreet advisory services',
+      'Strategic planning for globally mobile families',
+      'Coordination with your professional advisors',
+    ],
+    faqs: [
+      {
+        question: 'What does private client advisory include?',
+        answer:
+          'We provide mobility strategy, cross-border governance, asset protection structuring, and ongoing general counsel support. We coordinate with your tax and financial advisors; we do not provide tax or investment advice.',
+      },
+      {
+        question: 'Do you work with families outside the U.S.?',
+        answer:
+          'Yes. We regularly assist globally mobile families through virtual consultations and strategic planning, with counsel available in multiple languages.',
+      },
+      {
+        question: 'How is this different from immigration services?',
+        answer:
+          'Private client advisory is relationship-based, long-term counsel. Mobility strategy may include residence planning, but the focus is on governance, asset protection, and ongoing oversight—not transactional visa processing.',
+      },
+    ],
+    relatedAreas: ['real-estate-estate-planning', 'us-mobility-immigration-strategy', 'family-based-immigration'],
+  },
+  {
+    id: 'us-mobility-immigration-strategy',
+    title: 'U.S. Mobility & Immigration Strategy',
+    slug: 'us-mobility-immigration-strategy',
+    icon: 'residency',
+    shortDescription: 'Strategic counsel for residence, mobility, and long-term U.S. presence—visas, green cards, citizenship, and family reunification.',
+    fullDescription: 'U.S. mobility and immigration strategy encompasses residence planning, travel flexibility, and long-term presence in the United States. We provide strategic counsel—not transactional visa processing—for principals, families, and businesses seeking lawful U.S. presence. Our approach includes eligibility assessment, pathway planning, documentation, and process guidance across temporary and permanent residence options, family reunification, and citizenship. We advise on employment-based and family-based pathways, coordination with corporate structures, and long-term planning. Immigration counsel only; no investment or financial advice. We work with your advisors to align legal strategy with your overall objectives.',
+    services: [
+      'Residence and mobility strategy',
+      'Temporary work and visitor visas',
+      'Employment-based green cards',
+      'Family-based immigration',
+      'U.S. citizenship and naturalization',
+      'Pathway planning and eligibility assessment',
+      'Documentation and process guidance',
+      'Coordination with corporate and family structures',
+    ],
+    benefits: [
+      'Strategic pathway planning',
+      'Long-term presence and mobility counsel',
+      'Comprehensive eligibility assessment',
+      'Coordination with your professional advisors',
+    ],
+    faqs: [
+      {
+        question: 'What is the difference between mobility strategy and visa processing?',
+        answer:
+          'We provide strategic counsel—pathway planning, eligibility assessment, and long-term oversight. We do not emphasize transactional visa processing; we focus on your objectives and the most efficient path to achieve them.',
+      },
+      {
+        question: 'Do you provide investment or financial advice?',
+        answer:
+          'No. We provide immigration counsel only. We coordinate with your tax and financial advisors where appropriate.',
+      },
+      {
+        question: 'How do you support families and businesses?',
+        answer:
+          'We advise on residence pathways, family reunification, and corporate mobility. Our counsel is tailored to principals, families, and international companies seeking long-term U.S. presence.',
+      },
+    ],
+    relatedAreas: ['temporary-business-work-visas', 'permanent-residency-green-cards', 'family-based-immigration', 'citizenship-naturalization', 'us-market-entry'],
+  },
+  {
     id: 'temporary-business-work-visas',
     title: 'Travel & Work Visas',
     slug: 'temporary-business-work-visas',
@@ -74,7 +200,7 @@ export const practiceAreas: PracticeArea[] = [
     title: 'EB-5 & Employment Residency',
     slug: 'permanent-residency-green-cards',
     icon: 'residency',
-    shortDescription: 'Employment- and investment-based green cards, including Investor Visa, EB-1/2/3, and EB-5 options.',
+    shortDescription: 'Employment- and investment-based green cards, including EB-1/2/3 and EB-5 options.',
     fullDescription: 'Employment-Based Immigration generally requires a job offer and clearance by the U.S. Labor Department involving a test of the U.S. labor market - a process called Labor Certification. Once that has been established, employers can then offer the advertised job to a qualified foreign worker on a permanent basis, and the worker can apply for permanent residency. Existing quotas may drag this process out for some time. Fortunately, the following categories of workers are exempt from the Labor Certification requirement and processes are often shorter: Aliens of Extraordinary Ability (EB-1A), Multinational Executives/Managers (EB-1C), Immigrant Investors (EB-5), and Individuals with advanced degrees/exceptional ability pursuing projects in the United States that are of substantial merit and in the U.S. National Interest (EB2-NIW). Aliens of extraordinary ability, immigrant investors and those qualifying for a national interest waiver can even self petition, eliminating the need for a job offer. Also excepted from the Labor Certification requirement and able to petition without an employer or job offer are immigrant investors under the EB-5 category who make a qualifying investment and create ten U.S. jobs - either with their own business enterprise or by participating in one of the many USCIS-approved EB-5 Regional Centers. Minimum investments range from $800,000 to $1,050,000 depending on the location of the investment enterprise. Based on or - if visa numbers are available - simultaneously with a successful petition, the immigrant may be able to apply for permanent residence at a consulate abroad or by adjusting status in the United States. Let us evaluate your background and your plans to see which one of these options may be suitable for you.',
     services: [
       'EB-1A - Aliens of Extraordinary Ability',
@@ -100,7 +226,7 @@ export const practiceAreas: PracticeArea[] = [
       {
         question: 'Do I need a job offer for a green card?',
         answer:
-          'Some categories require a job offer, while others allow self-petitioning. We help determine the best route.',
+          'Some categories require a job offer, while others allow self-petitioning. We help determine the most suitable route.',
       },
       {
         question: 'How long does an employment-based green card take?',
@@ -138,7 +264,7 @@ export const practiceAreas: PracticeArea[] = [
     ],
     benefits: [
       'Family-focused approach with compassionate service',
-      'Expert handling of complex family immigration cases',
+      'Comprehensive handling of complex family immigration cases',
       'Efficient processing and timeline management',
       'Comprehensive support for interviews and documentation',
     ],

@@ -4,49 +4,49 @@ type Lang = 'en' | 'de' | 'es' | 'ru' | 'fr';
 
 const rootMeta: Record<Lang, { title: string; description: string; ogTitle: string; ogDesc: string; twitterTitle: string; twitterDesc: string }> = {
   en: {
-    title: 'Henning Law Firm PLLC | Strategic U.S. Immigration Counsel',
+    title: 'Henning Law Firm PLLC | Strategic U.S. Counsel for International Companies and Private Clients',
     description:
-      'Strategic U.S. immigration counsel for global principals and investors. Global mobility and residence strategy, including Investor Visa and EB-5 pathways. 20+ years experience. Former Honorary German Consul. Immigration counsel only—no investment or financial advice.',
-    ogTitle: 'Strategic U.S. Immigration Counsel | Henning Law Firm',
-    ogDesc: 'Global mobility and residence strategy for UHNW clients. Strategic immigration counsel. Offices in Florida and Minnesota.',
-    twitterTitle: 'Strategic U.S. Immigration Counsel | Henning Law Firm',
-    twitterDesc: 'Strategic immigration counsel for global mobility and residence. Immigration counsel only.',
+      'Strategic U.S. counsel for international companies and private clients. U.S. market entry, mobility strategy, and ongoing legal oversight. 20+ years experience. Former Honorary Consul. Legal counsel only—no investment or financial advice.',
+    ogTitle: 'Strategic U.S. Counsel for International Companies and Private Clients | Henning Law Firm',
+    ogDesc: 'U.S. market entry, private client advisory, and mobility strategy. Strategic legal counsel. Offices in Florida and Minnesota.',
+    twitterTitle: 'Strategic U.S. Counsel for International Companies and Private Clients | Henning Law Firm',
+    twitterDesc: 'Strategic U.S. counsel for market entry, mobility, and residence. Legal counsel only.',
   },
   de: {
-    title: 'Henning Law Firm PLLC | Strategische Einwanderungsberatung USA',
+    title: 'Henning Law Firm PLLC | Rechtsberatung für den US-Markt',
     description:
-      'Strategische Einwanderungsberatung für internationale Mandanten. Globale Mobilität und Aufenthaltsstrategie—u. a. EB-5 und investorenbasierte Wege. Über 20 Jahre Erfahrung. Ehemalige Honorarkonsulin. Nur Rechtsberatung.',
-    ogTitle: 'Strategische Einwanderungsberatung USA | Henning Law Firm',
-    ogDesc: 'Globale Mobilität und Aufenthaltsstrategie. Strategische Einwanderungsberatung.',
-    twitterTitle: 'Strategische Einwanderungsberatung USA | Henning Law Firm',
-    twitterDesc: 'Strategische Einwanderungsberatung für globale Mobilität und Aufenthalt.',
+      'Rechtsberatung für Unternehmen und Privatkunden. Markteintritt USA, Mobilität, Strukturierung. Über 20 Jahre Erfahrung. Ehemalige Honorarkonsulin. Nur Rechtsberatung.',
+    ogTitle: 'Rechtsberatung für den US-Markt | Henning Law Firm',
+    ogDesc: 'Markteintritt USA, Private Clients, Mobilität. Rechtsberatung in Florida und Minnesota.',
+    twitterTitle: 'Rechtsberatung für den US-Markt | Henning Law Firm',
+    twitterDesc: 'Markteintritt, Mobilität, Aufenthalt—Rechtsberatung für internationale Mandanten.',
   },
   es: {
-    title: 'Henning Law Firm PLLC | Asesoría migratoria estratégica en EE.UU.',
+    title: 'Henning Law Firm PLLC | Asesoramiento jurídico en EE.UU.',
     description:
-      'Asesoría migratoria estratégica para clientes globales. Movilidad global y estrategia de residencia, incluidas EB-5 y vías basadas en inversión. Más de 20 años de experiencia. Ex cónsul honoraria. Solo asesoría migratoria.',
-    ogTitle: 'Asesoría migratoria estratégica en EE.UU. | Henning Law Firm',
-    ogDesc: 'Movilidad global y estrategia de residencia. Asesoría migratoria estratégica.',
-    twitterTitle: 'Asesoría migratoria estratégica | Henning Law Firm',
-    twitterDesc: 'Asesoría migratoria estratégica para movilidad global y residencia.',
+      'Asesoramiento jurídico para empresas y patrimonios familiares. Entrada al mercado, movilidad, estructuración. Más de 20 años de experiencia. Ex cónsul honoraria. Solo asesoría jurídica.',
+    ogTitle: 'Asesoramiento jurídico en EE.UU. | Henning Law Firm',
+    ogDesc: 'Entrada al mercado, clientes privados, movilidad. Oficinas en Florida y Minnesota.',
+    twitterTitle: 'Asesoramiento jurídico en EE.UU. | Henning Law Firm',
+    twitterDesc: 'Entrada al mercado, movilidad y residencia—asesoramiento para clientes internacionales.',
   },
   ru: {
-    title: 'Henning Law Firm PLLC | Стратегическая иммиграционная практика в США',
+    title: 'Henning Law Firm PLLC | Юридическое сопровождение в США',
     description:
-      'Стратегическая иммиграционная практика для международных клиентов. Глобальная мобильность и стратегия проживания, включая инвесторские визы и EB-5. Более 20 лет опыта. Бывший почётный консул Германии. Только иммиграционная практика—без инвестиционных и финансовых консультаций.',
-    ogTitle: 'Стратегическая иммиграционная практика в США | Henning Law Firm',
-    ogDesc: 'Глобальная мобильность и стратегия проживания. Стратегическая иммиграционная практика. Офисы во Флориде и Миннесоте.',
-    twitterTitle: 'Стратегическая иммиграционная практика в США | Henning Law Firm',
-    twitterDesc: 'Стратегическая иммиграционная практика для глобальной мобильности и проживания.',
+      'Юридическое сопровождение для компаний и частных клиентов. Выход на рынок США, мобильность, структурирование. Более 20 лет опыта. Бывший почётный консул. Только юридические услуги.',
+    ogTitle: 'Юридическое сопровождение в США | Henning Law Firm',
+    ogDesc: 'Выход на рынок, частные клиенты, мобильность. Офисы во Флориде и Миннесоте.',
+    twitterTitle: 'Юридическое сопровождение в США | Henning Law Firm',
+    twitterDesc: 'Выход на рынок, мобильность и проживание—сопровождение международных клиентов.',
   },
   fr: {
-    title: 'Henning Law Firm PLLC | Conseil en immigration américaine stratégique',
+    title: 'Henning Law Firm PLLC | Conseil juridique aux États-Unis',
     description:
-      'Conseil en immigration américaine pour clients internationaux. Mobilité globale et stratégie de résidence, dont visa investisseur et EB-5. Plus de 20 ans d\'expérience. Ancienne consule honoraire d\'Allemagne. Conseil en immigration uniquement—sans conseil en investissement ou financier.',
-    ogTitle: 'Conseil en immigration américaine stratégique | Henning Law Firm',
-    ogDesc: 'Mobilité globale et stratégie de résidence. Conseil en immigration stratégique. Bureaux en Floride et au Minnesota.',
-    twitterTitle: 'Conseil en immigration américaine stratégique | Henning Law Firm',
-    twitterDesc: 'Conseil en immigration stratégique pour mobilité globale et résidence.',
+      'Conseil juridique pour entreprises et clients privés. Entrée sur le marché, mobilité, structuration. Plus de 20 ans d\'expérience. Ancienne consule honoraire. Conseil juridique uniquement.',
+    ogTitle: 'Conseil juridique aux États-Unis | Henning Law Firm',
+    ogDesc: 'Entrée sur le marché, clients privés, mobilité. Bureaux en Floride et au Minnesota.',
+    twitterTitle: 'Conseil juridique aux États-Unis | Henning Law Firm',
+    twitterDesc: 'Entrée sur le marché, mobilité et résidence—conseil pour clients internationaux.',
   },
 };
 
@@ -59,12 +59,12 @@ const contactMeta: Record<Lang, { title: string; description: string }> = {
   de: {
     title: 'Kontakt',
     description:
-      'Kontaktieren Sie Henning Law Firm für US-Einwanderungsberatung. Büros in Tampa und Minneapolis. Rufen Sie (239) 821-6504 an oder nutzen Sie unser Kontaktformular.',
+      'Henning Law Firm—Einwanderungsberatung. Büros in Tampa und Minneapolis. Tel. (239) 821-6504 oder Kontaktformular.',
   },
   es: {
-    title: 'Contáctenos',
+    title: 'Contacto',
     description:
-      'Contacte a Henning Law Firm para consultas de inmigración en EE.UU. Oficinas en Tampa y Minneapolis. Llame al (239) 821-6504 o use nuestro formulario.',
+      'Henning Law Firm—consultas de inmigración en EE.UU. Oficinas en Tampa y Minneapolis. Tel. (239) 821-6504 o formulario de contacto.',
   },
   ru: {
     title: 'Контакты',
@@ -85,24 +85,24 @@ const attorneyBioMeta: Record<Lang, { title: string; description: string }> = {
       'Norma Henning, J.D., founding attorney at Henning Law Firm. 20+ years advising in the legal field. Former Honorary Consul of Germany in Florida fostering transatlantic relations. Strategic immigration counsel for global mobility and residence.',
   },
   de: {
-    title: 'Norma Henning, J.D. - Strategische Einwanderungsberatung',
+    title: 'Norma Henning, J.D. - Rechtsberatung für den US-Markt',
     description:
-      'Norma Henning, J.D., Gründerin von Henning Law Firm. Über 20 Jahre Erfahrung in der Rechtsberatung. Ehemalige Honorarkonsulin in Florida. Einwanderungsberatung für internationale Mandanten.',
+      'Norma Henning, J.D., Gründerin von Henning Law Firm. Über 20 Jahre Erfahrung. Ehemalige Honorarkonsulin in Florida. Beratung auf Deutsch, Englisch und Spanisch.',
   },
   es: {
-    title: 'Norma Henning, J.D. - Asesoría migratoria estratégica',
+    title: 'Norma Henning, J.D. - Asesoramiento jurídico en EE.UU.',
     description:
-      'Norma Henning, J.D., abogada fundadora de Henning Law Firm. Más de 20 años asesorando en el campo legal. Ex cónsul honoraria de Alemania en Florida. Asesoría migratoria estratégica para movilidad global y residencia.',
+      'Norma Henning, J.D., abogada fundadora de Henning Law Firm. Más de 20 años de experiencia. Ex cónsul honoraria de Alemania en Florida. Asesoramiento en alemán, inglés y español.',
   },
   ru: {
-    title: 'Норма Хеннинг, J.D. — Стратегическая иммиграционная практика в США',
+    title: 'Норма Хеннинг, J.D. — Юридическое сопровождение в США',
     description:
-      'Норма Хеннинг, J.D., основатель Henning Law Firm. Более 20 лет юридической практики. Бывший почётный консул Германии во Флориде. Стратегическая иммиграционная практика для глобальной мобильности и проживания.',
+      'Норма Хеннинг, J.D., основатель Henning Law Firm. Более 20 лет опыта. Бывший почётный консул Германии во Флориде. Консультации на немецком, английском и испанском.',
   },
   fr: {
-    title: 'Norma Henning, J.D. - Conseil en immigration américaine stratégique',
+    title: 'Norma Henning, J.D. - Conseil juridique aux États-Unis',
     description:
-      'Norma Henning, J.D., avocate fondatrice de Henning Law Firm. Plus de 20 ans de conseil juridique. Ancienne consule honoraire d\'Allemagne en Floride. Conseil en immigration pour mobilité globale et résidence.',
+      'Norma Henning, J.D., avocate fondatrice de Henning Law Firm. Plus de 20 ans d\'expérience. Ancienne consule honoraire d\'Allemagne en Floride. Conseil en allemand, anglais et espagnol.',
   },
 };
 

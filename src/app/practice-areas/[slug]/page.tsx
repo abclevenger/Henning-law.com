@@ -117,6 +117,91 @@ export default async function PracticeAreaPage({ params }: PageProps) {
       links: { href: string; label: string }[];
     }
   > = {
+    'us-market-entry': {
+      overview:
+        'This option is suited for international companies establishing or expanding U.S. presence. We provide strategic structuring, entity formation, regulatory navigation, and cross-border compliance—not transactional support. Ongoing legal oversight and coordination with your tax and financial advisors.',
+      goodFit: [
+        'You are establishing a U.S. subsidiary, office, or operations',
+        'You need entity formation aligned with regulatory and compliance requirements',
+        'You want ongoing legal oversight rather than one-off transactions',
+      ],
+      notIdeal: [
+        'You only need a single contract review or formation',
+        'You are seeking investment or financial advice',
+      ],
+      useCases: [
+        'Strategic structuring of U.S. presence for international expansion',
+        'Entity formation and regulatory navigation',
+        'Cross-border compliance planning',
+        'Coordination with tax and financial advisors',
+      ],
+      pitfalls: [
+        'Treating market entry as a one-time transaction rather than ongoing counsel',
+        'Failing to align legal structure with tax and regulatory requirements',
+        'Assuming U.S. rules mirror foreign jurisdictions',
+      ],
+      links: [
+        { href: '/practice-areas/corporate-business-support', label: 'Corporate support and compliance' },
+        { href: '/practice-areas/us-mobility-immigration-strategy', label: 'Mobility and residence strategy' },
+      ],
+    },
+    'private-client-advisory': {
+      overview:
+        'This option is suited for ultra-high-net-worth individuals and families with global mobility. We provide high-touch, relationship-based counsel: mobility strategy, cross-border governance, asset protection, and ongoing general counsel support. Discreet advisory for clients who value privacy and long-term outcomes.',
+      goodFit: [
+        'You are a globally mobile family seeking long-term legal oversight',
+        'You need mobility strategy, asset protection, or cross-border governance',
+        'You value discreet, relationship-based counsel over transactional services',
+      ],
+      notIdeal: [
+        'You need a single visa application or one-off transaction',
+        'You are seeking tax or investment advice',
+      ],
+      useCases: [
+        'Mobility strategy and long-term residence planning',
+        'Cross-border governance and asset protection structuring',
+        'Ongoing general counsel for U.S. interests',
+        'Coordination with tax and financial advisors',
+      ],
+      pitfalls: [
+        'Treating private client work as transactional rather than relationship-based',
+        'Lack of coordination between U.S. and foreign advisors',
+        'Assuming one-size-fits-all structures for globally mobile families',
+      ],
+      links: [
+        { href: '/practice-areas/real-estate-estate-planning', label: 'Real estate and estate planning' },
+        { href: '/practice-areas/us-mobility-immigration-strategy', label: 'Mobility and residence strategy' },
+      ],
+    },
+    'us-mobility-immigration-strategy': {
+      overview:
+        'This option encompasses strategic counsel for residence, mobility, and long-term U.S. presence. We advise on pathway planning, eligibility, documentation, and process—not transactional visa processing. Suitable for principals, families, and businesses seeking lawful U.S. presence and travel flexibility.',
+      goodFit: [
+        'You need strategic pathway planning for residence or mobility',
+        'You are a principal, family, or business seeking long-term U.S. presence',
+        'You want eligibility assessment and process guidance, not just filing support',
+      ],
+      notIdeal: [
+        'You need investment or financial advice',
+        'You are seeking a quick, one-off visa without long-term planning',
+      ],
+      useCases: [
+        'Residence and mobility strategy for internationally mobile clients',
+        'Temporary work and visitor visas',
+        'Employment-based and family-based green cards',
+        'U.S. citizenship and naturalization',
+      ],
+      pitfalls: [
+        'Treating mobility strategy as transactional visa processing',
+        'Underestimating documentation or eligibility requirements',
+        'Lack of coordination with corporate or family structures',
+      ],
+      links: [
+        { href: '/practice-areas/temporary-business-work-visas', label: 'Travel and work visas' },
+        { href: '/practice-areas/permanent-residency-green-cards', label: 'Employment-based residency' },
+        { href: '/practice-areas/family-based-immigration', label: 'Family-based immigration' },
+      ],
+    },
     'temporary-business-work-visas': {
       overview:
         'This option is generally suited for founders, executives, specialized employees, and professionals who need temporary, lawful entry to work or conduct business in the U.S. It typically addresses short‑term work authorization and cross‑border business activity.',
@@ -322,7 +407,7 @@ export default async function PracticeAreaPage({ params }: PageProps) {
               justifyContent: 'space-between',
             }}>
               <p style={{ margin: 0, color: '#fff', fontWeight: 500, fontSize: '1.05rem' }}>
-                Ready to discuss your options? Schedule a free consultation.
+                Ready to discuss your options? Schedule a confidential strategy session.
               </p>
               <Link href="/contact" className="btn" style={{ 
                 backgroundColor: '#fff', 
@@ -335,6 +420,11 @@ export default async function PracticeAreaPage({ params }: PageProps) {
 
             {/* Decision-First Opening */}
             <div className="reveal" style={{ marginBottom: '3rem' }}>
+              {practiceArea.id === 'us-market-entry' && (
+                <h2 style={{ marginBottom: '0.5rem', fontSize: '1.5rem', color: 'var(--color-primary)' }}>
+                  U.S. Entry Strategy for International Companies
+                </h2>
+              )}
               <h2 style={{ marginBottom: '1rem' }}>Is this path the right fit?</h2>
               <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-text-light)' }}>
                 {guidance.overview}
@@ -384,9 +474,11 @@ export default async function PracticeAreaPage({ params }: PageProps) {
 
             {/* Services */}
             <div className="reveal" style={{ marginBottom: '3rem' }}>
-              <h2 style={{ marginBottom: '1rem' }}>Popular visas and solutions we handle</h2>
+              <h2 style={{ marginBottom: '1rem' }}>Services we provide</h2>
               <p style={{ fontWeight: 600, color: 'var(--color-primary)', marginBottom: '0.75rem' }}>
-                Popular Visas we can help you obtain include:
+                {['us-market-entry', 'private-client-advisory', 'us-mobility-immigration-strategy'].includes(practiceArea.id)
+                  ? 'Key areas we advise on:'
+                  : 'Popular visas and solutions we handle:'}
               </p>
               <ul style={{ listStyle: 'none', padding: 0, marginBottom: '1.5rem' }}>
                 {practiceArea.services.map((service, index) => (
@@ -407,7 +499,9 @@ export default async function PracticeAreaPage({ params }: PageProps) {
                 ))}
               </ul>
               <p style={{ marginBottom: '0.75rem', color: 'var(--color-text-light)' }}>
-                How clients typically use these categories:
+                {['us-market-entry', 'private-client-advisory', 'us-mobility-immigration-strategy'].includes(practiceArea.id)
+                  ? 'Typical applications:'
+                  : 'How clients typically use these categories:'}
               </p>
               <ul style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--color-text-light)', lineHeight: '1.7' }}>
                 {guidance.useCases.map((item) => (
@@ -539,7 +633,7 @@ export default async function PracticeAreaPage({ params }: PageProps) {
             }}>
               <h3 style={{ marginBottom: '1.5rem' }}>Plan the right next step</h3>
               <p style={{ fontSize: '1.1rem', marginBottom: '2rem', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto', color: 'var(--color-text-light)' }}>
-                Discuss whether this option fits your situation and map your best path forward.
+                Discuss whether this option fits your situation and map a path forward.
               </p>
               <div className="cta-buttons">
                 <Link href="/contact" className="btn btn-primary">

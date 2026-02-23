@@ -414,7 +414,7 @@ export default function Home() {
             <div className="testimonial-card reveal">
               <blockquote style={{ margin: 0, fontStyle: 'italic', fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-text-light)' }}>
                 <p style={{ marginBottom: '1.5rem' }}>
-                  I was referred to Norma Henning by my CPA, who spoke <strong>highly</strong> about her <strong>knowledge</strong> when it comes to visa and immigration matters. I wanted to move from Germany to the US and was looking for the best way to get my visa or even permanent resident card (green card). She <strong>analyzed</strong> my professional background and found that I qualified for classification as an Alien of Extraordinary Ability in my field.
+                  I was referred to Norma Henning by my CPA, who spoke <strong>highly</strong> about her <strong>knowledge</strong> when it comes to visa and immigration matters. I wanted to move from Germany to the US and was looking for the right approach to get my visa or even permanent resident card (green card). She <strong>analyzed</strong> my professional background and found that I qualified for classification as an Alien of Extraordinary Ability in my field.
                 </p>
                 <p style={{ marginBottom: '1.5rem' }}>
                   Now some time ago, I opened my own consulting firm and get to contribute my experience and skills to U.S. clients while enjoying the flexibility that permanent residence brings with it. Traveling back and forth to Europe has been possible even during the pandemic, and I am very <strong>grateful</strong> to Ms. Henning for guiding and supporting me and my wife throughout the process.
