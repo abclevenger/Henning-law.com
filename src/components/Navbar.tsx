@@ -13,7 +13,7 @@ const Navbar = () => {
     const closeMenus = () => setIsMenuOpen(false);
 
     return (
-        <nav className="navbar">
+        <nav className="navbar" aria-label="Main navigation">
             <div className="container navbar-content">
                 <Link href="/" className="logo">
                     <Image
@@ -200,12 +200,21 @@ const Navbar = () => {
 
                     .nav-links {
                         display: none;
+                        position: fixed;
+                        top: 72px;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
                         width: 100%;
                         flex-direction: column;
                         gap: 0;
-                        margin-top: 1rem;
-                        padding-top: 1rem;
-                        border-top: 1px solid var(--color-border);
+                        margin: 0;
+                        padding: 1rem 0 2rem;
+                        background: var(--color-white);
+                        z-index: 999;
+                        overflow-y: auto;
+                        border: none;
+                        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
                     }
 
                     .nav-links-open {
@@ -218,12 +227,12 @@ const Navbar = () => {
 
                     .nav-links a {
                         display: block;
-                        padding: 1rem;
+                        padding: 1rem 1.5rem;
                         border-bottom: 1px solid var(--color-border);
                     }
 
                     .language-toggle-wrapper {
-                        padding: 1rem;
+                        padding: 1rem 1.5rem;
                         border-bottom: 1px solid var(--color-border);
                         width: 100%;
                     }
@@ -238,7 +247,7 @@ const Navbar = () => {
                         display: block;
                         width: 100%;
                         text-align: center;
-                        padding: 1rem;
+                        padding: 1rem 1.5rem;
                         border-bottom: 1px solid var(--color-border);
                         border-radius: 0;
                         border-left: none;

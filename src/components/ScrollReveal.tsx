@@ -14,6 +14,8 @@ const ScrollReveal = () => {
       }
     });
 
+    document.body.classList.add('reveal-ready');
+
     const markInitiallyVisible = () => {
       elements.forEach((el) => {
         const rect = el.getBoundingClientRect();

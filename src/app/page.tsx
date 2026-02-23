@@ -160,9 +160,9 @@ export default function Home() {
       {/* Building Bridges Section */}
       <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container text-center reveal">
-          <h2 style={{ fontSize: '3rem', marginBottom: '2rem' }}>
+          <h3 style={{ fontSize: '2rem', marginBottom: '2rem' }}>
             {translate('home.bridges.heading')}
-          </h2>
+          </h3>
         </div>
       </section>
 
@@ -228,7 +228,7 @@ export default function Home() {
             </div>
             <div className="content-image reveal" style={{ position: 'relative', width: '100%', aspectRatio: '16/9', minHeight: '300px', borderRadius: '8px', overflow: 'hidden' }}>
               <Image
-                src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1200"
                 alt="Professional team collaboration and immigration strategy planning"
                 fill
                 sizes="(max-width: 968px) 100vw, 50vw"
